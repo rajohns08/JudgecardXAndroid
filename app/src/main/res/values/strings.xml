@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--Android Studio auto-generated-->
     <string name="app_name">JudgecardXAndroid</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!--Login-->
     <string name="signin">Sign In</string>
+    <string name="app_title_judge">Judge</string>
+    <string name="app_title_card">card</string>
+    <string name="app_title_x">X</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember Me</string>
 
 </resources>
