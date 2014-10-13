@@ -22,8 +22,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.http.POST;
-import retrofit.http.PUT;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class LoginActivity extends Activity {
 
@@ -32,14 +34,24 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        final JudgecardXClient restClient = new RestAdapter.Builder().setEndpoint(JudgecardXClient.BASE_URL).build().create(JudgecardXClient.class);
+
         Button signInButton = (Button)findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                new LoginTask().execute();
+                restClient.login("blab", "blu", new Callback<String>() {
+                    @Override
+                    public void success(String s, Response response) {
+                        Log.d("tag", "log response: " + s);
+                    }
 
-                // send up stuff the new way with @put or @post or @get
-//                @PUT()
+                    @Override
+                    public void failure(RetrofitError retrofitError) {
+                        Log.d("tag", "service failure");
+                    }
+                });
+//                new LoginTask().execute();
             }
         });
     }
