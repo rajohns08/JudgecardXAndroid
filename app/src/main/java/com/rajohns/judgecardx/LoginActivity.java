@@ -6,13 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import static com.rajohns.judgecardx.JudgecardXClient.*;
-import static com.rajohns.judgecardx.NotifyHelper.*;
-
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
+import static com.rajohns.judgecardx.JudgecardXClient.*;
+import static com.rajohns.judgecardx.NotifyHelper.*;
 
 public class LoginActivity extends Activity {
     public EditText usernameET;
@@ -26,7 +26,7 @@ public class LoginActivity extends Activity {
         usernameET = (EditText)findViewById(R.id.usernameET);
         passwordET = (EditText)findViewById(R.id.passwordET);
 
-        final JudgecardXClient restClient = new RestAdapter.Builder().setEndpoint(JudgecardXClient.BASE_URL).build().create(JudgecardXClient.class);
+        final JudgecardXClient restClient = new RestAdapter.Builder().setEndpoint(BASE_URL).build().create(JudgecardXClient.class);
 
         Button signInButton = (Button)findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {

@@ -10,10 +10,11 @@ import android.content.DialogInterface;
  *
  */
 public class NotifyHelper {
-    public static final String BAD_CREDENTIALS_TITLE = "Bad Credentials";
-    public static final String BAD_CREDENTIALS_MSG = "Incorrect username or password";
+    public static final String BAD_CREDENTIALS_TITLE = "Invalid";
+    public static final String BAD_CREDENTIALS_MSG = "Invalid username or password";
     public static final String GENERIC_ERROR_TITLE = "Unknown Error";
     public static final String GENERIC_ERROR_MSG = "An unknown error has occurred. Please try again later.";
+
     private static ProgressDialog loadingDialog;
     private static AlertDialog alertDialog;
 
