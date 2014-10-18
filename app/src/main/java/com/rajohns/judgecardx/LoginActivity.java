@@ -14,7 +14,7 @@ import retrofit.client.Response;
 import static com.rajohns.judgecardx.JudgecardXClient.*;
 import static com.rajohns.judgecardx.NotifyHelper.*;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
     public EditText usernameET;
     public EditText passwordET;
 
@@ -25,8 +25,6 @@ public class LoginActivity extends Activity {
 
         usernameET = (EditText)findViewById(R.id.usernameET);
         passwordET = (EditText)findViewById(R.id.passwordET);
-
-        final JudgecardXClient restClient = new RestAdapter.Builder().setEndpoint(BASE_URL).build().create(JudgecardXClient.class);
 
         Button signInButton = (Button)findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
