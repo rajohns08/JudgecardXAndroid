@@ -19,7 +19,10 @@ public class CustomApplication extends Application {
 
     public void initRestClient() {
         if (restClient == null) {
-            restClient = new RestAdapter.Builder().setEndpoint(BASE_URL).build().create(JudgecardXClient.class);
+            restClient = new RestAdapter.Builder()
+                    .setEndpoint(BASE_URL)
+                    .setLogLevel(RestAdapter.LogLevel.FULL)
+                    .build().create(JudgecardXClient.class);
         }
     }
 }
