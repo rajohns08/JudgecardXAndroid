@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -15,6 +17,9 @@ import static com.rajohns.judgecardx.JudgecardXClient.*;
 import static com.rajohns.judgecardx.NotifyHelper.*;
 
 public class LoginActivity extends BaseActivity {
+    @Inject
+    JudgecardXClient restClient;
+
     public EditText usernameET;
     public EditText passwordET;
 

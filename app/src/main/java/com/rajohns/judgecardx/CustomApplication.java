@@ -2,27 +2,22 @@ package com.rajohns.judgecardx;
 
 import android.app.Application;
 
-import retrofit.RestAdapter;
-
-import static com.rajohns.judgecardx.JudgecardXClient.BASE_URL;
+import dagger.ObjectGraph;
 
 /**
  * Created by rajohns on 10/17/14.
  *
  */
 public class CustomApplication extends Application {
-    private JudgecardXClient restClient = null;
+    private ObjectGraph objectGraph;
 
-    public JudgecardXClient getRestClient() {
-        return restClient;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        objectGraph = ObjectGraph.create(new ApplicationModule());
     }
 
-    public void initRestClient() {
-        if (restClient == null) {
-            restClient = new RestAdapter.Builder()
-                    .setEndpoint(BASE_URL)
-                    .setLogLevel(RestAdapter.LogLevel.FULL)
-                    .build().create(JudgecardXClient.class);
-        }
+    public ObjectGraph getObjectGraph() {
+        return objectGraph;
     }
 }

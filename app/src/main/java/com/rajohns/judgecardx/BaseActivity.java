@@ -8,12 +8,9 @@ import android.os.Bundle;
  *
  */
 public class BaseActivity extends Activity {
-    protected JudgecardXClient restClient;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((CustomApplication) this.getApplication()).initRestClient();
-        restClient = ((CustomApplication) this.getApplication()).getRestClient();
+        ((CustomApplication) this.getApplication()).getObjectGraph().inject(this);
     }
 }
