@@ -14,7 +14,7 @@ public class CustomApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        objectGraph = ObjectGraph.create(new ApplicationModule());
+        objectGraph = ObjectGraph.create(new NetworkingModule());
     }
 
     public ObjectGraph getObjectGraph() {

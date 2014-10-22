@@ -13,7 +13,7 @@ import retrofit.http.Query;
  * Created by rajohns on 10/12/14.
  *
  */
-public interface JudgecardXClient {
+public interface RestClient {
     public static final String BASE_URL = "https://secure3017.hostgator.com/~rajohns/";
     public static final String LOGIN_SUCCESS = "com.judgecard.successfulLogin";
     public static final String LOGIN_FAILURE = "com.judgecard.badCredentials";
