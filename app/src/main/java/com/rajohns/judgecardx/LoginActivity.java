@@ -15,8 +15,7 @@ import static com.rajohns.judgecardx.RestClient.*;
 import static com.rajohns.judgecardx.NotifyHelper.*;
 
 public class LoginActivity extends BaseActivity {
-    @Inject
-    RestClient restClient;
+    @Inject RestClient restClient;
 
     public EditText usernameET;
     public EditText passwordET;
