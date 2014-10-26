@@ -14,7 +14,8 @@ import static com.rajohns.judgecardx.RestClient.BASE_URL;
  */
 @Module (
     injects = {
-        LoginActivity.class
+        LoginActivity.class,
+        ForgotLoginActivity.class
     }
 )
 public class NetworkingModule {

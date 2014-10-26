@@ -1,5 +1,6 @@
 package com.rajohns.judgecardx;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +45,10 @@ public class LoginActivity extends BaseActivity {
                 NotifyHelper.showSingleButtonAlert(LoginActivity.this, GENERIC_ERROR_TITLE, GENERIC_ERROR_MSG);
             }
         });
+    }
+
+    @OnClick(R.id.forgotLoginButton) void forgotLogin() {
+        startActivity(new Intent(this, ForgotLoginActivity.class));
     }
 
     @Override
