@@ -20,6 +20,7 @@ import static com.rajohns.judgecardx.NotifyHelper.*;
 
 public class LoginActivity extends BaseActivity {
     @Inject RestClient restClient;
+    @Inject ObscuredSharedPreferences prefs;
     @InjectView(R.id.usernameET) EditText usernameET;
     @InjectView(R.id.passwordET) EditText passwordET;
 

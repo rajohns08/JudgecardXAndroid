@@ -13,11 +13,15 @@ import static com.rajohns.judgecardx.RestClient.BASE_URL;
  *
  */
 @Module (
+    includes = {
+        AndroidModule.class
+    },
     injects = {
         LoginActivity.class,
         ForgotLoginActivity.class
     }
 )
+
 public class NetworkingModule {
     @Provides @Singleton RestClient provideJudgecardXClient() {
         RestAdapter restAdapter = new RestAdapter.Builder()
