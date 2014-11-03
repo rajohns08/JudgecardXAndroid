@@ -2,6 +2,7 @@ package com.rajohns.judgecardx;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -48,8 +50,17 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    @OnClick(R.id.forgotLoginButton) void forgotLogin() {
+    @OnClick(R.id.forgotLoginButton) void forgotLoginTapped() {
         startActivity(new Intent(this, ForgotLoginActivity.class));
+    }
+
+    @OnCheckedChanged(R.id.rememberMeSwitch) void onChecked(boolean checked) {
+        if (checked) {
+            Log.d("tag", "checked");
+        }
+        else {
+            Log.d("tag", "not checked");
+        }
     }
 
     @Override

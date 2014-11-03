@@ -21,6 +21,8 @@ import dagger.Provides;
 
 public class AndroidModule {
     private Context context;
+    public String SHARED_PREFS_USERNAME_KEY = "com.rajohns.judgecardx.username";
+    public String SHARED_PREFS_PASSWORD_KEY = "com.rajohns.judgecardx.password";
 
     public AndroidModule(Context context) {
         this.context = context;
