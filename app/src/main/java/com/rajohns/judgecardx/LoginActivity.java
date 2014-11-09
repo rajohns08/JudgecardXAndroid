@@ -2,10 +2,10 @@ package com.rajohns.judgecardx;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -19,14 +19,34 @@ import retrofit.client.Response;
 
 import static com.rajohns.judgecardx.RestClient.*;
 import static com.rajohns.judgecardx.NotifyHelper.*;
+import static com.rajohns.judgecardx.ObscuredSharedPreferences.*;
 
 public class LoginActivity extends BaseActivity {
     @Inject RestClient restClient;
     @Inject ObscuredSharedPreferences prefs;
     @InjectView(R.id.usernameET) EditText usernameET;
     @InjectView(R.id.passwordET) EditText passwordET;
+    @InjectView(R.id.rememberMeSwitch) Switch rememberMeSwitch;
+    ArrayList<EditText> requiredEditTexts;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        ButterKnife.inject(this);
+
+        requiredEditTexts = new ArrayList<EditText>() {{
+            add(usernameET);
+            add(passwordET);
+        }};
+
+        restoreLoginFieldsIfUserWantsThemRemembered();
+    }
 
     @OnClick(R.id.signInButton) void signIn() {
+        notifyUserIfEmptyLoginField();
+        saveLoginInfoIfUserWantsItRemembered();
+
         NotifyHelper.showLoading(LoginActivity.this);
         restClient.login(usernameET.getText().toString(), passwordET.getText().toString(), new Callback<String>() {
             @Override
@@ -55,18 +75,32 @@ public class LoginActivity extends BaseActivity {
     }
 
     @OnCheckedChanged(R.id.rememberMeSwitch) void onChecked(boolean checked) {
-        if (checked) {
-            Log.d("tag", "checked");
-        }
-        else {
-            Log.d("tag", "not checked");
+        prefs.edit().putBoolean(REMEMBER_ME_PREF, checked).commit();
+        if (!checked) {
+            prefs.edit().remove(USERNAME_PREF).commit();
+            prefs.edit().remove(PASSWORD_PREF).commit();
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.inject(this);
+    private void notifyUserIfEmptyLoginField() {
+        if (EditTextUtil.hasEmptyRequiredTextField(requiredEditTexts)) {
+            NotifyHelper.showSingleButtonAlert(this, MISSING_LOGIN_FIELD_TITLE, MISSING_LOGIN_FIELD_MSG);
+            return;
+        }
+    }
+
+    private void saveLoginInfoIfUserWantsItRemembered() {
+        if (prefs.getBoolean(REMEMBER_ME_PREF, false)) {
+            prefs.edit().putString(USERNAME_PREF, usernameET.getText().toString()).commit();
+            prefs.edit().putString(PASSWORD_PREF, passwordET.getText().toString()).commit();
+        }
+    }
+
+    private void restoreLoginFieldsIfUserWantsThemRemembered() {
+        if (prefs.getBoolean(REMEMBER_ME_PREF, false)) {
+            rememberMeSwitch.setChecked(true);
+            usernameET.setText(prefs.getString(USERNAME_PREF, ""));
+            passwordET.setText(prefs.getString(PASSWORD_PREF, ""));
+        }
     }
 }

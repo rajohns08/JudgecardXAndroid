@@ -24,6 +24,10 @@ import javax.crypto.spec.PBEParameterSpec;
  * publicity.
  */
 public class ObscuredSharedPreferences implements SharedPreferences {
+    public static final String REMEMBER_ME_PREF = "rememberMePref";
+    public static final String USERNAME_PREF = "usernamePref";
+    public static final String PASSWORD_PREF = "passwordPref";
+
     protected static final String UTF8 = "utf-8";
     private static final char[] SEKRIT = new char[]{'R', 'A', 'N', 'D', 'O', 'M'};
 
@@ -167,7 +171,7 @@ public class ObscuredSharedPreferences implements SharedPreferences {
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
             SecretKey key = keyFactory.generateSecret(new PBEKeySpec(SEKRIT));
             Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
-            pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(Settings.Secure.getString(context.getContentResolver(),Settings.System.ANDROID_ID).getBytes(UTF8), 20));
+            pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID).getBytes(UTF8), 20));
             return new String(Base64.encode(pbeCipher.doFinal(bytes), Base64.NO_WRAP),UTF8);
 
         } catch( Exception e ) {
@@ -191,7 +195,7 @@ public class ObscuredSharedPreferences implements SharedPreferences {
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
             SecretKey key = keyFactory.generateSecret(new PBEKeySpec(SEKRIT));
             Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
-            pbeCipher.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(Settings.Secure.getString(context.getContentResolver(),Settings.System.ANDROID_ID).getBytes(UTF8), 20));
+            pbeCipher.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(Settings.Secure.getString(context.getContentResolver(),Settings.Secure.ANDROID_ID).getBytes(UTF8), 20));
             return new String(pbeCipher.doFinal(bytes),UTF8);
 
         } catch( Exception e) {

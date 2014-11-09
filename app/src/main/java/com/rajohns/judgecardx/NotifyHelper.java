@@ -14,6 +14,8 @@ public class NotifyHelper {
     public static final String BAD_CREDENTIALS_MSG = "Invalid username or password";
     public static final String GENERIC_ERROR_TITLE = "Unknown Error";
     public static final String GENERIC_ERROR_MSG = "An unknown error has occurred. Please try again later.";
+    public static final String MISSING_LOGIN_FIELD_TITLE = "Enter Login Info";
+    public static final String MISSING_LOGIN_FIELD_MSG = "Please enter both your username and your password to login.";
 
     private static ProgressDialog loadingDialog;
     private static AlertDialog alertDialog;
