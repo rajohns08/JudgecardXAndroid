@@ -16,4 +16,8 @@
     <string name="forgot_login">Forgot Login</string>
     <string name="sign_up">Sign Up</string>
 
+    <!--Forgot Login-->
+    <string name="email">Email</string>
+    <string name="emailMe">Email Me</string>
+
 </resources>

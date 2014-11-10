@@ -2,6 +2,7 @@ package com.rajohns.judgecardx;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 
@@ -13,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -79,6 +81,18 @@ public class LoginActivity extends BaseActivity {
         if (!checked) {
             prefs.edit().remove(USERNAME_PREF).commit();
             prefs.edit().remove(PASSWORD_PREF).commit();
+        }
+    }
+
+    @OnFocusChange(R.id.usernameET) void usernameFocusChanged(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            KeyboardUtil.hideKeyboard(v, this);
+        }
+    }
+
+    @OnFocusChange(R.id.passwordET) void passwordFocusChanged(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            KeyboardUtil.hideKeyboard(v, this);
         }
     }
 

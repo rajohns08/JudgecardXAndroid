@@ -2,6 +2,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -38,12 +40,16 @@
             android:id="@+id/usernameET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
             android:hint="@string/username"/>
         <EditText
             android:id="@+id/passwordET"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
             android:hint="@string/password"/>
     </LinearLayout>
 
