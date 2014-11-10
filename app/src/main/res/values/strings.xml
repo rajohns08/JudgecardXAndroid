@@ -5,6 +5,10 @@
     <string name="app_name">JudgecardXAndroid</string>
     <string name="action_settings">Settings</string>
 
+    <!--General-->
+    <string name="unknownErrorTitle">Unknown Error</string>
+    <string name="unknownErrorMsg">An unknown error occurred.</string>
+
     <!--Login-->
     <string name="signin">Sign In</string>
     <string name="app_title_judge">Judge</string>
@@ -19,5 +23,7 @@
     <!--Forgot Login-->
     <string name="email">Email</string>
     <string name="emailMe">Email Me</string>
+    <string name="emailNotFoundTitle">Email Not Found</string>
+    <string name="emailNotFoundMsg">That email is not in our database.</string>
 
 </resources>
