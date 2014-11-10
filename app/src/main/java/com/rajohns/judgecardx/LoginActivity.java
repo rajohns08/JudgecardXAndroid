@@ -6,12 +6,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.InjectViews;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
@@ -29,24 +30,24 @@ public class LoginActivity extends BaseActivity {
     @InjectView(R.id.usernameET) EditText usernameET;
     @InjectView(R.id.passwordET) EditText passwordET;
     @InjectView(R.id.rememberMeSwitch) Switch rememberMeSwitch;
-    ArrayList<EditText> requiredEditTexts;
+
+    @InjectViews({R.id.usernameET, R.id.passwordET})
+    List<EditText> requiredEditTexts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
-
-        requiredEditTexts = new ArrayList<EditText>() {{
-            add(usernameET);
-            add(passwordET);
-        }};
-
         restoreLoginFieldsIfUserWantsThemRemembered();
     }
 
     @OnClick(R.id.signInButton) void signIn() {
-        notifyUserIfEmptyLoginField();
+        if (EditTextUtil.hasEmptyRequiredTextField(requiredEditTexts)) {
+            NotifyHelper.showSingleButtonAlert(this, MISSING_LOGIN_FIELD_TITLE, MISSING_LOGIN_FIELD_MSG);
+            return;
+        }
+
         saveLoginInfoIfUserWantsItRemembered();
 
         NotifyHelper.showLoading(LoginActivity.this);
@@ -93,13 +94,6 @@ public class LoginActivity extends BaseActivity {
     @OnFocusChange(R.id.passwordET) void passwordFocusChanged(View v, boolean hasFocus) {
         if (!hasFocus) {
             KeyboardUtil.hideKeyboard(v, this);
-        }
-    }
-
-    private void notifyUserIfEmptyLoginField() {
-        if (EditTextUtil.hasEmptyRequiredTextField(requiredEditTexts)) {
-            NotifyHelper.showSingleButtonAlert(this, MISSING_LOGIN_FIELD_TITLE, MISSING_LOGIN_FIELD_MSG);
-            return;
         }
     }
 
