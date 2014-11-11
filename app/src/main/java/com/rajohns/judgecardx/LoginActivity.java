@@ -21,7 +21,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import static com.rajohns.judgecardx.RestClient.*;
-import static com.rajohns.judgecardx.NotifyHelper.*;
 import static com.rajohns.judgecardx.ObscuredSharedPreferences.*;
 
 public class LoginActivity extends BaseActivity {
@@ -44,7 +43,7 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.signInButton) void signIn() {
         if (EditTextUtil.hasEmptyRequiredTextField(requiredEditTexts)) {
-            NotifyHelper.showSingleButtonAlert(this, MISSING_LOGIN_FIELD_TITLE, MISSING_LOGIN_FIELD_MSG);
+            NotifyHelper.showSingleButtonAlert(this, getResources().getString(R.string.missing_login_field_title), getResources().getString(R.string.missing_login_field_msg));
             return;
         }
 
@@ -58,17 +57,17 @@ public class LoginActivity extends BaseActivity {
                 if (responseString.equals(LOGIN_SUCCESS)) {
                 }
                 else if (responseString.equals(LOGIN_FAILURE)) {
-                    NotifyHelper.showSingleButtonAlert(LoginActivity.this, BAD_CREDENTIALS_TITLE, BAD_CREDENTIALS_MSG);
+                    NotifyHelper.showSingleButtonAlert(LoginActivity.this, getResources().getString(R.string.bad_credentials_title), getResources().getString(R.string.bad_credentials_msg));
                 }
                 else {
-                    NotifyHelper.showSingleButtonAlert(LoginActivity.this, GENERIC_ERROR_TITLE, GENERIC_ERROR_MSG);
+                    NotifyHelper.showSingleButtonAlert(LoginActivity.this, getResources().getString(R.string.generic_error_title), getResources().getString(R.string.generic_error_msg));
                 }
             }
 
             @Override
             public void failure(RetrofitError retrofitError) {
                 NotifyHelper.hideLoading();
-                NotifyHelper.showSingleButtonAlert(LoginActivity.this, GENERIC_ERROR_TITLE, GENERIC_ERROR_MSG);
+                NotifyHelper.showSingleButtonAlert(LoginActivity.this, getResources().getString(R.string.generic_error_title), getResources().getString(R.string.generic_error_msg));
             }
         });
     }

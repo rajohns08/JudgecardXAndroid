@@ -18,7 +18,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import static com.rajohns.judgecardx.RestClient.*;
-import static com.rajohns.judgecardx.NotifyHelper.*;
 
 /**
  * Created by rajohns on 10/25/14.
@@ -40,7 +39,7 @@ public class ForgotLoginActivity extends BaseActivity {
 
     @OnClick(R.id.emailMeButton) void emailMe() {
         if (EditTextUtil.hasEmptyRequiredTextField(requiredEditTexts)) {
-            NotifyHelper.showSingleButtonAlert(this, MISSING_EMAIL_FORGOT_TITLE, MISSING_EMAIL_FORGOT_MSG);
+            NotifyHelper.showSingleButtonAlert(this, getResources().getString(R.string.missing_email_forgot_title), getResources().getString(R.string.missing_email_forgot_msg));
             return;
         }
 
@@ -51,7 +50,7 @@ public class ForgotLoginActivity extends BaseActivity {
             public void success(String responseString, Response response) {
                 NotifyHelper.hideLoading();
                 if (responseString.equals(FORGOT_LOGIN_SUCCESS)) {
-                    NotifyHelper.showSingleButtonAlert(ForgotLoginActivity.this, EMAIL_SENT_TITLE, EMAIL_SENT_MSG);
+                    NotifyHelper.showSingleButtonAlert(ForgotLoginActivity.this, getResources().getString(R.string.email_sent_title), getResources().getString(R.string.email_sent_msg));
                 }
                 else if (responseString.equals(EMAIL_NOT_FOUND)) {
                     NotifyHelper.showSingleButtonAlert(ForgotLoginActivity.this, getResources().getString(R.string.emailNotFoundTitle), getResources().getString(R.string.emailNotFoundMsg));
