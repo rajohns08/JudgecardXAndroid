@@ -10,6 +10,7 @@
 	<!-- SECTION: General -->
 	<string name="unknownErrorTitle">Unknown Error</string>
 	<string name="unknownErrorMsg">An unknown error occurred.</string>
+	<string name="ok">OK</string>
 
 	<!-- SECTION: Login -->
 	<string name="signin">Sign In</string>

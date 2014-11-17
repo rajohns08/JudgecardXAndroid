@@ -76,6 +76,10 @@ public class LoginActivity extends BaseActivity {
         startActivity(new Intent(this, ForgotLoginActivity.class));
     }
 
+    @OnClick(R.id.signUpButton) void signUpTapped() {
+        startActivity(new Intent(this, SignUpActivity.class));
+    }
+
     @OnCheckedChanged(R.id.rememberMeSwitch) void onChecked(boolean checked) {
         prefs.edit().putBoolean(REMEMBER_ME_PREF, checked).commit();
         if (!checked) {
