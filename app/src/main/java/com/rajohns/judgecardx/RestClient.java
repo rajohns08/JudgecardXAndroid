@@ -19,12 +19,22 @@ public interface RestClient {
     public static final String LOGIN_FAILURE = "com.judgecard.badCredentials";
     public static final String FORGOT_LOGIN_SUCCESS = "com.judgecard.sendingEmail";
     public static final String EMAIL_NOT_FOUND = "com.judgecard.userNotFound";
+    public static final String SIGNUP_SUCCESS = "com.judgecard.userAvailable";
+    public static final String SIGNUP_FAILURE = "com.judgecard.userAlreadyExists";
+
+    public static final String USERNAME_KEY = "username";
+    public static final String PASSWORD_KEY = "password";
+    public static final String EMAIL_KEY = "email";
 
     @FormUrlEncoded
     @POST("/login.php")
-    void login(@Field("username") String username, @Field("password") String password, Callback<String> callback);
+    void login(@Field(USERNAME_KEY) String username, @Field(PASSWORD_KEY) String password, Callback<String> callback);
 
     @FormUrlEncoded
     @POST("/forgotLoginSSL.php")
-    void sendEmail(@Field("email") String email, Callback<String> callback);
+    void sendEmail(@Field(EMAIL_KEY) String email, Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST("/signup.php")
+    void signup(@Field(USERNAME_KEY) String username, @Field(EMAIL_KEY) String email, @Field(PASSWORD_KEY) String password, Callback<String> callback);
 }

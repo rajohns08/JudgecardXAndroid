@@ -11,6 +11,7 @@
 	<string name="unknownErrorTitle">Unknown Error</string>
 	<string name="unknownErrorMsg">An unknown error occurred.</string>
 	<string name="ok">OK</string>
+	<string name="success">Success</string>
 
 	<!-- SECTION: Login -->
 	<string name="signin">Sign In</string>
@@ -41,4 +42,11 @@
 
 	<!-- SECTION: Sign Up -->
 	<string name="confirm_password">Confirm Password</string>
+	<string name="missing_required_field_title">Missing Field</string>
+	<string name="missing_required_field_msg">Please fill out all of the fields.</string>
+	<string name="signup_success_msg">Your account has been successfully created. You may now login with your information.</string>
+	<string name="already_exists_title">Already Exists</string>
+	<string name="already_exists_msg">Username and/or Email already exist in the database.</string>
+	<string name="mismatched_passwords_title">Mismatched Passwords</string>
+	<string name="mismatched_passwords_msg">Passwords don\&#39;t match.</string>
 </resources>

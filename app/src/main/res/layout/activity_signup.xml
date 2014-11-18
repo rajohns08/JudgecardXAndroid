@@ -12,7 +12,6 @@
         android:id="@+id/usernameET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:singleLine="true"
         android:imeOptions="actionDone"
         android:hint="@string/username"/>
@@ -43,5 +42,12 @@
         android:singleLine="true"
         android:imeOptions="actionDone"
         android:hint="@string/confirm_password"/>
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/sign_up"/>
 
 </LinearLayout>
