@@ -31,6 +31,11 @@
             android:label="@string/sign_up">
         </activity>
 
+        <activity
+            android:name=".MasterFightListActivity"
+            android:label="@string/master_list_label">
+        </activity>
+
     </application>
 
 </manifest>

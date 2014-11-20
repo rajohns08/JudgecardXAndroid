@@ -19,7 +19,8 @@ import static com.rajohns.judgecardx.RestClient.BASE_URL;
     injects = {
         LoginActivity.class,
         ForgotLoginActivity.class,
-        SignUpActivity.class
+        SignUpActivity.class,
+        MasterFightListActivity.class
     }
 )
 

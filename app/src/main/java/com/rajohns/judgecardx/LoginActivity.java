@@ -55,6 +55,7 @@ public class LoginActivity extends BaseActivity {
             public void success(String responseString, Response response) {
                 NotifyHelper.hideLoading();
                 if (responseString.equals(LOGIN_SUCCESS)) {
+                    startActivity(new Intent(LoginActivity.this, MasterFightListActivity.class));
                 }
                 else if (responseString.equals(LOGIN_FAILURE)) {
                     NotifyHelper.showSingleButtonAlert(LoginActivity.this, getResources().getString(R.string.bad_credentials_title), getResources().getString(R.string.bad_credentials_msg));
