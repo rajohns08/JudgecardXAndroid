@@ -1,6 +1,10 @@
 package com.rajohns.judgecardx;
 
+import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import retrofit.Callback;
 import retrofit.http.Field;
@@ -37,4 +41,7 @@ public interface RestClient {
     @FormUrlEncoded
     @POST("/signup.php")
     void signup(@Field(USERNAME_KEY) String username, @Field(EMAIL_KEY) String email, @Field(PASSWORD_KEY) String password, Callback<String> callback);
+
+    @GET("/fightList.php")
+    void getMasterFightList(Callback<JsonElement> callback);
 }
