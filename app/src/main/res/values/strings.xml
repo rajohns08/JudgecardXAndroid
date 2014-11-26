@@ -52,4 +52,5 @@
 
 	<!-- SECTION: Master Fight List -->
 	<string name="master_list_label">Master Fight List</string>
+	<string name="today_label">Today</string>
 </resources>

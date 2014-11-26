@@ -2,6 +2,7 @@ package com.rajohns.judgecardx;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,16 @@ public class MasterFightListAdapter extends ArrayAdapter<Fight> {
     Context context;
     int layoutResourceId;
     ArrayList<Fight> fights;
+    Time today;
 
     public MasterFightListAdapter(Context context, int layoutResourceId, ArrayList<Fight> fights) {
         super(context, layoutResourceId, fights);
         this.context = context;
         this.layoutResourceId = layoutResourceId;
         this.fights = fights;
+
+        this.today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
     }
 
     @Override
@@ -41,9 +46,11 @@ public class MasterFightListAdapter extends ArrayAdapter<Fight> {
         fightersTV.setText(fight.fighter1 + " - " + fight.fighter2);
         dateTV.setText(fight.fightDate);
 
-//        if (fight.fightDate == today) {
-//            todayTV.setText(fight.fightDate);
-//        }
+        String todayString = today.month+1 + "-" + today.monthDay + "-" + today.year;
+
+        if (todayString.equals(fight.fightDate)) {
+            todayTV.setText(context.getResources().getString(R.string.today_label));
+        }
 
         return convertView;
     }

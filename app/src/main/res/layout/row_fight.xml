@@ -35,7 +35,7 @@
             android:id="@+id/todayTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today"
+            android:text=""
             android:textColor="@android:color/holo_blue_bright"
             android:textStyle="italic"
             android:textSize="12sp"/>
