@@ -30,7 +30,7 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_master_fight_list);
+        setContentView(R.layout.activity_fight_lists_container);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();

@@ -3,6 +3,7 @@ package com.rajohns.judgecardx.Dagger;
 import com.rajohns.judgecardx.Activities.FightListsContainerActivity;
 import com.rajohns.judgecardx.Activities.ForgotLoginActivity;
 import com.rajohns.judgecardx.Activities.LoginActivity;
+import com.rajohns.judgecardx.Fragments.MasterFightListFragment;
 import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Activities.SignUpActivity;
 
@@ -26,7 +27,8 @@ import static com.rajohns.judgecardx.Retrofit.RestClient.BASE_URL;
         LoginActivity.class,
         ForgotLoginActivity.class,
         SignUpActivity.class,
-        FightListsContainerActivity.class
+        FightListsContainerActivity.class,
+        MasterFightListFragment.class
     }
 )
 
