@@ -20,7 +20,7 @@ import static com.rajohns.judgecardx.RestClient.BASE_URL;
         LoginActivity.class,
         ForgotLoginActivity.class,
         SignUpActivity.class,
-        MasterFightListActivity.class
+        FightListsContainerActivity.class
     }
 )
 

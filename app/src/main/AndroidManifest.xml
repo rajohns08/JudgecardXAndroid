@@ -32,7 +32,7 @@
         </activity>
 
         <activity
-            android:name=".MasterFightListActivity"
+            android:name=".FightListsContainerActivity"
             android:label="@string/judgecardx">
         </activity>
 

@@ -25,7 +25,7 @@ import retrofit.client.Response;
  * Created by rajohns on 11/19/14.
  *
  */
-public class MasterFightListActivity extends FragmentActivity implements ActionBar.TabListener {
+public class FightListsContainerActivity extends FragmentActivity implements ActionBar.TabListener {
     @Inject RestClient restClient;
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
