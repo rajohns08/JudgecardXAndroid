@@ -1,4 +1,4 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Model;
 
 /**
  * Created by rajohns on 11/22/14.

@@ -1,4 +1,4 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

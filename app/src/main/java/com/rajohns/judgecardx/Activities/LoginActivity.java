@@ -1,10 +1,17 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
+
+import com.rajohns.judgecardx.Utils.NotifyHelper;
+import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
+import com.rajohns.judgecardx.R;
+import com.rajohns.judgecardx.Retrofit.RestClient;
+import com.rajohns.judgecardx.Utils.EditTextUtil;
+import com.rajohns.judgecardx.Utils.KeyboardUtil;
 
 import java.util.List;
 
@@ -20,12 +27,14 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import static com.rajohns.judgecardx.RestClient.*;
-import static com.rajohns.judgecardx.ObscuredSharedPreferences.*;
+import static com.rajohns.judgecardx.Retrofit.RestClient.*;
+import static com.rajohns.judgecardx.Utils.ObscuredSharedPreferences.*;
 
 public class LoginActivity extends BaseActivity {
-    @Inject RestClient restClient;
-    @Inject ObscuredSharedPreferences prefs;
+    @Inject
+    RestClient restClient;
+    @Inject
+    ObscuredSharedPreferences prefs;
     @InjectView(R.id.usernameET) EditText usernameET;
     @InjectView(R.id.passwordET) EditText passwordET;
     @InjectView(R.id.rememberMeSwitch) Switch rememberMeSwitch;

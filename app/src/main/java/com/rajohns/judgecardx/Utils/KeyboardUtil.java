@@ -1,4 +1,4 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Utils;
 
 import android.app.Activity;
 import android.content.Context;

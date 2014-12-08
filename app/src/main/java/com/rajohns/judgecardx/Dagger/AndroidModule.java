@@ -1,6 +1,9 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Dagger;
 
 import android.content.Context;
+
+import com.rajohns.judgecardx.Activities.LoginActivity;
+import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
 
 import javax.inject.Singleton;
 
@@ -28,7 +31,8 @@ public class AndroidModule {
         this.context = context;
     }
 
-    @Provides @Singleton ObscuredSharedPreferences provideSharedPreferences() {
+    @Provides @Singleton
+    ObscuredSharedPreferences provideSharedPreferences() {
         return new ObscuredSharedPreferences(context, context.getSharedPreferences("com.rajohns.judgecardx", Context.MODE_PRIVATE));
     }
 }

@@ -1,4 +1,4 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,15 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rajohns.judgecardx.R;
+
 /**
  * Created by rajohns on 12/7/14.
  *
  */
-public class MyCardsFragment extends Fragment {
+public class RecentScorecardsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_my_cards, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recent_scorecards, container, false);
         return rootView;
     }
 }

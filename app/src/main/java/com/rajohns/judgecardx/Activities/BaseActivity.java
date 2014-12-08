@@ -1,7 +1,9 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.rajohns.judgecardx.CustomApplication;
 
 /**
  * Created by rajohns on 10/17/14.

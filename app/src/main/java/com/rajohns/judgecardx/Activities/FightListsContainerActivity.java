@@ -1,4 +1,4 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Activities;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
@@ -7,26 +7,20 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import java.util.ArrayList;
+import com.rajohns.judgecardx.R;
+import com.rajohns.judgecardx.Retrofit.RestClient;
+import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
 
 import javax.inject.Inject;
-
-import butterknife.ButterKnife;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Created by rajohns on 11/19/14.
  *
  */
 public class FightListsContainerActivity extends FragmentActivity implements ActionBar.TabListener {
-    @Inject RestClient restClient;
+    @Inject
+    RestClient restClient;
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;

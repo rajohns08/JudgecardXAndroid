@@ -1,9 +1,11 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Utils;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+
+import com.rajohns.judgecardx.R;
 
 /**
  * Created by rajohns on 10/13/14.

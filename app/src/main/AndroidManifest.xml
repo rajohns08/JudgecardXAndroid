@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:label="@string/signin" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,17 +22,17 @@
         </activity>
 
         <activity
-            android:name=".ForgotLoginActivity"
+            android:name=".Activities.ForgotLoginActivity"
             android:label="@string/forgot_login">
         </activity>
 
         <activity
-            android:name=".SignUpActivity"
+            android:name=".Activities.SignUpActivity"
             android:label="@string/sign_up">
         </activity>
 
         <activity
-            android:name=".FightListsContainerActivity"
+            android:name=".Activities.FightListsContainerActivity"
             android:label="@string/judgecardx">
         </activity>
 

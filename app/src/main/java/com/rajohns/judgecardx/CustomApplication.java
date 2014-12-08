@@ -2,6 +2,9 @@ package com.rajohns.judgecardx;
 
 import android.app.Application;
 
+import com.rajohns.judgecardx.Dagger.AndroidModule;
+import com.rajohns.judgecardx.Dagger.NetworkingModule;
+
 import dagger.ObjectGraph;
 
 /**

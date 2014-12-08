@@ -1,9 +1,14 @@
-package com.rajohns.judgecardx;
+package com.rajohns.judgecardx.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.EditText;
+
+import com.rajohns.judgecardx.Utils.EditTextUtil;
+import com.rajohns.judgecardx.Utils.NotifyHelper;
+import com.rajohns.judgecardx.R;
+import com.rajohns.judgecardx.Retrofit.RestClient;
 
 import java.util.List;
 
@@ -17,14 +22,15 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import static com.rajohns.judgecardx.RestClient.*;
+import static com.rajohns.judgecardx.Retrofit.RestClient.*;
 
 /**
  * Created by rajohns on 11/11/14.
  *
  */
 public class SignUpActivity extends BaseActivity {
-    @Inject RestClient restClient;
+    @Inject
+    RestClient restClient;
     @InjectView(R.id.emailET) EditText emailET;
     @InjectView(R.id.usernameET) EditText usernameET;
     @InjectView(R.id.passwordET) EditText passwordET;
