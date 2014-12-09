@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.rajohns.judgecardx.Adapters.MasterFightListAdapter;
+import com.rajohns.judgecardx.Adapters.FightListAdapter;
 import com.rajohns.judgecardx.CustomApplication;
 import com.rajohns.judgecardx.Model.Fight;
 import com.rajohns.judgecardx.R;
@@ -39,7 +39,7 @@ public class MasterFightListFragment extends Fragment {
 
         final ListView listView = (ListView) rootView.findViewById(R.id.listview);
         final ArrayList<Fight> fights = new ArrayList<>();
-        final MasterFightListAdapter adapter = new MasterFightListAdapter(getActivity(), R.layout.row_fight, fights);
+        final FightListAdapter adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
 
         listView.setAdapter(adapter);
 

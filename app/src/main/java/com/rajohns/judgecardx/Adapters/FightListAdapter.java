@@ -18,13 +18,13 @@ import java.util.ArrayList;
  * Created by rajohns on 11/23/14.
  *
  */
-public class MasterFightListAdapter extends ArrayAdapter<Fight> {
+public class FightListAdapter extends ArrayAdapter<Fight> {
     Context context;
     int layoutResourceId;
     ArrayList<Fight> fights;
     Time today;
 
-    public MasterFightListAdapter(Context context, int layoutResourceId, ArrayList<Fight> fights) {
+    public FightListAdapter(Context context, int layoutResourceId, ArrayList<Fight> fights) {
         super(context, layoutResourceId, fights);
         this.context = context;
         this.layoutResourceId = layoutResourceId;
