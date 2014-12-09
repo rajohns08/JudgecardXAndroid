@@ -24,8 +24,10 @@ public class NotifyHelper {
     }
 
     public static void hideLoading() {
-        loadingDialog.dismiss();
-        loadingDialog = null;
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+            loadingDialog = null;
+        }
     }
 
     public static void showSingleButtonAlert(Context context, String title, String message) {

@@ -44,4 +44,7 @@ public interface RestClient {
 
     @GET("/fightList.php")
     void getMasterFightList(Callback<JsonElement> callback);
+
+    @GET("/upcomingFights.php")
+    void getUpcomingFights(Callback<JsonElement> callback);
 }

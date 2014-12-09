@@ -35,7 +35,7 @@ public class MasterFightListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((CustomApplication) getActivity().getApplication()).getObjectGraph().inject(this);
 
-        View rootView = inflater.inflate(R.layout.fragment_master_fight_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_fight_list, container, false);
 
         final ListView listView = (ListView) rootView.findViewById(R.id.listview);
         final ArrayList<Fight> fights = new ArrayList<>();

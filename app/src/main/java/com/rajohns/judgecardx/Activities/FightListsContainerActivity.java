@@ -33,6 +33,7 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
         setContentView(R.layout.activity_fight_lists_container);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setOffscreenPageLimit(3);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
