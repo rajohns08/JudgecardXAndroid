@@ -1,17 +1,12 @@
 package com.rajohns.judgecardx.Retrofit;
 
 import com.google.gson.JsonElement;
-import com.google.gson.annotations.SerializedName;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
-import retrofit.http.Query;
 
 /**
  * Created by rajohns on 10/12/14.
@@ -47,4 +42,10 @@ public interface RestClient {
 
     @GET("/upcomingFights.php")
     void getUpcomingFights(Callback<JsonElement> callback);
+
+    @GET("/myCards.php")
+    void getMyCards(Callback<JsonElement> callback);
+
+    @GET("/recentScorecards.php")
+    void getRecentScorecards(Callback<JsonElement> callback);
 }

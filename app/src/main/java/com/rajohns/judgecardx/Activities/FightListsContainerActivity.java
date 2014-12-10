@@ -19,8 +19,7 @@ import javax.inject.Inject;
  *
  */
 public class FightListsContainerActivity extends FragmentActivity implements ActionBar.TabListener {
-    @Inject
-    RestClient restClient;
+    @Inject RestClient restClient;
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
@@ -62,36 +61,6 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
 
             }
         });
-
-//        final ListView listView = (ListView) findViewById(R.id.listview);
-//        final ArrayList<Fight> fights = new ArrayList<Fight>();
-//        final MasterFightListAdapter adapter = new MasterFightListAdapter(this, R.layout.row_fight, fights);
-//
-//        listView.setAdapter(adapter);
-//
-//        NotifyHelper.showLoading(this);
-//        restClient.getMasterFightList(new Callback<JsonElement>() {
-//            @Override
-//            public void success(JsonElement jsonElement, Response response) {
-//                NotifyHelper.hideLoading();
-//                for (JsonElement je : jsonElement.getAsJsonArray()) {
-//                    JsonObject object = je.getAsJsonObject();
-//                    String fighter1 = object.get("fighter1").getAsString();
-//                    String fighter2 = object.get("fighter2").getAsString();
-//                    String date = object.get("date").getAsString();
-//
-//                    Fight fight = new Fight(fighter1, fighter2, date);
-//                    fights.add(fight);
-//                }
-//
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//                NotifyHelper.hideLoading();
-//            }
-//        });
     }
 
     @Override

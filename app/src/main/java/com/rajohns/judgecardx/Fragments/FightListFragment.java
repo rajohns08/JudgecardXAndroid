@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.rajohns.judgecardx.Adapters.FightListAdapter;
+import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
 import com.rajohns.judgecardx.CustomApplication;
 import com.rajohns.judgecardx.Model.Fight;
 import com.rajohns.judgecardx.R;
@@ -28,12 +29,25 @@ import retrofit.client.Response;
  * Created by rajohns on 12/7/14.
  *
  */
-public class MasterFightListFragment extends Fragment {
+public class FightListFragment extends Fragment {
     @Inject RestClient restClient;
+
+    private static final int MASTER_FIGHT_LIST_INDEX = 0;
+    private static final int UPCOMING_FIGHTS_INDEX = 1;
+    private static final int MY_CARDS_INDEX = 2;
+    private static final int RECENT_CARDS_INDEX = 3;
+
+    private int position;
+
+    private Callback callback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((CustomApplication) getActivity().getApplication()).getObjectGraph().inject(this);
+
+        if (getArguments() != null) {
+            position = getArguments().getInt(TabsPagerAdapter.REST_CALL_KEY);
+        }
 
         View rootView = inflater.inflate(R.layout.fragment_fight_list, container, false);
 
@@ -43,8 +57,7 @@ public class MasterFightListFragment extends Fragment {
 
         listView.setAdapter(adapter);
 
-        NotifyHelper.showLoading(getActivity());
-        restClient.getMasterFightList(new Callback<JsonElement>() {
+        callback = new Callback<JsonElement>() {
             @Override
             public void success(JsonElement jsonElement, Response response) {
                 NotifyHelper.hideLoading();
@@ -65,8 +78,32 @@ public class MasterFightListFragment extends Fragment {
             public void failure(RetrofitError error) {
                 NotifyHelper.hideLoading();
             }
-        });
+        };
+
+        callAppropriateRestMethodFromIndex(position);
 
         return rootView;
+    }
+
+    private void callAppropriateRestMethodFromIndex(int index) {
+        NotifyHelper.showLoading(getActivity());
+
+        switch (index) {
+            case MASTER_FIGHT_LIST_INDEX:
+                restClient.getMasterFightList(callback);
+                break;
+            case UPCOMING_FIGHTS_INDEX:
+                restClient.getUpcomingFights(callback);
+                break;
+            case MY_CARDS_INDEX:
+                restClient.getUpcomingFights(callback);
+                break;
+            case RECENT_CARDS_INDEX:
+                restClient.getUpcomingFights(callback);
+                break;
+            default:
+                NotifyHelper.hideLoading();
+                break;
+        }
     }
 }
