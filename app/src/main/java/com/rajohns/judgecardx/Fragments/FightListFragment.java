@@ -69,9 +69,17 @@ public class FightListFragment extends Fragment {
                     JsonObject object = je.getAsJsonObject();
                     String fighter1 = object.get("fighter1").getAsString();
                     String fighter2 = object.get("fighter2").getAsString();
-                    String date = object.get("date").getAsString();
 
-                    Fight fight = new Fight(fighter1, fighter2, date);
+                    String subtext;
+                    if (position == RECENT_CARDS_INDEX) {
+                        String username = object.get("username").getAsString();
+                        subtext = "User: " + username;
+                    }
+                    else {
+                        subtext = object.get("date").getAsString();
+                    }
+
+                    Fight fight = new Fight(fighter1, fighter2, subtext);
                     fights.add(fight);
                 }
 
@@ -104,7 +112,7 @@ public class FightListFragment extends Fragment {
                 restClient.getMyCards(username, callback);
                 break;
             case RECENT_CARDS_INDEX:
-                restClient.getUpcomingFights(callback);
+                restClient.getRecentScorecards(callback);
                 break;
             default:
                 NotifyHelper.hideLoading();

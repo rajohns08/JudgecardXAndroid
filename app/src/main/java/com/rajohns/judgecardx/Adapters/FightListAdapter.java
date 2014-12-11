@@ -42,16 +42,16 @@ public class FightListAdapter extends ArrayAdapter<Fight> {
         }
 
         TextView fightersTV = (TextView)convertView.findViewById(R.id.fightersTV);
-        TextView dateTV = (TextView)convertView.findViewById(R.id.dateTV);
+        TextView subtextTV = (TextView)convertView.findViewById(R.id.subtextTV);
         TextView todayTV = (TextView)convertView.findViewById(R.id.todayTV);
 
         Fight fight = fights.get(position);
-        fightersTV.setText(fight.fighter1 + " - " + fight.fighter2);
-        dateTV.setText(fight.fightDate);
+        fightersTV.setText(fight.getFighter1() + " - " + fight.getFighter2());
+        subtextTV.setText(fight.getSubtext());
 
         String todayString = today.month+1 + "-" + today.monthDay + "-" + today.year;
 
-        if (todayString.equals(fight.fightDate)) {
+        if (todayString.equals(fight.getSubtext())) {
             todayTV.setText(context.getResources().getString(R.string.today_label));
         }
 
