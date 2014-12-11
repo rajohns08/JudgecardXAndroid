@@ -43,8 +43,9 @@ public interface RestClient {
     @GET("/upcomingFights.php")
     void getUpcomingFights(Callback<JsonElement> callback);
 
-    @GET("/myCards.php")
-    void getMyCards(Callback<JsonElement> callback);
+    @FormUrlEncoded
+    @POST("/myCards.php")
+    void getMyCards(@Field(USERNAME_KEY) String username, Callback<JsonElement> callback);
 
     @GET("/recentScorecards.php")
     void getRecentScorecards(Callback<JsonElement> callback);

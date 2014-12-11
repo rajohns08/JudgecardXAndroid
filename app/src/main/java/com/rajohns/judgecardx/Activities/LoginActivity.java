@@ -56,7 +56,8 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
-        saveLoginInfoIfUserWantsItRemembered();
+        prefs.edit().putString(USERNAME_PREF, usernameET.getText().toString()).commit();
+        savePasswordInfoIfUserWantsItRemembered();
 
         NotifyHelper.showLoading(LoginActivity.this);
         restClient.login(usernameET.getText().toString(), passwordET.getText().toString(), new Callback<String>() {
@@ -110,9 +111,8 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    private void saveLoginInfoIfUserWantsItRemembered() {
+    private void savePasswordInfoIfUserWantsItRemembered() {
         if (prefs.getBoolean(REMEMBER_ME_PREF, false)) {
-            prefs.edit().putString(USERNAME_PREF, usernameET.getText().toString()).commit();
             prefs.edit().putString(PASSWORD_PREF, passwordET.getText().toString()).commit();
         }
     }

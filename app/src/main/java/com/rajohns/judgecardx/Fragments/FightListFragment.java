@@ -16,6 +16,7 @@ import com.rajohns.judgecardx.Model.Fight;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
+import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
 
 import java.util.ArrayList;
 
@@ -25,12 +26,15 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import static com.rajohns.judgecardx.Utils.ObscuredSharedPreferences.USERNAME_PREF;
+
 /**
  * Created by rajohns on 12/7/14.
  *
  */
 public class FightListFragment extends Fragment {
     @Inject RestClient restClient;
+    @Inject ObscuredSharedPreferences prefs;
 
     private static final int MASTER_FIGHT_LIST_INDEX = 0;
     private static final int UPCOMING_FIGHTS_INDEX = 1;
@@ -39,7 +43,7 @@ public class FightListFragment extends Fragment {
 
     private int position;
 
-    private Callback callback;
+    private Callback<JsonElement> callback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -96,7 +100,8 @@ public class FightListFragment extends Fragment {
                 restClient.getUpcomingFights(callback);
                 break;
             case MY_CARDS_INDEX:
-                restClient.getUpcomingFights(callback);
+                String username = prefs.getString(USERNAME_PREF, "");
+                restClient.getMyCards(username, callback);
                 break;
             case RECENT_CARDS_INDEX:
                 restClient.getUpcomingFights(callback);

@@ -3,6 +3,7 @@ package com.rajohns.judgecardx.Dagger;
 import android.content.Context;
 
 import com.rajohns.judgecardx.Activities.LoginActivity;
+import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
 
 import javax.inject.Singleton;
@@ -18,7 +19,8 @@ import dagger.Provides;
 @Module (
     complete = false,
     injects = {
-        LoginActivity.class
+        LoginActivity.class,
+        FightListFragment.class
     }
 )
 
