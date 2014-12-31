@@ -19,6 +19,7 @@ import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -42,12 +43,18 @@ public class FightListFragment extends Fragment {
     private static final int RECENT_CARDS_INDEX = 3;
 
     private int position;
-
-    private Callback<JsonElement> callback;
+    public Callback<JsonElement> callback;
+    public static HashMap<Integer, Boolean> serviceCallsMade = new HashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((CustomApplication) getActivity().getApplication()).getObjectGraph().inject(this);
+
+        // Initially only the first page will have its service call made
+        serviceCallsMade.put(MASTER_FIGHT_LIST_INDEX, true);
+        serviceCallsMade.put(UPCOMING_FIGHTS_INDEX, false);
+        serviceCallsMade.put(MY_CARDS_INDEX, false);
+        serviceCallsMade.put(RECENT_CARDS_INDEX, false);
 
         if (getArguments() != null) {
             position = getArguments().getInt(TabsPagerAdapter.REST_CALL_KEY);
@@ -92,13 +99,19 @@ public class FightListFragment extends Fragment {
             }
         };
 
-        callAppropriateRestMethodFromIndex(position);
+        // Go ahead and make the first service call. Wait
+        // to make the other service calls after their
+        // tab has been navigated to.
+        if (position == MASTER_FIGHT_LIST_INDEX) {
+            callAppropriateRestMethodFromIndex(position);
+        }
 
         return rootView;
     }
 
-    private void callAppropriateRestMethodFromIndex(int index) {
+    public void callAppropriateRestMethodFromIndex(int index) {
         NotifyHelper.showLoading(getActivity());
+        serviceCallsMade.put(index, true);
 
         switch (index) {
             case MASTER_FIGHT_LIST_INDEX:
@@ -106,6 +119,7 @@ public class FightListFragment extends Fragment {
                 break;
             case UPCOMING_FIGHTS_INDEX:
                 restClient.getUpcomingFights(callback);
+
                 break;
             case MY_CARDS_INDEX:
                 String username = prefs.getString(USERNAME_PREF, "");

@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
@@ -54,6 +55,11 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
             @Override
             public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
+
+                // Only make the service call for the list if it hasn't already been made
+                if (!FightListFragment.serviceCallsMade.get(position)) {
+                    mAdapter.getFragment(position).callAppropriateRestMethodFromIndex(position);
+                }
             }
 
             @Override
