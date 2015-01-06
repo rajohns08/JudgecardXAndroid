@@ -36,6 +36,11 @@
             android:label="@string/judgecardx">
         </activity>
 
+        <activity
+            android:name=".Activities.ScorecardActivity"
+            android:label="Scorecard">
+        </activity>
+
     </application>
 
 </manifest>

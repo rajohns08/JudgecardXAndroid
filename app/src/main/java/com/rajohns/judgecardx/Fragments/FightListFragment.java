@@ -1,14 +1,17 @@
 package com.rajohns.judgecardx.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.rajohns.judgecardx.Activities.ScorecardActivity;
 import com.rajohns.judgecardx.Adapters.FightListAdapter;
 import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
 import com.rajohns.judgecardx.CustomApplication;
@@ -67,6 +70,17 @@ public class FightListFragment extends Fragment {
         final FightListAdapter adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
 
         listView.setAdapter(adapter);
+
+        // The upcoming fights section should not be clickable
+        if (position != UPCOMING_FIGHTS_INDEX) {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    NotifyHelper.showSingleButtonAlert(getActivity(), "title", "" + fights.get(position).getFighter1());
+                    startActivity(new Intent(getActivity(), ScorecardActivity.class));
+                }
+            });
+        }
 
         callback = new Callback<JsonElement>() {
             @Override
