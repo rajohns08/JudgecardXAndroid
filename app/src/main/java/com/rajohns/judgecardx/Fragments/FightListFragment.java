@@ -45,7 +45,7 @@ public class FightListFragment extends Fragment {
     private static final int MY_CARDS_INDEX = 2;
     private static final int RECENT_CARDS_INDEX = 3;
 
-    private int position;
+    private int fragmentPosition;
     public Callback<JsonElement> callback;
     public static HashMap<Integer, Boolean> serviceCallsMade = new HashMap<>();
 
@@ -60,7 +60,7 @@ public class FightListFragment extends Fragment {
         serviceCallsMade.put(RECENT_CARDS_INDEX, false);
 
         if (getArguments() != null) {
-            position = getArguments().getInt(TabsPagerAdapter.REST_CALL_KEY);
+            fragmentPosition = getArguments().getInt(TabsPagerAdapter.REST_CALL_KEY);
         }
 
         View rootView = inflater.inflate(R.layout.fragment_fight_list, container, false);
@@ -72,12 +72,13 @@ public class FightListFragment extends Fragment {
         listView.setAdapter(adapter);
 
         // The upcoming fights section should not be clickable
-        if (position != UPCOMING_FIGHTS_INDEX) {
+        if (fragmentPosition != UPCOMING_FIGHTS_INDEX) {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    NotifyHelper.showSingleButtonAlert(getActivity(), "title", "" + fights.get(position).getFighter1());
-                    startActivity(new Intent(getActivity(), ScorecardActivity.class));
+                    Intent intent = new Intent(getActivity(), ScorecardActivity.class);
+                    intent.putExtra(TabsPagerAdapter.REST_CALL_KEY, fragmentPosition);
+                    startActivity(intent);
                 }
             });
         }
@@ -92,7 +93,7 @@ public class FightListFragment extends Fragment {
                     String fighter2 = object.get("fighter2").getAsString();
 
                     String subtext;
-                    if (position == RECENT_CARDS_INDEX) {
+                    if (fragmentPosition == RECENT_CARDS_INDEX) {
                         String username = object.get("username").getAsString();
                         subtext = "User: " + username;
                     }
@@ -116,8 +117,8 @@ public class FightListFragment extends Fragment {
         // Go ahead and make the first service call. Wait
         // to make the other service calls after their
         // tab has been navigated to.
-        if (position == MASTER_FIGHT_LIST_INDEX) {
-            callAppropriateRestMethodFromIndex(position);
+        if (fragmentPosition == MASTER_FIGHT_LIST_INDEX) {
+            callAppropriateRestMethodFromIndex(fragmentPosition);
         }
 
         return rootView;
