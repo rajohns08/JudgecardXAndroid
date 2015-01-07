@@ -40,10 +40,12 @@ public class FightListFragment extends Fragment {
     @Inject RestClient restClient;
     @Inject ObscuredSharedPreferences prefs;
 
-    private static final int MASTER_FIGHT_LIST_INDEX = 0;
-    private static final int UPCOMING_FIGHTS_INDEX = 1;
-    private static final int MY_CARDS_INDEX = 2;
-    private static final int RECENT_CARDS_INDEX = 3;
+    public static final int MASTER_FIGHT_LIST_INDEX = 0;
+    public static final int UPCOMING_FIGHTS_INDEX = 1;
+    public static final int MY_CARDS_INDEX = 2;
+    public static final int RECENT_CARDS_INDEX = 3;
+
+    public static final String SUBTEXT = "subtext";
 
     private int fragmentPosition;
     public Callback<JsonElement> callback;
@@ -78,6 +80,7 @@ public class FightListFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(getActivity(), ScorecardActivity.class);
                     intent.putExtra(TabsPagerAdapter.REST_CALL_KEY, fragmentPosition);
+                    intent.putExtra(SUBTEXT, fights.get(position).getSubtext());
                     startActivity(intent);
                 }
             });
