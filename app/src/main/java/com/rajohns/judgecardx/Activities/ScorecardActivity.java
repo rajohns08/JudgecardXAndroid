@@ -55,8 +55,6 @@ public class ScorecardActivity extends BaseActivity {
         s.add(r9);
         Scorecard scorecard = new Scorecard(s);
         ScorecardAdapter adapter = new ScorecardAdapter(this, R.layout.row_scorecard, scorecard);
-        View view = View.inflate(this, R.layout.header_scorecard, null);
-        listView.addHeaderView(view);
         listView.setAdapter(adapter);
     }
 
