@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.rajohns.judgecardx.Adapters.ScorecardAdapter;
 import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
  */
 public class ScorecardActivity extends BaseActivity {
     String subtext;
+    String leftFighter;
+    String rightFighter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,13 @@ public class ScorecardActivity extends BaseActivity {
         if (intent != null) {
             int fragmentSource = intent.getIntExtra(TabsPagerAdapter.REST_CALL_KEY, 0);
             subtext = intent.getStringExtra(FightListFragment.SUBTEXT);
+            leftFighter = intent.getStringExtra(FightListFragment.LEFT_FIGHTER);
+            rightFighter = intent.getStringExtra(FightListFragment.RIGHT_FIGHTER);
             setTitle(actionBarTitle(fragmentSource));
+            TextView leftFighterTV = (TextView)findViewById(R.id.leftFighter);
+            TextView rightFighterTV = (TextView)findViewById(R.id.rightFighter);
+            leftFighterTV.setText(leftFighter);
+            rightFighterTV.setText(rightFighter);
         }
 
         ListView listView = (ListView)findViewById(R.id.scorecardList);

@@ -46,6 +46,8 @@ public class FightListFragment extends Fragment {
     public static final int RECENT_CARDS_INDEX = 3;
 
     public static final String SUBTEXT = "subtext";
+    public static final String LEFT_FIGHTER = "leftFighter";
+    public static final String RIGHT_FIGHTER = "rightFighter";
 
     private int fragmentPosition;
     public Callback<JsonElement> callback;
@@ -81,6 +83,8 @@ public class FightListFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), ScorecardActivity.class);
                     intent.putExtra(TabsPagerAdapter.REST_CALL_KEY, fragmentPosition);
                     intent.putExtra(SUBTEXT, fights.get(position).getSubtext());
+                    intent.putExtra(LEFT_FIGHTER, fights.get(position).getFighter1());
+                    intent.putExtra(RIGHT_FIGHTER, fights.get(position).getFighter2());
                     startActivity(intent);
                 }
             });
