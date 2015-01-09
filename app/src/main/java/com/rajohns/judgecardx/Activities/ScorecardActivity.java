@@ -2,10 +2,16 @@ package com.rajohns.judgecardx.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
 
+import com.rajohns.judgecardx.Adapters.ScorecardAdapter;
 import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
 import com.rajohns.judgecardx.Fragments.FightListFragment;
+import com.rajohns.judgecardx.Model.Round;
+import com.rajohns.judgecardx.Model.Scorecard;
 import com.rajohns.judgecardx.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by rajohns on 1/5/15.
@@ -25,6 +31,18 @@ public class ScorecardActivity extends BaseActivity {
             subtext = intent.getStringExtra(FightListFragment.SUBTEXT);
             setTitle(actionBarTitle(fragmentSource));
         }
+
+        ListView listView = (ListView)findViewById(R.id.scorecardList);
+        Round r1 = new Round(10, 1, 9);
+        Round r2 = new Round(10, 2, 9);
+        Round r3 = new Round(10, 3, 9);
+        ArrayList<Round> s = new ArrayList<>();
+        s.add(r1);
+        s.add(r2);
+        s.add(r3);
+        Scorecard scorecard = new Scorecard(s);
+        ScorecardAdapter adapter = new ScorecardAdapter(this, R.layout.row_scorecard, scorecard);
+        listView.setAdapter(adapter);
     }
 
     private String actionBarTitle(int fragmentSource) {
