@@ -2,6 +2,7 @@ package com.rajohns.judgecardx.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.rajohns.judgecardx.Adapters.ScorecardAdapter;
@@ -36,12 +37,26 @@ public class ScorecardActivity extends BaseActivity {
         Round r1 = new Round(10, 1, 9);
         Round r2 = new Round(10, 2, 9);
         Round r3 = new Round(10, 3, 9);
+        Round r4 = new Round(10, 1, 9);
+        Round r5 = new Round(10, 2, 9);
+        Round r6 = new Round(10, 3, 9);
+        Round r7 = new Round(10, 1, 9);
+        Round r8 = new Round(10, 2, 9);
+        Round r9 = new Round(10, 3, 9);
         ArrayList<Round> s = new ArrayList<>();
         s.add(r1);
         s.add(r2);
         s.add(r3);
+        s.add(r4);
+        s.add(r5);
+        s.add(r6);
+        s.add(r7);
+        s.add(r8);
+        s.add(r9);
         Scorecard scorecard = new Scorecard(s);
         ScorecardAdapter adapter = new ScorecardAdapter(this, R.layout.row_scorecard, scorecard);
+        View view = View.inflate(this, R.layout.header_scorecard, null);
+        listView.addHeaderView(view);
         listView.setAdapter(adapter);
     }
 
