@@ -43,15 +43,15 @@ public class ScorecardActivity extends BaseActivity {
         }
 
         ListView listView = (ListView)findViewById(R.id.scorecardList);
-        Round r1 = new Round(10, 1, 9);
-        Round r2 = new Round(10, 2, 9);
-        Round r3 = new Round(10, 3, 9);
-        Round r4 = new Round(10, 1, 9);
-        Round r5 = new Round(10, 2, 9);
-        Round r6 = new Round(10, 3, 9);
-        Round r7 = new Round(10, 1, 9);
-        Round r8 = new Round(10, 2, 9);
-        Round r9 = new Round(10, 3, 9);
+        Round r1 = new Round(10, 9);
+        Round r2 = new Round(10, 9);
+        Round r3 = new Round(10, 9);
+        Round r4 = new Round(10, 9);
+        Round r5 = new Round(10, 9);
+        Round r6 = new Round(10, 9);
+        Round r7 = new Round(10, 9);
+        Round r8 = new Round(10, 9);
+        Round r9 = new Round(10, 9);
         ArrayList<Round> s = new ArrayList<>();
         s.add(r1);
         s.add(r2);

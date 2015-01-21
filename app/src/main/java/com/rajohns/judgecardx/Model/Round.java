@@ -6,12 +6,10 @@ package com.rajohns.judgecardx.Model;
  */
 public class Round {
     private int leftScore;
-    private int roundNumber;
     private int rightScore;
 
-    public Round(int leftScore, int roundNumber, int rightScore) {
+    public Round(int leftScore, int rightScore) {
         this.leftScore = leftScore;
-        this.roundNumber = roundNumber;
         this.rightScore = rightScore;
     }
 
@@ -31,20 +29,8 @@ public class Round {
         this.rightScore = rightScore;
     }
 
-    public int getRoundNumber() {
-        return roundNumber;
-    }
-
-    public void setRoundNumber(int roundNumber) {
-        this.roundNumber = roundNumber;
-    }
-
     public String getLeftScoreString() {
         return String.valueOf(leftScore);
-    }
-
-    public String getRoundNumberString() {
-        return String.valueOf(roundNumber);
     }
 
     public String getRightScoreString() {
