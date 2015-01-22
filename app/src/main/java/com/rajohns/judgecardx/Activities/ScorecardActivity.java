@@ -6,20 +6,35 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.JsonElement;
 import com.rajohns.judgecardx.Adapters.ScorecardAdapter;
 import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
 import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.Model.Round;
 import com.rajohns.judgecardx.Model.Scorecard;
 import com.rajohns.judgecardx.R;
+import com.rajohns.judgecardx.Retrofit.RestClient;
+import com.rajohns.judgecardx.Utils.NotifyHelper;
+import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+import static com.rajohns.judgecardx.Utils.ObscuredSharedPreferences.USERNAME_PREF;
 
 /**
  * Created by rajohns on 1/5/15.
  *
  */
 public class ScorecardActivity extends BaseActivity {
+    @Inject RestClient restClient;
+    @Inject ObscuredSharedPreferences prefs;
+
     String subtext;
     String leftFighter;
     String rightFighter;
@@ -43,6 +58,26 @@ public class ScorecardActivity extends BaseActivity {
         }
 
         ListView listView = (ListView)findViewById(R.id.scorecardList);
+
+
+        NotifyHelper.showLoading(this);
+        String username = prefs.getString(USERNAME_PREF, "");
+        restClient.getScorecardDetail(username, "brook", "porter", new Callback<JsonElement>() {
+            @Override
+            public void success(JsonElement jsonElement, Response response) {
+                NotifyHelper.hideLoading();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                NotifyHelper.hideLoading();
+            }
+        });
+
+
+
+
+
         Round r1 = new Round(10, 9);
         Round r2 = new Round(10, 9);
         Round r3 = new Round(10, 9);

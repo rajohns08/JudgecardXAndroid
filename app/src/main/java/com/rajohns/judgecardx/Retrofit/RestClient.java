@@ -24,6 +24,8 @@ public interface RestClient {
     public static final String USERNAME_KEY = "username";
     public static final String PASSWORD_KEY = "password";
     public static final String EMAIL_KEY = "email";
+    public static final String FIGHTER1_KEY = "fighter1";
+    public static final String FIGHTER2_KEY = "fighter2";
 
     @FormUrlEncoded
     @POST("/login.php")
@@ -49,4 +51,8 @@ public interface RestClient {
 
     @GET("/recentScorecards.php")
     void getRecentScorecards(Callback<JsonElement> callback);
+
+    @FormUrlEncoded
+    @POST("/fetchScorecard.php")
+    void getScorecardDetail(@Field(USERNAME_KEY) String username, @Field(FIGHTER1_KEY) String fighter1, @Field(FIGHTER2_KEY) String fighter2, Callback<JsonElement> callback);
 }
