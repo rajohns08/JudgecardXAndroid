@@ -62,7 +62,7 @@ public class ScorecardActivity extends BaseActivity {
 
         NotifyHelper.showLoading(this);
         String username = prefs.getString(USERNAME_PREF, "");
-        restClient.getScorecardDetail(username, "brook", "porter", new Callback<JsonElement>() {
+        restClient.getScorecardDetail(username, leftFighter, rightFighter, new Callback<JsonElement>() {
             @Override
             public void success(JsonElement jsonElement, Response response) {
                 NotifyHelper.hideLoading();
