@@ -7,6 +7,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.rajohns.judgecardx.Adapters.ScorecardAdapter;
 import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
 import com.rajohns.judgecardx.Fragments.FightListFragment;
@@ -66,6 +67,10 @@ public class ScorecardActivity extends BaseActivity {
             @Override
             public void success(JsonElement jsonElement, Response response) {
                 NotifyHelper.hideLoading();
+
+                JsonObject object = jsonElement.getAsJsonObject();
+                String f1r1 = object.get("f1r1").getAsString();
+                String f1r2 = object.get("f1r2").getAsString();
             }
 
             @Override
