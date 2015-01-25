@@ -48,6 +48,7 @@ public class FightListFragment extends Fragment {
     public static final String SUBTEXT = "subtext";
     public static final String LEFT_FIGHTER = "leftFighter";
     public static final String RIGHT_FIGHTER = "rightFighter";
+    public static final String ROUNDS = "rounds";
 
     private int fragmentPosition;
     public Callback<JsonElement> callback;
@@ -85,6 +86,7 @@ public class FightListFragment extends Fragment {
                     intent.putExtra(SUBTEXT, fights.get(position).getSubtext());
                     intent.putExtra(LEFT_FIGHTER, fights.get(position).getFighter1());
                     intent.putExtra(RIGHT_FIGHTER, fights.get(position).getFighter2());
+                    intent.putExtra(ROUNDS, fights.get(position).getRounds());
                     startActivity(intent);
                 }
             });
@@ -98,6 +100,8 @@ public class FightListFragment extends Fragment {
                     JsonObject object = je.getAsJsonObject();
                     String fighter1 = object.get("fighter1").getAsString();
                     String fighter2 = object.get("fighter2").getAsString();
+                    String rounds = object.get("rounds").getAsString();
+                    int roundsNum = Integer.parseInt(rounds);
 
                     String subtext;
                     if (fragmentPosition == RECENT_CARDS_INDEX) {
@@ -108,7 +112,7 @@ public class FightListFragment extends Fragment {
                         subtext = object.get("date").getAsString();
                     }
 
-                    Fight fight = new Fight(fighter1, fighter2, subtext);
+                    Fight fight = new Fight(fighter1, fighter2, subtext, roundsNum);
                     fights.add(fight);
                 }
 

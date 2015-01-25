@@ -5,35 +5,27 @@ package com.rajohns.judgecardx.Model;
  *
  */
 public class Round {
-    private int leftScore;
-    private int rightScore;
+    private String leftScore;
+    private String rightScore;
 
-    public Round(int leftScore, int rightScore) {
+    public Round(String leftScore, String rightScore) {
         this.leftScore = leftScore;
         this.rightScore = rightScore;
     }
 
-    public int getLeftScore() {
+    public String getLeftScore() {
         return leftScore;
     }
 
-    public void setLeftScore(int leftScore) {
+    public void setLeftScore(String leftScore) {
         this.leftScore = leftScore;
     }
 
-    public int getRightScore() {
+    public String getRightScore() {
         return rightScore;
     }
 
-    public void setRightScore(int rightScore) {
+    public void setRightScore(String rightScore) {
         this.rightScore = rightScore;
-    }
-
-    public String getLeftScoreString() {
-        return String.valueOf(leftScore);
-    }
-
-    public String getRightScoreString() {
-        return String.valueOf(rightScore);
     }
 }

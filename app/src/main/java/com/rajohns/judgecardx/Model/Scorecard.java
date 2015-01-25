@@ -1,23 +1,23 @@
 package com.rajohns.judgecardx.Model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rajohns on 1/7/15.
  *
  */
 public class Scorecard {
-    private ArrayList<Round> scorecard;
+    private List<Round> scorecard;
 
-    public Scorecard(ArrayList<Round> scorecard) {
+    public Scorecard(List<Round> scorecard) {
         this.scorecard = scorecard;
     }
 
-    public ArrayList<Round> getScorecard() {
+    public List<Round> getScorecard() {
         return scorecard;
     }
 
-    public void setScorecard(ArrayList<Round> scorecard) {
+    public void setScorecard(List<Round> scorecard) {
         this.scorecard = scorecard;
     }
 }

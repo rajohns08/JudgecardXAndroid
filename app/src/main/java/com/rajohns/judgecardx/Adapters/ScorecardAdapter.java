@@ -46,10 +46,10 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
 
         Round round = scorecard.getScorecard().get(position);
 
-        leftScoreButton.setText(round.getLeftScoreString());
+        leftScoreButton.setText(round.getLeftScore());
         int roundNum = position+1;
         roundNumber.setText("" + roundNum);
-        rightScoreButton.setText(round.getRightScoreString());
+        rightScoreButton.setText(round.getRightScore());
 
         return convertView;
     }
