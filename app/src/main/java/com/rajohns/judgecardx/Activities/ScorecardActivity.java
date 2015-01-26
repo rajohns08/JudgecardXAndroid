@@ -49,9 +49,10 @@ public class ScorecardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scorecard);
 
+        int fragmentSource = 0;
         Intent intent = getIntent();
         if (intent != null) {
-            int fragmentSource = intent.getIntExtra(TabsPagerAdapter.REST_CALL_KEY, 0);
+            fragmentSource = intent.getIntExtra(TabsPagerAdapter.REST_CALL_KEY, 0);
             subtext = intent.getStringExtra(FightListFragment.SUBTEXT);
             leftFighter = intent.getStringExtra(FightListFragment.LEFT_FIGHTER);
             rightFighter = intent.getStringExtra(FightListFragment.RIGHT_FIGHTER);
@@ -68,7 +69,15 @@ public class ScorecardActivity extends BaseActivity {
         final TextView rightTotalTV = (TextView)findViewById(R.id.rightFighterTotalScore);
 
         NotifyHelper.showLoading(this);
-        String username = prefs.getString(USERNAME_PREF, "");
+
+        String username;
+        if (fragmentSource == FightListFragment.RECENT_CARDS_INDEX) {
+            username = getJustUsernameFromSubtext(subtext);
+        }
+        else {
+            username = prefs.getString(USERNAME_PREF, "");
+        }
+
         restClient.getScorecardDetail(username, leftFighter, rightFighter, new Callback<JsonElement>() {
             @Override
             public void success(JsonElement jsonElement, Response response) {
