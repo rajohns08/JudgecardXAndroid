@@ -1,5 +1,7 @@
 package com.rajohns.judgecardx.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -62,6 +64,8 @@ public class ScorecardActivity extends BaseActivity {
         }
 
         final ListView listView = (ListView)findViewById(R.id.scorecardList);
+        final TextView leftTotalTV = (TextView)findViewById(R.id.leftFighterTotalScore);
+        final TextView rightTotalTV = (TextView)findViewById(R.id.rightFighterTotalScore);
 
         NotifyHelper.showLoading(this);
         String username = prefs.getString(USERNAME_PREF, "");
@@ -107,11 +111,19 @@ public class ScorecardActivity extends BaseActivity {
                         object.get("f2r15").getAsString()
                 );
 
+                int leftTotal = 0;
+                int rightTotal = 0;
                 ArrayList<Round> roundsList = new ArrayList<>();
                 for (int i = 0; i < rounds; i++) {
                     Round round = new Round(leftScoresList.get(i), rightScoresList.get(i));
                     roundsList.add(round);
+                    leftTotal += Integer.parseInt(leftScoresList.get(i));
+                    rightTotal += Integer.parseInt(rightScoresList.get(i));
                 }
+
+                leftTotalTV.setText(Integer.toString(leftTotal));
+                rightTotalTV.setText(Integer.toString(rightTotal));
+
                 Scorecard scorecard = new Scorecard(roundsList);
                 ScorecardAdapter adapter = new ScorecardAdapter(ScorecardActivity.this, R.layout.row_scorecard, scorecard);
                 listView.setAdapter(adapter);
@@ -120,6 +132,21 @@ public class ScorecardActivity extends BaseActivity {
             @Override
             public void failure(RetrofitError error) {
                 NotifyHelper.hideLoading();
+
+                AlertDialog alertDialog;
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ScorecardActivity.this);
+                alertDialogBuilder.setTitle("Unknown Error");
+                alertDialogBuilder.setMessage("An unknown error occurred. Either your internet is down, or we are having server issues.");
+                alertDialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
     }
