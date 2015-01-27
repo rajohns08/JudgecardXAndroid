@@ -78,6 +78,7 @@ public class ScorecardActivity extends BaseActivity {
             username = prefs.getString(USERNAME_PREF, "");
         }
 
+        final int finalFragmentSource = fragmentSource;
         restClient.getScorecardDetail(username, leftFighter, rightFighter, new Callback<JsonElement>() {
             @Override
             public void success(JsonElement jsonElement, Response response) {
@@ -134,7 +135,7 @@ public class ScorecardActivity extends BaseActivity {
                 rightTotalTV.setText(Integer.toString(rightTotal));
 
                 Scorecard scorecard = new Scorecard(roundsList);
-                ScorecardAdapter adapter = new ScorecardAdapter(ScorecardActivity.this, R.layout.row_scorecard, scorecard);
+                ScorecardAdapter adapter = new ScorecardAdapter(ScorecardActivity.this, R.layout.row_scorecard, scorecard, finalFragmentSource);
                 listView.setAdapter(adapter);
             }
 

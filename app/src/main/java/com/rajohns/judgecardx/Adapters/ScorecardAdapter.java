@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.Model.Fight;
 import com.rajohns.judgecardx.Model.Round;
 import com.rajohns.judgecardx.Model.Scorecard;
@@ -25,12 +26,14 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
     Context context;
     int layoutResourceId;
     Scorecard scorecard;
+    int fragmentSource;
 
-    public ScorecardAdapter(Context context, int layoutResourceId, Scorecard scorecard) {
+    public ScorecardAdapter(Context context, int layoutResourceId, Scorecard scorecard, int fragmentSource) {
         super(context, layoutResourceId, scorecard.getScorecard());
         this.context = context;
         this.layoutResourceId = layoutResourceId;
         this.scorecard = scorecard;
+        this.fragmentSource = fragmentSource;
     }
 
     @Override
@@ -50,6 +53,11 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
         int roundNum = position+1;
         roundNumber.setText("" + roundNum);
         rightScoreButton.setText(round.getRightScore());
+
+        if (fragmentSource == FightListFragment.RECENT_CARDS_INDEX) {
+            leftScoreButton.setEnabled(false);
+            rightScoreButton.setEnabled(false);
+        }
 
         return convertView;
     }
