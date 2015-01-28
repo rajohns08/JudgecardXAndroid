@@ -43,6 +43,8 @@ public class ScorecardActivity extends BaseActivity {
     String leftFighter;
     String rightFighter;
     int rounds;
+    TextView leftTotalTV;
+    TextView rightTotalTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +67,8 @@ public class ScorecardActivity extends BaseActivity {
         }
 
         final ListView listView = (ListView)findViewById(R.id.scorecardList);
-        final TextView leftTotalTV = (TextView)findViewById(R.id.leftFighterTotalScore);
-        final TextView rightTotalTV = (TextView)findViewById(R.id.rightFighterTotalScore);
+        leftTotalTV = (TextView)findViewById(R.id.leftFighterTotalScore);
+        rightTotalTV = (TextView)findViewById(R.id.rightFighterTotalScore);
 
         NotifyHelper.showLoading(this);
 
@@ -176,5 +178,18 @@ public class ScorecardActivity extends BaseActivity {
 
     private String getJustUsernameFromSubtext(String subtext) {
         return subtext.replace("User: ", "");
+    }
+
+    public void updateTotalScores(Scorecard scorecard) {
+        int leftTotal = 0;
+        int rightTotal = 0;
+
+        for (Round round : scorecard.getScorecard()) {
+            leftTotal += Integer.parseInt(round.getLeftScore());
+            rightTotal += Integer.parseInt(round.getRightScore());
+        }
+
+        leftTotalTV.setText(Integer.toString(leftTotal));
+        rightTotalTV.setText(Integer.toString(rightTotal));
     }
 }

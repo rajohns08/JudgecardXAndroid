@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.rajohns.judgecardx.Activities.ScorecardActivity;
 import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.Model.Fight;
 import com.rajohns.judgecardx.Model.Round;
@@ -64,6 +65,7 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
                 public void onClick(View v) {
                     round.updateLeftScore();
                     notifyDataSetChanged();
+                    ((ScorecardActivity)context).updateTotalScores(scorecard);
                 }
             });
             rightScoreButton.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +73,7 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
                 public void onClick(View v) {
                     round.updateRightScore();
                     notifyDataSetChanged();
+                    ((ScorecardActivity)context).updateTotalScores(scorecard);
                 }
             });
         }
