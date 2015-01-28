@@ -181,15 +181,7 @@ public class ScorecardActivity extends BaseActivity {
     }
 
     public void updateTotalScores(Scorecard scorecard) {
-        int leftTotal = 0;
-        int rightTotal = 0;
-
-        for (Round round : scorecard.getScorecard()) {
-            leftTotal += Integer.parseInt(round.getLeftScore());
-            rightTotal += Integer.parseInt(round.getRightScore());
-        }
-
-        leftTotalTV.setText(Integer.toString(leftTotal));
-        rightTotalTV.setText(Integer.toString(rightTotal));
+        leftTotalTV.setText(Integer.toString(scorecard.getLeftTotal()));
+        rightTotalTV.setText(Integer.toString(scorecard.getRightTotal()));
     }
 }

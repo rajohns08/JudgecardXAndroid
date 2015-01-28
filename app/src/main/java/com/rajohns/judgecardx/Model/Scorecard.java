@@ -8,6 +8,8 @@ import java.util.List;
  */
 public class Scorecard {
     private List<Round> scorecard;
+    private int leftTotal;
+    private int rightTotal;
 
     public Scorecard(List<Round> scorecard) {
         this.scorecard = scorecard;
@@ -19,5 +21,25 @@ public class Scorecard {
 
     public void setScorecard(List<Round> scorecard) {
         this.scorecard = scorecard;
+    }
+
+    public int getLeftTotal() {
+        leftTotal = 0;
+
+        for (Round round : scorecard) {
+            leftTotal += Integer.parseInt(round.getLeftScore());
+        }
+
+        return leftTotal;
+    }
+
+    public int getRightTotal() {
+        rightTotal = 0;
+
+        for (Round round : scorecard) {
+            rightTotal += Integer.parseInt(round.getRightScore());
+        }
+
+        return rightTotal;
     }
 }
