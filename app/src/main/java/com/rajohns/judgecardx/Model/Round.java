@@ -28,4 +28,31 @@ public class Round {
     public void setRightScore(String rightScore) {
         this.rightScore = rightScore;
     }
+
+    public void updateLeftScore() {
+        updateScore(true);
+    }
+
+    public void updateRightScore() {
+        updateScore(false);
+    }
+
+    private void updateScore(Boolean isLeftScore) {
+        int scoreInt = isLeftScore ? Integer.parseInt(leftScore) : Integer.parseInt(rightScore);
+
+        scoreInt--;
+        if (scoreInt < 0) {
+            scoreInt = 10;
+        }
+        else if (scoreInt < 6) {
+            scoreInt = 0;
+        }
+
+        if (isLeftScore) {
+            leftScore = Integer.toString(scoreInt);
+        }
+        else {
+            rightScore = Integer.toString(scoreInt);
+        }
+    }
 }

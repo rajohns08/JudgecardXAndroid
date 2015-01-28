@@ -37,7 +37,7 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(layoutResourceId, parent, false);
@@ -47,7 +47,7 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
         TextView roundNumber = (TextView)convertView.findViewById(R.id.roundNumber);
         Button rightScoreButton = (Button)convertView.findViewById(R.id.rightFighterScore);
 
-        Round round = scorecard.getScorecard().get(position);
+        final Round round = scorecard.getScorecard().get(position);
 
         leftScoreButton.setText(round.getLeftScore());
         int roundNum = position+1;
@@ -57,6 +57,22 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
         if (fragmentSource == FightListFragment.RECENT_CARDS_INDEX) {
             leftScoreButton.setEnabled(false);
             rightScoreButton.setEnabled(false);
+        }
+        else {
+            leftScoreButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    round.updateLeftScore();
+                    notifyDataSetChanged();
+                }
+            });
+            rightScoreButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    round.updateRightScore();
+                    notifyDataSetChanged();
+                }
+            });
         }
 
         return convertView;
