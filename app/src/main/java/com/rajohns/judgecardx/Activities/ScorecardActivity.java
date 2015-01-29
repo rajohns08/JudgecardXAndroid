@@ -123,6 +123,8 @@ public class ScorecardActivity extends BaseActivity {
                         object.get("f2r15").getAsString()
                 );
 
+                String id = object.get("id").getAsString();
+
                 int leftTotal = 0;
                 int rightTotal = 0;
                 ArrayList<Round> roundsList = new ArrayList<>();
@@ -136,7 +138,7 @@ public class ScorecardActivity extends BaseActivity {
                 leftTotalTV.setText(Integer.toString(leftTotal));
                 rightTotalTV.setText(Integer.toString(rightTotal));
 
-                Scorecard scorecard = new Scorecard(roundsList);
+                Scorecard scorecard = new Scorecard(roundsList, id);
                 ScorecardAdapter adapter = new ScorecardAdapter(ScorecardActivity.this, R.layout.row_scorecard, scorecard, finalFragmentSource);
                 listView.setAdapter(adapter);
             }

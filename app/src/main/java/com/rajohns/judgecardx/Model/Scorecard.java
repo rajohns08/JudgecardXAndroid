@@ -10,9 +10,11 @@ public class Scorecard {
     private List<Round> scorecard;
     private int leftTotal;
     private int rightTotal;
+    private String id;
 
-    public Scorecard(List<Round> scorecard) {
+    public Scorecard(List<Round> scorecard, String id) {
         this.scorecard = scorecard;
+        this.id = id;
     }
 
     public List<Round> getScorecard() {
@@ -41,5 +43,13 @@ public class Scorecard {
         }
 
         return rightTotal;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
