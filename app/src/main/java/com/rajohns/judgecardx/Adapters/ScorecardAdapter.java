@@ -28,13 +28,20 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
     int layoutResourceId;
     Scorecard scorecard;
     int fragmentSource;
+    int rounds;
 
-    public ScorecardAdapter(Context context, int layoutResourceId, Scorecard scorecard, int fragmentSource) {
+    public ScorecardAdapter(Context context, int layoutResourceId, Scorecard scorecard, int fragmentSource, int rounds) {
         super(context, layoutResourceId, scorecard.getScorecard());
         this.context = context;
         this.layoutResourceId = layoutResourceId;
         this.scorecard = scorecard;
         this.fragmentSource = fragmentSource;
+        this.rounds = rounds;
+    }
+
+    @Override
+    public int getCount() {
+        return rounds;
     }
 
     @Override
@@ -66,6 +73,7 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
                     round.updateLeftScore();
                     notifyDataSetChanged();
                     ((ScorecardActivity)context).updateTotalScores(scorecard);
+                    ((ScorecardActivity)context).createOrUpdateScorecard(scorecard);
                 }
             });
             rightScoreButton.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +82,7 @@ public class ScorecardAdapter extends ArrayAdapter<Round> {
                     round.updateRightScore();
                     notifyDataSetChanged();
                     ((ScorecardActivity)context).updateTotalScores(scorecard);
+                    ((ScorecardActivity)context).createOrUpdateScorecard(scorecard);
                 }
             });
         }

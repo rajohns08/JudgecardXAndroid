@@ -42,6 +42,7 @@ public class ScorecardActivity extends BaseActivity {
     String subtext;
     String leftFighter;
     String rightFighter;
+    String fightDate;
     int rounds;
     TextView leftTotalTV;
     TextView rightTotalTV;
@@ -59,6 +60,7 @@ public class ScorecardActivity extends BaseActivity {
             leftFighter = intent.getStringExtra(FightListFragment.LEFT_FIGHTER);
             rightFighter = intent.getStringExtra(FightListFragment.RIGHT_FIGHTER);
             rounds = intent.getIntExtra(FightListFragment.ROUNDS, 0);
+            fightDate = intent.getStringExtra(FightListFragment.FIGHT_DATE);
             setTitle(actionBarTitle(fragmentSource));
             TextView leftFighterTV = (TextView)findViewById(R.id.leftFighter);
             TextView rightFighterTV = (TextView)findViewById(R.id.rightFighter);
@@ -128,7 +130,7 @@ public class ScorecardActivity extends BaseActivity {
                 int leftTotal = 0;
                 int rightTotal = 0;
                 ArrayList<Round> roundsList = new ArrayList<>();
-                for (int i = 0; i < rounds; i++) {
+                for (int i = 0; i < 15; i++) {
                     Round round = new Round(leftScoresList.get(i), rightScoresList.get(i));
                     roundsList.add(round);
                     leftTotal += Integer.parseInt(leftScoresList.get(i));
@@ -139,7 +141,7 @@ public class ScorecardActivity extends BaseActivity {
                 rightTotalTV.setText(Integer.toString(rightTotal));
 
                 Scorecard scorecard = new Scorecard(roundsList, id);
-                ScorecardAdapter adapter = new ScorecardAdapter(ScorecardActivity.this, R.layout.row_scorecard, scorecard, finalFragmentSource);
+                ScorecardAdapter adapter = new ScorecardAdapter(ScorecardActivity.this, R.layout.row_scorecard, scorecard, finalFragmentSource, rounds);
                 listView.setAdapter(adapter);
             }
 
@@ -185,5 +187,57 @@ public class ScorecardActivity extends BaseActivity {
     public void updateTotalScores(Scorecard scorecard) {
         leftTotalTV.setText(Integer.toString(scorecard.getLeftTotal()));
         rightTotalTV.setText(Integer.toString(scorecard.getRightTotal()));
+    }
+
+    public void createOrUpdateScorecard(Scorecard scorecard) {
+        NotifyHelper.showLoading(this);
+        String username = prefs.getString(USERNAME_PREF, "");
+        List<Round> myRounds = scorecard.getScorecard();
+        restClient.createOrUpdateScorecard( username,
+                                            leftFighter,
+                                            rightFighter,
+                                            fightDate,
+                                            Integer.toString(rounds),
+                                            myRounds.get(0).getLeftScore(),
+                                            myRounds.get(1).getLeftScore(),
+                                            myRounds.get(2).getLeftScore(),
+                                            myRounds.get(3).getLeftScore(),
+                                            myRounds.get(4).getLeftScore(),
+                                            myRounds.get(5).getLeftScore(),
+                                            myRounds.get(6).getLeftScore(),
+                                            myRounds.get(7).getLeftScore(),
+                                            myRounds.get(8).getLeftScore(),
+                                            myRounds.get(9).getLeftScore(),
+                                            myRounds.get(10).getLeftScore(),
+                                            myRounds.get(11).getLeftScore(),
+                                            myRounds.get(12).getLeftScore(),
+                                            myRounds.get(13).getLeftScore(),
+                                            myRounds.get(14).getLeftScore(),
+                                            myRounds.get(0).getRightScore(),
+                                            myRounds.get(1).getRightScore(),
+                                            myRounds.get(2).getRightScore(),
+                                            myRounds.get(3).getRightScore(),
+                                            myRounds.get(4).getRightScore(),
+                                            myRounds.get(5).getRightScore(),
+                                            myRounds.get(6).getRightScore(),
+                                            myRounds.get(7).getRightScore(),
+                                            myRounds.get(8).getRightScore(),
+                                            myRounds.get(9).getRightScore(),
+                                            myRounds.get(10).getRightScore(),
+                                            myRounds.get(11).getRightScore(),
+                                            myRounds.get(12).getRightScore(),
+                                            myRounds.get(13).getRightScore(),
+                                            myRounds.get(14).getRightScore(),
+                                            new Callback<JsonElement>() {
+                                                @Override
+                                                public void success(JsonElement jsonElement, Response response) {
+                                                    NotifyHelper.hideLoading();
+                                                }
+
+                                                @Override
+                                                public void failure(RetrofitError error) {
+                                                    NotifyHelper.hideLoading();
+                                                }
+                                            });
     }
 }

@@ -49,6 +49,7 @@ public class FightListFragment extends Fragment {
     public static final String LEFT_FIGHTER = "leftFighter";
     public static final String RIGHT_FIGHTER = "rightFighter";
     public static final String ROUNDS = "rounds";
+    public static final String FIGHT_DATE = "fightDate";
 
     private int fragmentPosition;
     public Callback<JsonElement> callback;
@@ -87,6 +88,7 @@ public class FightListFragment extends Fragment {
                     intent.putExtra(LEFT_FIGHTER, fights.get(position).getFighter1());
                     intent.putExtra(RIGHT_FIGHTER, fights.get(position).getFighter2());
                     intent.putExtra(ROUNDS, fights.get(position).getRounds());
+                    intent.putExtra(FIGHT_DATE, fights.get(position).getSubtext());
                     startActivity(intent);
                 }
             });
