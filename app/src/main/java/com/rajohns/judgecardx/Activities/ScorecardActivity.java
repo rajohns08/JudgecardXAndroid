@@ -190,7 +190,6 @@ public class ScorecardActivity extends BaseActivity {
     }
 
     public void createOrUpdateScorecard(Scorecard scorecard) {
-        NotifyHelper.showLoading(this);
         String username = prefs.getString(USERNAME_PREF, "");
         List<Round> myRounds = scorecard.getScorecard();
         restClient.createOrUpdateScorecard( username,
@@ -231,12 +230,10 @@ public class ScorecardActivity extends BaseActivity {
                                             new Callback<JsonElement>() {
                                                 @Override
                                                 public void success(JsonElement jsonElement, Response response) {
-                                                    NotifyHelper.hideLoading();
                                                 }
 
                                                 @Override
                                                 public void failure(RetrofitError error) {
-                                                    NotifyHelper.hideLoading();
                                                 }
                                             });
     }
