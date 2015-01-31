@@ -125,7 +125,7 @@ public class ScorecardActivity extends BaseActivity {
                         object.get("f2r15").getAsString()
                 );
 
-                String id = object.get("id").getAsString();
+                String id = object.get("id").toString();
 
                 int leftTotal = 0;
                 int rightTotal = 0;
