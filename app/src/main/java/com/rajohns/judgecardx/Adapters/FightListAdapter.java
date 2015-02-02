@@ -49,11 +49,7 @@ public class FightListAdapter extends ArrayAdapter<Fight> {
         fightersTV.setText(fight.getFighter1() + " - " + fight.getFighter2());
         subtextTV.setText(fight.getSubtext());
 
-        String todayString = today.month+1 + "-" + today.monthDay + "-" + today.year;
-        if (today.month+1 < 10) {
-            // Insert a 0 so month will be 01 for january instead of just 1
-            todayString = new StringBuffer(todayString).insert(0, "0").toString();
-        }
+        String todayString = String.format("%02d", today.month+1) + "-" + String.format("%02d", today.monthDay) + "-" + today.year;
 
         if (todayString.equals(fight.getSubtext())) {
             todayTV.setText(context.getResources().getString(R.string.today_label));
