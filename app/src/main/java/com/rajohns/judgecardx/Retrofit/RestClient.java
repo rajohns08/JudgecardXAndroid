@@ -67,7 +67,7 @@ public interface RestClient {
     void createOrUpdateScorecard(@Field(USERNAME_KEY) String username,
                                  @Field(FIGHTER1_KEY) String fighter1,
                                  @Field(FIGHTER2_KEY) String fighter2,
-                                 @Field(FIGHT_DATE_KEY) String fightDate,
+                                 @Field(FIGHT_DATE_KEY) java.sql.Date fightDate,
                                  @Field(ROUNDS_KEY) String rounds,
                                  @Field("f1r1") String f1r1,
                                  @Field("f1r2") String f1r2,

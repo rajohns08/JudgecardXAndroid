@@ -16,6 +16,7 @@ import com.rajohns.judgecardx.Model.Round;
 import com.rajohns.judgecardx.Model.Scorecard;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
+import com.rajohns.judgecardx.Utils.DateUtil;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
 
@@ -42,7 +43,8 @@ public class ScorecardActivity extends BaseActivity {
     String subtext;
     String leftFighter;
     String rightFighter;
-    String fightDate;
+    String fightDateString;
+    java.sql.Date sqlFightDate;
     int rounds;
     TextView leftTotalTV;
     TextView rightTotalTV;
@@ -60,13 +62,15 @@ public class ScorecardActivity extends BaseActivity {
             leftFighter = intent.getStringExtra(FightListFragment.LEFT_FIGHTER);
             rightFighter = intent.getStringExtra(FightListFragment.RIGHT_FIGHTER);
             rounds = intent.getIntExtra(FightListFragment.ROUNDS, 0);
-            fightDate = intent.getStringExtra(FightListFragment.FIGHT_DATE);
+            fightDateString = intent.getStringExtra(FightListFragment.FIGHT_DATE);
             setTitle(actionBarTitle(fragmentSource));
             TextView leftFighterTV = (TextView)findViewById(R.id.leftFighter);
             TextView rightFighterTV = (TextView)findViewById(R.id.rightFighter);
             leftFighterTV.setText(leftFighter);
             rightFighterTV.setText(rightFighter);
         }
+
+        sqlFightDate = DateUtil.sqlDateFromString(fightDateString);
 
         final ListView listView = (ListView)findViewById(R.id.scorecardList);
         leftTotalTV = (TextView)findViewById(R.id.leftFighterTotalScore);
@@ -195,7 +199,7 @@ public class ScorecardActivity extends BaseActivity {
         restClient.createOrUpdateScorecard( username,
                                             leftFighter,
                                             rightFighter,
-                                            fightDate,
+                                            sqlFightDate,
                                             Integer.toString(rounds),
                                             myRounds.get(0).getLeftScore(),
                                             myRounds.get(1).getLeftScore(),
