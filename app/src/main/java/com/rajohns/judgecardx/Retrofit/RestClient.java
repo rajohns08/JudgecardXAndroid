@@ -20,6 +20,7 @@ public interface RestClient {
     public static final String EMAIL_NOT_FOUND = "com.judgecard.userNotFound";
     public static final String SIGNUP_SUCCESS = "com.judgecard.userAvailable";
     public static final String SIGNUP_FAILURE = "com.judgecard.userAlreadyExists";
+    public static final String SCORECARD_CREATED = "com.judgecard.scorecardCreated";
 
     public static final String USERNAME_KEY = "username";
     public static final String PASSWORD_KEY = "password";

@@ -234,6 +234,15 @@ public class ScorecardActivity extends BaseActivity {
                                             new Callback<JsonElement>() {
                                                 @Override
                                                 public void success(JsonElement jsonElement, Response response) {
+
+                                                    if (jsonElement != null) {
+                                                        JsonObject object = jsonElement.getAsJsonObject();
+                                                        String created = object.get("msg").getAsString();
+
+                                                        if (created.equals(RestClient.SCORECARD_CREATED)) {
+                                                            NotifyHelper.showSingleButtonAlert(ScorecardActivity.this, "Scorecard Created", "This scorecard has been saved to 'My Scorecards'");
+                                                        }
+                                                    }
                                                 }
 
                                                 @Override
