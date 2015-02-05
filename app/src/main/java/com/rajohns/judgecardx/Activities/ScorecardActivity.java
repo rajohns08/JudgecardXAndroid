@@ -145,7 +145,7 @@ public class ScorecardActivity extends BaseActivity {
                 rightTotalTV.setText(Integer.toString(rightTotal));
 
                 Scorecard scorecard = new Scorecard(roundsList, id);
-                ScorecardAdapter adapter = new ScorecardAdapter(ScorecardActivity.this, R.layout.row_scorecard, scorecard, finalFragmentSource, rounds);
+                ScorecardAdapter adapter = new ScorecardAdapter(ScorecardActivity.this, scorecard, finalFragmentSource, rounds);
                 listView.setAdapter(adapter);
             }
 
