@@ -26,6 +26,9 @@ public class ScorecardAdapter extends BaseAdapter {
     int fragmentSource;
     int rounds;
     private LayoutInflater inflater;
+    private static final int TYPE_REGULAR_ROW = 0;
+    private static final int TYPE_FOOTER = 1;
+    private static final int NUM_TYPE_ROWS = 2;
 
     public ScorecardAdapter(Context context, Scorecard scorecard, int fragmentSource, int rounds) {
         this.context = context;
@@ -52,50 +55,73 @@ public class ScorecardAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        // committing a great sin here by not reusing convertview (if convertview == null), but listviews small and
-        // it makes handling my different types of rows (regular or footer) simple
-        if (position == rounds) {
-            convertView = inflater.inflate(R.layout.row_scorecard_footer, parent, false);
+    public int getItemViewType(int position) {
+        if (position == getCount()-1) {
+            return TYPE_FOOTER;
         }
-        else {
-            convertView = inflater.inflate(R.layout.row_scorecard, parent, false);
 
-            Button leftScoreButton = (Button)convertView.findViewById(R.id.leftFighterScore);
-            TextView roundNumber = (TextView)convertView.findViewById(R.id.roundNumber);
-            Button rightScoreButton = (Button)convertView.findViewById(R.id.rightFighterScore);
+        return TYPE_REGULAR_ROW;
+    }
 
-            final Round round = scorecard.getScorecard().get(position);
+    @Override
+    public int getViewTypeCount() {
+        return NUM_TYPE_ROWS;
+    }
 
-            leftScoreButton.setText(round.getLeftScore());
-            int roundNum = position+1;
-            roundNumber.setText("" + roundNum);
-            rightScoreButton.setText(round.getRightScore());
-
-            if (fragmentSource == FightListFragment.RECENT_CARDS_INDEX) {
-                leftScoreButton.setEnabled(false);
-                rightScoreButton.setEnabled(false);
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        int type = getItemViewType(position);
+        if (convertView == null) {
+            switch (type) {
+                case TYPE_REGULAR_ROW:
+                    convertView = inflater.inflate(R.layout.row_scorecard, parent, false);
+                    break;
+                case TYPE_FOOTER:
+                    convertView = inflater.inflate(R.layout.row_scorecard_footer, parent, false);
+                    break;
             }
-            else {
-                leftScoreButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        round.updateLeftScore();
-                        notifyDataSetChanged();
-                        ((ScorecardActivity)context).updateTotalScores(scorecard);
-                        ((ScorecardActivity)context).createOrUpdateScorecard(scorecard);
-                    }
-                });
-                rightScoreButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        round.updateRightScore();
-                        notifyDataSetChanged();
-                        ((ScorecardActivity)context).updateTotalScores(scorecard);
-                        ((ScorecardActivity)context).createOrUpdateScorecard(scorecard);
-                    }
-                });
-            }
+        }
+
+        switch (type) {
+            case TYPE_REGULAR_ROW:
+                Button leftScoreButton = (Button)convertView.findViewById(R.id.leftFighterScore);
+                TextView roundNumber = (TextView)convertView.findViewById(R.id.roundNumber);
+                Button rightScoreButton = (Button)convertView.findViewById(R.id.rightFighterScore);
+
+                final Round round = scorecard.getScorecard().get(position);
+
+                leftScoreButton.setText(round.getLeftScore());
+                int roundNum = position+1;
+                roundNumber.setText("" + roundNum);
+                rightScoreButton.setText(round.getRightScore());
+
+                if (fragmentSource == FightListFragment.RECENT_CARDS_INDEX) {
+                    leftScoreButton.setEnabled(false);
+                    rightScoreButton.setEnabled(false);
+                }
+                else {
+                    leftScoreButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            round.updateLeftScore();
+                            notifyDataSetChanged();
+                            ((ScorecardActivity)context).updateTotalScores(scorecard);
+                            ((ScorecardActivity)context).createOrUpdateScorecard(scorecard);
+                        }
+                    });
+                    rightScoreButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            round.updateRightScore();
+                            notifyDataSetChanged();
+                            ((ScorecardActivity)context).updateTotalScores(scorecard);
+                            ((ScorecardActivity)context).createOrUpdateScorecard(scorecard);
+                        }
+                    });
+                }
+                break;
+            case TYPE_FOOTER:
+                break;
         }
 
         return convertView;
