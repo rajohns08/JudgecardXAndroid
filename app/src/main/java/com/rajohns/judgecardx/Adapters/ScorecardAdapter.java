@@ -2,6 +2,7 @@ package com.rajohns.judgecardx.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,6 +122,14 @@ public class ScorecardAdapter extends BaseAdapter {
                 }
                 break;
             case TYPE_FOOTER:
+                final Button deleteButton = (Button)convertView.findViewById(R.id.deleteButton);
+                Button resetButton = (Button)convertView.findViewById(R.id.resetButton);
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    }
+                });
                 break;
         }
 
