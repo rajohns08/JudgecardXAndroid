@@ -250,4 +250,8 @@ public class ScorecardActivity extends BaseActivity {
                                                 }
                                             });
     }
+
+    public void deleteScorecard(Scorecard scorecard) {
+
+    }
 }
