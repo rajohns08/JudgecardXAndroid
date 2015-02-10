@@ -21,6 +21,8 @@ public interface RestClient {
     public static final String SIGNUP_SUCCESS = "com.judgecard.userAvailable";
     public static final String SIGNUP_FAILURE = "com.judgecard.userAlreadyExists";
     public static final String SCORECARD_CREATED = "com.judgecard.scorecardCreated";
+    public static final String DELETE_SUCCESS = "com.judgecard.scorecardDeleted";
+    public static final String DELETE_FAILED = "com.judgecard.deleteFailed";
 
     public static final String USERNAME_KEY = "username";
     public static final String PASSWORD_KEY = "password";
@@ -29,16 +31,20 @@ public interface RestClient {
     public static final String FIGHTER2_KEY = "fighter2";
     public static final String FIGHT_DATE_KEY = "date";
     public static final String ROUNDS_KEY = "rounds";
+    public static final String SCORECARD_ID_KEY = "id";
 
-    @FormUrlEncoded @POST("/login.php")
+    @FormUrlEncoded
+    @POST("/login.php")
     void login(@Field(USERNAME_KEY) String username,
                @Field(PASSWORD_KEY) String password,
                Callback<String> callback);
 
-    @FormUrlEncoded @POST("/forgotLoginSSL.php")
+    @FormUrlEncoded
+    @POST("/forgotLoginSSL.php")
     void sendEmail(@Field(EMAIL_KEY) String email, Callback<String> callback);
 
-    @FormUrlEncoded @POST("/signup.php")
+    @FormUrlEncoded
+    @POST("/signup.php")
     void signup(@Field(USERNAME_KEY) String username,
                 @Field(EMAIL_KEY) String email,
                 @Field(PASSWORD_KEY) String password,
@@ -50,21 +56,24 @@ public interface RestClient {
     @GET("/upcomingFights.php")
     void getUpcomingFights(Callback<JsonElement> callback);
 
-    @FormUrlEncoded @POST("/myCards.php")
+    @FormUrlEncoded
+    @POST("/myCards.php")
     void getMyCards(@Field(USERNAME_KEY) String username,
                     Callback<JsonElement> callback);
 
     @GET("/recentScorecards.php")
     void getRecentScorecards(Callback<JsonElement> callback);
 
-    @FormUrlEncoded @POST("/fetchScorecard.php")
+    @FormUrlEncoded
+    @POST("/fetchScorecard.php")
     void getScorecardDetail(@Field(USERNAME_KEY) String username,
                             @Field(FIGHTER1_KEY) String fighter1,
                             @Field(FIGHTER2_KEY) String fighter2,
                             Callback<JsonElement> callback);
 
     /* ******************************************************************* */
-    @FormUrlEncoded @POST("/createOrUpdateScorecard.php")
+    @FormUrlEncoded
+    @POST("/createOrUpdateScorecard.php")
     void createOrUpdateScorecard(@Field(USERNAME_KEY) String username,
                                  @Field(FIGHTER1_KEY) String fighter1,
                                  @Field(FIGHTER2_KEY) String fighter2,
@@ -102,4 +111,10 @@ public interface RestClient {
                                  @Field("f2r15") String f2r15,
                                  Callback<JsonElement> callback);
     /* ******************************************************************* */
+
+    @FormUrlEncoded
+    @POST("/deleteScorecardNew.php")
+    void deleteScorecard(@Field(SCORECARD_ID_KEY) String scorecardId,
+                         @Field(USERNAME_KEY) String username,
+                         Callback<String> callback);
 }

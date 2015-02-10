@@ -48,6 +48,7 @@ public class ScorecardActivity extends BaseActivity {
     int rounds;
     TextView leftTotalTV;
     TextView rightTotalTV;
+    ScorecardAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +146,7 @@ public class ScorecardActivity extends BaseActivity {
                 rightTotalTV.setText(Integer.toString(rightTotal));
 
                 Scorecard scorecard = new Scorecard(roundsList, id);
-                ScorecardAdapter adapter = new ScorecardAdapter(ScorecardActivity.this, scorecard, finalFragmentSource, rounds);
+                adapter = new ScorecardAdapter(ScorecardActivity.this, scorecard, finalFragmentSource, rounds);
                 listView.setAdapter(adapter);
             }
 
@@ -193,7 +194,7 @@ public class ScorecardActivity extends BaseActivity {
         rightTotalTV.setText(Integer.toString(scorecard.getRightTotal()));
     }
 
-    public void createOrUpdateScorecard(Scorecard scorecard) {
+    public void createOrUpdateScorecard(final Scorecard scorecard) {
         String username = prefs.getString(USERNAME_PREF, "");
         List<Round> myRounds = scorecard.getScorecard();
         restClient.createOrUpdateScorecard( username,
@@ -240,6 +241,8 @@ public class ScorecardActivity extends BaseActivity {
                                                         String created = object.get("msg").getAsString();
 
                                                         if (created.equals(RestClient.SCORECARD_CREATED)) {
+                                                            scorecard.setId(object.get("id").getAsString());
+                                                            adapter.updateScorecard(scorecard);
                                                             NotifyHelper.showSingleButtonAlert(ScorecardActivity.this, "Scorecard Created", "This scorecard has been saved to 'My Scorecards'");
                                                         }
                                                     }
@@ -251,7 +254,31 @@ public class ScorecardActivity extends BaseActivity {
                                             });
     }
 
-    public void deleteScorecard(Scorecard scorecard) {
+    public void deleteScorecard(final Scorecard scorecard) {
+        NotifyHelper.showLoading(this);
+        String username = prefs.getString(USERNAME_PREF, "");
+        restClient.deleteScorecard(scorecard.getId(), username, new Callback<String>() {
+            @Override
+            public void success(String s, Response response) {
+                NotifyHelper.hideLoading();
 
+                if (s.equals(RestClient.DELETE_SUCCESS)) {
+                    finish();
+                    //reload recent and my
+                }
+                else if (s.equals(RestClient.DELETE_FAILED)) {
+                    NotifyHelper.showSingleButtonAlert(ScorecardActivity.this, "Error", "Cannot delete scorecard at this time.");
+                }
+                else {
+                    NotifyHelper.showGeneralErrorMsg(ScorecardActivity.this);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                NotifyHelper.hideLoading();
+                NotifyHelper.showGeneralErrorMsg(ScorecardActivity.this);
+            }
+        });
     }
 }

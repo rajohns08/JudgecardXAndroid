@@ -39,6 +39,10 @@ public class ScorecardAdapter extends BaseAdapter {
         this.inflater = ((Activity) context).getLayoutInflater();
     }
 
+    public void updateScorecard(Scorecard scorecard) {
+        this.scorecard = scorecard;
+    }
+
     @Override
     public int getCount() {
         // +1 for the footer view
@@ -127,7 +131,7 @@ public class ScorecardAdapter extends BaseAdapter {
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        deleteButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        ((ScorecardActivity)context).deleteScorecard(scorecard);
                     }
                 });
                 break;

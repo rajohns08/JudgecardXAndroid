@@ -44,4 +44,8 @@ public class NotifyHelper {
         alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
+    public static void showGeneralErrorMsg(Context context) {
+        showSingleButtonAlert(context, "Unknown Error", "An unknown error occurred");
+    }
 }
