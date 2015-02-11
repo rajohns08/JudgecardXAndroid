@@ -11,8 +11,8 @@ public class Fight {
     public int rounds;
 
     public Fight(String fighter1, String fighter2, String subtext, int rounds) {
-        this.fighter1 = fighter1;
-        this.fighter2 = fighter2;
+        this.fighter1 = fighter1.toUpperCase();
+        this.fighter2 = fighter2.toUpperCase();
         this.subtext = subtext;
         this.rounds = rounds;
     }
