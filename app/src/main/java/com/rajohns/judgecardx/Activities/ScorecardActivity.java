@@ -252,6 +252,7 @@ public class ScorecardActivity extends BaseActivity {
 
                                                 @Override
                                                 public void failure(RetrofitError error) {
+                                                    // Don't do anything here because this is a silent network call
                                                 }
                                             });
     }
