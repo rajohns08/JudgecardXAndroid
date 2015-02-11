@@ -130,7 +130,9 @@ public class ScorecardActivity extends BaseActivity {
                         object.get("f2r15").getAsString()
                 );
 
-                String id = object.get("id").toString();
+                // Need to replace quotes (which is what \" does) because this toString method
+                // obviously inserts more quotes into an already existing string
+                String id = object.get("id").toString().replace("\"", "");
 
                 int leftTotal = 0;
                 int rightTotal = 0;
@@ -280,5 +282,17 @@ public class ScorecardActivity extends BaseActivity {
                 NotifyHelper.showGeneralErrorMsg(ScorecardActivity.this);
             }
         });
+    }
+
+    public void resetScorecard(Scorecard scorecard) {
+        for (Round round : scorecard.getScorecard()) {
+            round.setLeftScore("0");
+            round.setRightScore("0");
+        }
+
+        createOrUpdateScorecard(scorecard);
+        leftTotalTV.setText("0");
+        rightTotalTV.setText("0");
+        adapter.notifyDataSetChanged();
     }
 }

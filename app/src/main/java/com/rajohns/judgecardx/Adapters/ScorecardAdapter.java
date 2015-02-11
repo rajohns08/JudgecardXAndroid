@@ -134,6 +134,12 @@ public class ScorecardAdapter extends BaseAdapter {
                         ((ScorecardActivity)context).deleteScorecard(scorecard);
                     }
                 });
+                resetButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((ScorecardActivity)context).resetScorecard(scorecard);
+                    }
+                });
                 break;
         }
 
