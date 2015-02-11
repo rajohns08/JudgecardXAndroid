@@ -39,10 +39,6 @@ public class ScorecardAdapter extends BaseAdapter {
         this.inflater = ((Activity) context).getLayoutInflater();
     }
 
-    public void updateScorecard(Scorecard scorecard) {
-        this.scorecard = scorecard;
-    }
-
     @Override
     public int getCount() {
         // +1 for the footer view
@@ -132,6 +128,10 @@ public class ScorecardAdapter extends BaseAdapter {
                 if (scorecard.getId().equals("null")) {
                     deleteButton.setEnabled(false);
                     resetButton.setEnabled(false);
+                }
+                else {
+                    deleteButton.setEnabled(true);
+                    resetButton.setEnabled(true);
                 }
 
                 deleteButton.setOnClickListener(new View.OnClickListener() {
