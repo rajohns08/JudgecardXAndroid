@@ -128,6 +128,12 @@ public class ScorecardAdapter extends BaseAdapter {
             case TYPE_FOOTER:
                 final Button deleteButton = (Button)convertView.findViewById(R.id.deleteButton);
                 Button resetButton = (Button)convertView.findViewById(R.id.resetButton);
+
+                if (scorecard.getId().equals("null")) {
+                    deleteButton.setEnabled(false);
+                    resetButton.setEnabled(false);
+                }
+
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -140,6 +146,11 @@ public class ScorecardAdapter extends BaseAdapter {
                         ((ScorecardActivity)context).resetScorecard(scorecard);
                     }
                 });
+
+                if (fragmentSource == FightListFragment.RECENT_CARDS_INDEX) {
+                    deleteButton.setVisibility(View.GONE);
+                    resetButton.setVisibility(View.GONE);
+                }
                 break;
         }
 

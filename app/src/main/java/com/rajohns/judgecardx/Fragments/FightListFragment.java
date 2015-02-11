@@ -124,6 +124,7 @@ public class FightListFragment extends Fragment {
             @Override
             public void failure(RetrofitError error) {
                 NotifyHelper.hideLoading();
+                NotifyHelper.showGeneralErrorMsg(getActivity());
             }
         };
 
