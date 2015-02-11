@@ -3,6 +3,8 @@ package com.rajohns.judgecardx.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.Model.Round;
 import com.rajohns.judgecardx.Model.Scorecard;
 import com.rajohns.judgecardx.R;
+import com.rajohns.judgecardx.Utils.NotifyHelper;
 
 
 /**
@@ -137,13 +140,25 @@ public class ScorecardAdapter extends BaseAdapter {
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ((ScorecardActivity)context).deleteScorecard(scorecard);
+                        NotifyHelper.showConfirmAlert(context, "Delete Scorecard", "Are you sure you want to delete this scorecard?", "Delete", new Handler.Callback() {
+                            @Override
+                            public boolean handleMessage(Message msg) {
+                                ((ScorecardActivity)context).deleteScorecard(scorecard);
+                                return false;
+                            }
+                        });
                     }
                 });
                 resetButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ((ScorecardActivity)context).resetScorecard(scorecard);
+                        NotifyHelper.showConfirmAlert(context, "Reset Scorecard", "Are you sure you want to reset this scorecard to all 0's?", "Reset", new Handler.Callback() {
+                            @Override
+                            public boolean handleMessage(Message msg) {
+                                ((ScorecardActivity)context).resetScorecard(scorecard);
+                                return false;
+                            }
+                        });
                     }
                 });
 
