@@ -246,6 +246,8 @@ public class ScorecardActivity extends BaseActivity {
                                                             scorecard.setId(object.get("id").getAsString());
                                                             adapter.notifyDataSetChanged();
                                                             NotifyHelper.showSingleButtonAlert(ScorecardActivity.this, "Scorecard Created", "This scorecard has been saved to 'My Scorecards'");
+                                                            FightListFragment.serviceCallsMade.put(FightListFragment.MY_CARDS_INDEX, false);
+                                                            FightListFragment.serviceCallsMade.put(FightListFragment.RECENT_CARDS_INDEX, false);
                                                         }
                                                     }
                                                 }
@@ -267,7 +269,8 @@ public class ScorecardActivity extends BaseActivity {
 
                 if (s.equals(RestClient.DELETE_SUCCESS)) {
                     finish();
-                    //reload recent and my
+                    FightListFragment.serviceCallsMade.put(FightListFragment.MY_CARDS_INDEX, false);
+                    FightListFragment.serviceCallsMade.put(FightListFragment.RECENT_CARDS_INDEX, false);
                 }
                 else if (s.equals(RestClient.DELETE_FAILED)) {
                     NotifyHelper.showSingleButtonAlert(ScorecardActivity.this, "Error", "Cannot delete scorecard at this time.");

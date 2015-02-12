@@ -98,6 +98,7 @@ public class FightListFragment extends Fragment {
             @Override
             public void success(JsonElement jsonElement, Response response) {
                 NotifyHelper.hideLoading();
+                fights.clear();
                 for (JsonElement je : jsonElement.getAsJsonArray()) {
                     JsonObject object = je.getAsJsonObject();
                     String fighter1 = object.get("fighter1").getAsString();
@@ -148,7 +149,6 @@ public class FightListFragment extends Fragment {
                 break;
             case UPCOMING_FIGHTS_INDEX:
                 restClient.getUpcomingFights(callback);
-
                 break;
             case MY_CARDS_INDEX:
                 String username = prefs.getString(USERNAME_PREF, "");
