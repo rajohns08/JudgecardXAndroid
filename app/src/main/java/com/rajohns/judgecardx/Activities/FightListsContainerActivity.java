@@ -69,6 +69,29 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
         });
     }
 
+    // Using onRestart to reload certain tabs if coming back to them after deleting from detail
+    // Don't want to use onStart because don't want to load these tabs before we have ever
+    // scrolled to them.
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        switch (actionBar.getSelectedNavigationIndex()) {
+            case FightListFragment.MY_CARDS_INDEX:
+                if (!FightListFragment.serviceCallsMade.get(FightListFragment.MY_CARDS_INDEX)) {
+                    mAdapter.getFragment(FightListFragment.MY_CARDS_INDEX).callAppropriateRestMethodFromIndex(FightListFragment.MY_CARDS_INDEX);
+                }
+                break;
+            case FightListFragment.RECENT_CARDS_INDEX:
+                if (!FightListFragment.serviceCallsMade.get(FightListFragment.RECENT_CARDS_INDEX)) {
+                    mAdapter.getFragment(FightListFragment.RECENT_CARDS_INDEX).callAppropriateRestMethodFromIndex(FightListFragment.RECENT_CARDS_INDEX);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
