@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -298,5 +299,11 @@ public class ScorecardActivity extends BaseActivity {
         leftTotalTV.setText("0");
         rightTotalTV.setText("0");
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.scorecard, menu);
+        return true;
     }
 }
