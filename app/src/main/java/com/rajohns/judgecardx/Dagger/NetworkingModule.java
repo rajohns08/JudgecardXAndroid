@@ -1,5 +1,6 @@
 package com.rajohns.judgecardx.Dagger;
 
+import com.rajohns.judgecardx.Activities.AverageScorecardActivity;
 import com.rajohns.judgecardx.Activities.FightListsContainerActivity;
 import com.rajohns.judgecardx.Activities.ForgotLoginActivity;
 import com.rajohns.judgecardx.Activities.LoginActivity;
@@ -30,7 +31,8 @@ import static com.rajohns.judgecardx.Retrofit.RestClient.BASE_URL;
         SignUpActivity.class,
         FightListsContainerActivity.class,
         FightListFragment.class,
-        ScorecardActivity.class
+        ScorecardActivity.class,
+        AverageScorecardActivity.class
     }
 )
 

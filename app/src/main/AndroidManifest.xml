@@ -40,6 +40,11 @@
             android:label="Scorecard">
         </activity>
 
+        <activity
+            android:name=".Activities.AverageScorecardActivity"
+            android:label="Average Scorecard">
+        </activity>
+
     </application>
 
 </manifest>

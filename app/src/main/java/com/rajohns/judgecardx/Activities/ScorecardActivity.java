@@ -310,7 +310,7 @@ public class ScorecardActivity extends BaseActivity {
     }
 
     public boolean avgScorecardClicked(MenuItem item) {
-        int x =2 ;
+        startActivity(new Intent(this, AverageScorecardActivity.class));
         return true;
     }
 }
