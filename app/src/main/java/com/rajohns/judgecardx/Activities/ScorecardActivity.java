@@ -318,7 +318,11 @@ public class ScorecardActivity extends BaseActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.avg_scorecard) {
-            startActivity(new Intent(this, AverageScorecardActivity.class));
+            Intent intent = new Intent(this, AverageScorecardActivity.class);
+            intent.putExtra(FightListFragment.LEFT_FIGHTER, leftFighter);
+            intent.putExtra(FightListFragment.RIGHT_FIGHTER, rightFighter);
+            intent.putExtra(FightListFragment.ROUNDS, rounds);
+            startActivity(intent);
             return true;
         }
 

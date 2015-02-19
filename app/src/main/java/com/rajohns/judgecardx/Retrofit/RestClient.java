@@ -117,4 +117,10 @@ public interface RestClient {
     void deleteScorecard(@Field(SCORECARD_ID_KEY) String scorecardId,
                          @Field(USERNAME_KEY) String username,
                          Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST("/getAverageScorecard.php")
+    void getAvgScorecard(@Field(FIGHTER1_KEY) String fighter1,
+                         @Field(FIGHTER2_KEY) String fighter2,
+                         Callback<JsonElement> callback);
 }
