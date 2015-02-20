@@ -2,14 +2,18 @@ package com.rajohns.judgecardx.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.rajohns.judgecardx.Fragments.FightListFragment;
+import com.rajohns.judgecardx.Model.Round;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
+import com.rajohns.judgecardx.Utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,16 +33,25 @@ public class AverageScorecardActivity extends BaseActivity {
     private String leftFighter;
     private String rightFighter;
     private int rounds;
+    TextView leftTotalTV;
+    TextView rightTotalTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scorecard);
 
+        leftTotalTV = (TextView)findViewById(R.id.leftFighterTotalScore);
+        rightTotalTV = (TextView)findViewById(R.id.rightFighterTotalScore);
+        TextView leftFighterTV = (TextView)findViewById(R.id.leftFighter);
+        TextView rightFighterTV = (TextView)findViewById(R.id.rightFighter);
+
         Intent intent = getIntent();
         if (intent != null) {
             leftFighter = intent.getStringExtra(FightListFragment.LEFT_FIGHTER);
             rightFighter = intent.getStringExtra(FightListFragment.RIGHT_FIGHTER);
+            leftFighterTV.setText(leftFighter);
+            rightFighterTV.setText(StringUtils.removeNumbers(rightFighter));
             rounds = intent.getIntExtra(FightListFragment.ROUNDS, 0);
         }
 
@@ -84,6 +97,19 @@ public class AverageScorecardActivity extends BaseActivity {
                         object.get("f2r14").getAsString(),
                         object.get("f2r15").getAsString()
                 );
+
+                int leftTotal = 0;
+                int rightTotal = 0;
+                ArrayList<Round> roundsList = new ArrayList<>();
+                for (int i = 0; i < 15; i++) {
+                    Round round = new Round(leftScoresList.get(i), rightScoresList.get(i));
+                    roundsList.add(round);
+                    leftTotal += Integer.parseInt(leftScoresList.get(i));
+                    rightTotal += Integer.parseInt(rightScoresList.get(i));
+                }
+
+                leftTotalTV.setText(Integer.toString(leftTotal));
+                rightTotalTV.setText(Integer.toString(rightTotal));
             }
 
             @Override
