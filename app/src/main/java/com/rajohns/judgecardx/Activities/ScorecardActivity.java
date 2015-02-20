@@ -22,6 +22,7 @@ import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Utils.DateUtil;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
+import com.rajohns.judgecardx.Utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,7 +72,7 @@ public class ScorecardActivity extends BaseActivity {
             TextView leftFighterTV = (TextView)findViewById(R.id.leftFighter);
             TextView rightFighterTV = (TextView)findViewById(R.id.rightFighter);
             leftFighterTV.setText(leftFighter);
-            rightFighterTV.setText(rightFighter);
+            rightFighterTV.setText(StringUtils.removeNumbers(rightFighter));
         }
 
         sqlFightDate = DateUtil.sqlDateFromString(fightDateString);
