@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -271,16 +270,18 @@ public class ScorecardActivity extends BaseActivity {
             public void success(String s, Response response) {
                 NotifyHelper.hideLoading();
 
-                if (s.equals(RestClient.DELETE_SUCCESS)) {
-                    finish();
-                    FightListFragment.serviceCallsMade.put(FightListFragment.MY_CARDS_INDEX, false);
-                    FightListFragment.serviceCallsMade.put(FightListFragment.RECENT_CARDS_INDEX, false);
-                }
-                else if (s.equals(RestClient.DELETE_FAILED)) {
-                    NotifyHelper.showSingleButtonAlert(ScorecardActivity.this, "Error", "Cannot delete scorecard at this time.");
-                }
-                else {
-                    NotifyHelper.showGeneralErrorMsg(ScorecardActivity.this);
+                switch (s) {
+                    case RestClient.DELETE_SUCCESS:
+                        finish();
+                        FightListFragment.serviceCallsMade.put(FightListFragment.MY_CARDS_INDEX, false);
+                        FightListFragment.serviceCallsMade.put(FightListFragment.RECENT_CARDS_INDEX, false);
+                        break;
+                    case RestClient.DELETE_FAILED:
+                        NotifyHelper.showSingleButtonAlert(ScorecardActivity.this, "Error", "Cannot delete scorecard at this time.");
+                        break;
+                    default:
+                        NotifyHelper.showGeneralErrorMsg(ScorecardActivity.this);
+                        break;
                 }
             }
 
