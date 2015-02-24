@@ -5,8 +5,8 @@ package com.rajohns.judgecardx.Model;
  *
  */
 public class Round {
-    private String leftScore;
-    private String rightScore;
+    protected String leftScore;
+    protected String rightScore;
 
     public Round(String leftScore, String rightScore) {
         this.leftScore = leftScore;

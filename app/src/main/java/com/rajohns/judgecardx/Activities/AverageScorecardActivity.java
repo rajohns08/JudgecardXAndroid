@@ -2,11 +2,15 @@ package com.rajohns.judgecardx.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.rajohns.judgecardx.Adapters.AvgScorecardAdapter;
 import com.rajohns.judgecardx.Fragments.FightListFragment;
+import com.rajohns.judgecardx.Model.AvgRound;
+import com.rajohns.judgecardx.Model.AvgScorecard;
 import com.rajohns.judgecardx.Model.Round;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
@@ -35,12 +39,14 @@ public class AverageScorecardActivity extends BaseActivity {
     private int rounds;
     TextView leftTotalTV;
     TextView rightTotalTV;
+    AvgScorecardAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scorecard);
 
+        final ListView listView = (ListView)findViewById(R.id.scorecardList);
         leftTotalTV = (TextView)findViewById(R.id.leftFighterTotalScore);
         rightTotalTV = (TextView)findViewById(R.id.rightFighterTotalScore);
         TextView leftFighterTV = (TextView)findViewById(R.id.leftFighter);
@@ -80,6 +86,23 @@ public class AverageScorecardActivity extends BaseActivity {
                         object.get("f1r14").getAsString(),
                         object.get("f1r15").getAsString()
                 );
+                List<String> leftConfidenceList = Arrays.asList(
+                        object.get("f1r1conf").getAsString(),
+                        object.get("f1r2conf").getAsString(),
+                        object.get("f1r3conf").getAsString(),
+                        object.get("f1r4conf").getAsString(),
+                        object.get("f1r5conf").getAsString(),
+                        object.get("f1r6conf").getAsString(),
+                        object.get("f1r7conf").getAsString(),
+                        object.get("f1r8conf").getAsString(),
+                        object.get("f1r9conf").getAsString(),
+                        object.get("f1r10conf").getAsString(),
+                        object.get("f1r11conf").getAsString(),
+                        object.get("f1r12conf").getAsString(),
+                        object.get("f1r13conf").getAsString(),
+                        object.get("f1r14conf").getAsString(),
+                        object.get("f1r15conf").getAsString()
+                );
                 List<String> rightScoresList = Arrays.asList(
                         object.get("f2r1").getAsString(),
                         object.get("f2r2").getAsString(),
@@ -97,12 +120,29 @@ public class AverageScorecardActivity extends BaseActivity {
                         object.get("f2r14").getAsString(),
                         object.get("f2r15").getAsString()
                 );
+                List<String> rightConfidenceList = Arrays.asList(
+                        object.get("f2r1conf").getAsString(),
+                        object.get("f2r2conf").getAsString(),
+                        object.get("f2r3conf").getAsString(),
+                        object.get("f2r4conf").getAsString(),
+                        object.get("f2r5conf").getAsString(),
+                        object.get("f2r6conf").getAsString(),
+                        object.get("f2r7conf").getAsString(),
+                        object.get("f2r8conf").getAsString(),
+                        object.get("f2r9conf").getAsString(),
+                        object.get("f2r10conf").getAsString(),
+                        object.get("f2r11conf").getAsString(),
+                        object.get("f2r12conf").getAsString(),
+                        object.get("f2r13conf").getAsString(),
+                        object.get("f2r14conf").getAsString(),
+                        object.get("f2r15conf").getAsString()
+                );
 
                 int leftTotal = 0;
                 int rightTotal = 0;
-                ArrayList<Round> roundsList = new ArrayList<>();
+                ArrayList<AvgRound> roundsList = new ArrayList<>();
                 for (int i = 0; i < 15; i++) {
-                    Round round = new Round(leftScoresList.get(i), rightScoresList.get(i));
+                    AvgRound round = new AvgRound(leftScoresList.get(i), leftConfidenceList.get(i), rightScoresList.get(i), rightConfidenceList.get(i));
                     roundsList.add(round);
                     leftTotal += Integer.parseInt(leftScoresList.get(i));
                     rightTotal += Integer.parseInt(rightScoresList.get(i));
@@ -110,6 +150,10 @@ public class AverageScorecardActivity extends BaseActivity {
 
                 leftTotalTV.setText(Integer.toString(leftTotal));
                 rightTotalTV.setText(Integer.toString(rightTotal));
+
+                AvgScorecard avgScorecard = new AvgScorecard(roundsList);
+                adapter = new AvgScorecardAdapter(AverageScorecardActivity.this, avgScorecard, rounds);
+                listView.setAdapter(adapter);
             }
 
             @Override

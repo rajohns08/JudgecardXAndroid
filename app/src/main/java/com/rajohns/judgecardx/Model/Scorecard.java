@@ -7,10 +7,14 @@ import java.util.List;
  *
  */
 public class Scorecard {
-    private List<Round> scorecard;
-    private int leftTotal;
-    private int rightTotal;
-    private String id;
+    protected List<Round> scorecard;
+    protected int leftTotal;
+    protected int rightTotal;
+    protected String id;
+
+    public Scorecard() {
+        this.id = null;
+    }
 
     public Scorecard(List<Round> scorecard, String id) {
         this.scorecard = scorecard;
