@@ -61,6 +61,24 @@ public class AvgScorecardAdapter extends BaseAdapter {
         roundNumber.setText("" + roundNum);
         rightScore.setText(avgRound.getRightScore());
 
+
+        int leftScoreInt = Integer.parseInt(avgRound.getLeftScore());
+        int rightScoreInt = Integer.parseInt(avgRound.getRightScore());
+
+        if (leftScoreInt > rightScoreInt) {
+            leftScore.setTextColor(convertView.getResources().getColor(R.color.green));
+            rightScore.setTextColor(convertView.getResources().getColor(R.color.red));
+        }
+        else if (rightScoreInt > leftScoreInt) {
+            leftScore.setTextColor(convertView.getResources().getColor(R.color.red));
+            rightScore.setTextColor(convertView.getResources().getColor(R.color.green));
+        }
+        else {
+            leftScore.setTextColor(convertView.getResources().getColor(R.color.black));
+            rightScore.setTextColor(convertView.getResources().getColor(R.color.black));
+        }
+
+
         return convertView;
     }
 }

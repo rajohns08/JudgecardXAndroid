@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="bgGray" type="color">#55ABABAB</item>
-    <item name="red" type="color">#FFEF1919</item>
+    <color name="bgGray">#55ABABAB</color>
+    <color name="red">#FFEF1919</color>
+    <color name="green">#FF18b500</color>
+    <color name="black">#FF000000</color>
 </resources>
