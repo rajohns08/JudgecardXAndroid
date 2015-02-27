@@ -13,4 +13,12 @@ public class AvgRound extends Round {
         this.leftConfidence = Double.parseDouble(leftConfidence);
         this.rightConfidence = Double.parseDouble(rightConfidence);
     }
+
+    public double getLeftConfidence() {
+        return leftConfidence;
+    }
+
+    public double getRightConfidence() {
+        return rightConfidence;
+    }
 }
