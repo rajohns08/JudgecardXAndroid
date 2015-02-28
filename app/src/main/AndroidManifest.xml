@@ -13,7 +13,8 @@
 
         <activity
             android:name=".Activities.LoginActivity"
-            android:label="@string/signin" >
+            android:label="@string/signin"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,27 +24,32 @@
 
         <activity
             android:name=".Activities.ForgotLoginActivity"
-            android:label="@string/forgot_login">
+            android:label="@string/forgot_login"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".Activities.SignUpActivity"
-            android:label="@string/sign_up">
+            android:label="@string/sign_up"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".Activities.FightListsContainerActivity"
-            android:label="@string/judgecardx">
+            android:label="@string/judgecardx"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".Activities.ScorecardActivity"
-            android:label="Scorecard">
+            android:label="Scorecard"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".Activities.AverageScorecardActivity"
-            android:label="Average Scorecard">
+            android:label="Average Scorecard"
+            android:screenOrientation="portrait">
         </activity>
 
     </application>
