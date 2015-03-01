@@ -90,7 +90,6 @@ public class AvgScorecardAdapter extends BaseAdapter {
             rightScore.setTextColor(convertView.getResources().getColor(R.color.black));
         }
 
-        leftConfidenceBar.getLayoutParams().width = confidenceBarMaxWidth;
         double leftMultiplier = avgRound.getLeftConfidence();
         double rightMultiplier = avgRound.getRightConfidence();
 
