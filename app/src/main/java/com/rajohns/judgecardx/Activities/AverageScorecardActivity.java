@@ -2,6 +2,8 @@ package com.rajohns.judgecardx.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -40,6 +42,8 @@ public class AverageScorecardActivity extends BaseActivity {
     TextView leftTotalTV;
     TextView rightTotalTV;
     AvgScorecardAdapter adapter;
+    List<String> leftConfidenceList;
+    List<String> rightConfidenceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +90,7 @@ public class AverageScorecardActivity extends BaseActivity {
                         object.get("f1r14").getAsString(),
                         object.get("f1r15").getAsString()
                 );
-                List<String> leftConfidenceList = Arrays.asList(
+                leftConfidenceList = Arrays.asList(
                         object.get("f1r1conf").getAsString(),
                         object.get("f1r2conf").getAsString(),
                         object.get("f1r3conf").getAsString(),
@@ -120,7 +124,7 @@ public class AverageScorecardActivity extends BaseActivity {
                         object.get("f2r14").getAsString(),
                         object.get("f2r15").getAsString()
                 );
-                List<String> rightConfidenceList = Arrays.asList(
+                rightConfidenceList = Arrays.asList(
                         object.get("f2r1conf").getAsString(),
                         object.get("f2r2conf").getAsString(),
                         object.get("f2r3conf").getAsString(),
@@ -160,6 +164,17 @@ public class AverageScorecardActivity extends BaseActivity {
             public void failure(RetrofitError error) {
                 NotifyHelper.hideLoading();
                 NotifyHelper.showGeneralErrorMsg(AverageScorecardActivity.this);
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String leftConfString = leftConfidenceList.get(position);
+                String rightConfString = rightConfidenceList.get(position);
+                double leftConf = Double.parseDouble(leftConfString) * 100;
+                double rightConf = Double.parseDouble(rightConfString) * 100;
+                NotifyHelper.showSingleButtonAlert(AverageScorecardActivity.this, "Round " + (position+1), String.format("%.0f", leftConf) + "% gave " + leftFighter + " a 10\n" + String.format("%.0f", rightConf) + "% gave " + StringUtils.removeNumbers(rightFighter) + " a 10");
             }
         });
     }
