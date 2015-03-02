@@ -2,6 +2,8 @@ package com.rajohns.judgecardx.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -44,6 +46,8 @@ public class AverageScorecardActivity extends BaseActivity {
     AvgScorecardAdapter adapter;
     List<String> leftConfidenceList;
     List<String> rightConfidenceList;
+    int numOfCards;
+    MenuItem numPeopleMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,9 @@ public class AverageScorecardActivity extends BaseActivity {
                 NotifyHelper.hideLoading();
 
                 JsonObject object = jsonElement.getAsJsonObject();
+
+                numOfCards = object.get("numOfCards").getAsInt();
+                numPeopleMenuItem.setTitle("" + numOfCards);
 
                 List<String> leftScoresList = Arrays.asList(
                         object.get("f1r1").getAsString(),
@@ -177,5 +184,12 @@ public class AverageScorecardActivity extends BaseActivity {
                 NotifyHelper.showSingleButtonAlert(AverageScorecardActivity.this, "Round " + (position+1), String.format("%.0f", leftConf) + "% gave " + leftFighter + " a 10\n" + String.format("%.0f", rightConf) + "% gave " + StringUtils.removeNumbers(rightFighter) + " a 10");
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.avg_scorecard, menu);
+        numPeopleMenuItem = menu.findItem(R.id.num_people);
+        return true;
     }
 }
