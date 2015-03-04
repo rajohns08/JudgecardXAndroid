@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -58,6 +60,8 @@ public class FightListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((CustomApplication) getActivity().getApplication()).getObjectGraph().inject(this);
+
+        setHasOptionsMenu(true);
 
         // Initially only the first page will have its service call made
         serviceCallsMade.put(MASTER_FIGHT_LIST_INDEX, true);
@@ -161,5 +165,11 @@ public class FightListFragment extends Fragment {
                 NotifyHelper.hideLoading();
                 break;
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fight_list, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }
