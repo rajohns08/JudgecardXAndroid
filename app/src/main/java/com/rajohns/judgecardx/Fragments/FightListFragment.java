@@ -61,6 +61,9 @@ public class FightListFragment extends Fragment {
     public Callback<JsonElement> callback;
     public static HashMap<Integer, Boolean> serviceCallsMade = new HashMap<>();
 
+    final ArrayList<Fight> fights = new ArrayList<>();
+    FightListAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((CustomApplication) getActivity().getApplication()).getObjectGraph().inject(this);
@@ -80,8 +83,7 @@ public class FightListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_fight_list, container, false);
 
         final ListView listView = (ListView) rootView.findViewById(R.id.listview);
-        final ArrayList<Fight> fights = new ArrayList<>();
-        final FightListAdapter adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
+        adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
 
         listView.setAdapter(adapter);
 
@@ -183,6 +185,11 @@ public class FightListFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 System.out.println("search query: " + query);
+
+                //proof of concept for updating list from search
+                fights.clear();
+                adapter.notifyDataSetChanged();
+
                 return false;
             }
 
