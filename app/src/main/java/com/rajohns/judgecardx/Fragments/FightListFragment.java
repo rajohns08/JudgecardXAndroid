@@ -63,6 +63,7 @@ public class FightListFragment extends Fragment {
 
     final ArrayList<Fight> fights = new ArrayList<>();
     FightListAdapter adapter;
+    ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class FightListFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_fight_list, container, false);
 
-        final ListView listView = (ListView) rootView.findViewById(R.id.listview);
+        listView = (ListView) rootView.findViewById(R.id.listview);
         adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
 
         listView.setAdapter(adapter);
@@ -187,8 +188,16 @@ public class FightListFragment extends Fragment {
                 System.out.println("search query: " + query);
 
                 //proof of concept for updating list from search
-                fights.clear();
-                adapter.notifyDataSetChanged();
+
+                final ArrayList<Fight> filteredFights = new ArrayList<>();
+                for (Fight f : fights) {
+                    if (f.getFighter1().toLowerCase().startsWith(query.toLowerCase())) {
+                        filteredFights.add(f);
+                    }
+                }
+
+                adapter = new FightListAdapter(getActivity(), R.layout.row_fight, filteredFights);
+                listView.setAdapter(adapter);
 
                 return false;
             }
