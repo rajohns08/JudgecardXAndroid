@@ -54,6 +54,9 @@ public class FightListAdapter extends ArrayAdapter<Fight> {
         if (todayString.equals(fight.getSubtext())) {
             todayTV.setText(context.getResources().getString(R.string.today_label));
         }
+        else {
+            todayTV.setText("");
+        }
 
         return convertView;
     }
