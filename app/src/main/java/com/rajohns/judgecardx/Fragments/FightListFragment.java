@@ -62,6 +62,7 @@ public class FightListFragment extends Fragment {
     public static HashMap<Integer, Boolean> serviceCallsMade = new HashMap<>();
 
     final ArrayList<Fight> fights = new ArrayList<>();
+    ArrayList<Fight> filteredFights;
     FightListAdapter adapter;
     ListView listView;
 
@@ -93,13 +94,21 @@ public class FightListFragment extends Fragment {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Fight fightTapped;
+                    if (filteredFights != null) {
+                        fightTapped = filteredFights.get(position);
+                    }
+                    else {
+                        fightTapped = fights.get(position);
+                    }
+
                     Intent intent = new Intent(getActivity(), ScorecardActivity.class);
                     intent.putExtra(TabsPagerAdapter.REST_CALL_KEY, fragmentPosition);
-                    intent.putExtra(SUBTEXT, fights.get(position).getSubtext());
-                    intent.putExtra(LEFT_FIGHTER, fights.get(position).getFighter1());
-                    intent.putExtra(RIGHT_FIGHTER, fights.get(position).getFighter2());
-                    intent.putExtra(ROUNDS, fights.get(position).getRounds());
-                    intent.putExtra(FIGHT_DATE, fights.get(position).getSubtext());
+                    intent.putExtra(SUBTEXT, fightTapped.getSubtext());
+                    intent.putExtra(LEFT_FIGHTER, fightTapped.getFighter1());
+                    intent.putExtra(RIGHT_FIGHTER, fightTapped.getFighter2());
+                    intent.putExtra(ROUNDS, fightTapped.getRounds());
+                    intent.putExtra(FIGHT_DATE, fightTapped.getSubtext());
                     startActivity(intent);
                 }
             });
@@ -185,26 +194,28 @@ public class FightListFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                System.out.println("search query: " + query);
-
-                //proof of concept for updating list from search
-
-                final ArrayList<Fight> filteredFights = new ArrayList<>();
-                for (Fight f : fights) {
-                    if (f.getFighter1().toLowerCase().startsWith(query.toLowerCase())) {
-                        filteredFights.add(f);
-                    }
-                }
-
-                adapter = new FightListAdapter(getActivity(), R.layout.row_fight, filteredFights);
-                listView.setAdapter(adapter);
-
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                System.out.println("newText: " + newText);
+                if (newText != null && !newText.isEmpty()) {
+                    filteredFights = new ArrayList<>();
+                    for (Fight f : fights) {
+                        if (f.getFullSearchText().toLowerCase().contains(newText.toLowerCase())) {
+                            filteredFights.add(f);
+                        }
+                    }
+
+                    adapter = new FightListAdapter(getActivity(), R.layout.row_fight, filteredFights);
+                }
+                else {
+                    filteredFights = null;
+                    adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
+                }
+
+                listView.setAdapter(adapter);
+
                 return false;
             }
         });

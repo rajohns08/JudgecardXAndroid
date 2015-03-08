@@ -1,5 +1,7 @@
 package com.rajohns.judgecardx.Model;
 
+import com.rajohns.judgecardx.Utils.StringUtils;
+
 /**
  * Created by rajohns on 11/22/14.
  *
@@ -7,12 +9,14 @@ package com.rajohns.judgecardx.Model;
 public class Fight {
     public String fighter1;
     public String fighter2;
+    public String fighter2NoNum;
     public String subtext;
     public int rounds;
 
     public Fight(String fighter1, String fighter2, String subtext, int rounds) {
         this.fighter1 = fighter1.toUpperCase();
         this.fighter2 = fighter2.toUpperCase();
+        this.fighter2NoNum = StringUtils.removeNumbers(fighter2);
         this.subtext = subtext;
         this.rounds = rounds;
     }
@@ -31,5 +35,9 @@ public class Fight {
 
     public int getRounds() {
         return rounds;
+    }
+
+    public String getFullSearchText() {
+        return fighter1 + " " + fighter2NoNum + " " + fighter1 + " - " + fighter2NoNum + " - " + fighter1;
     }
 }
