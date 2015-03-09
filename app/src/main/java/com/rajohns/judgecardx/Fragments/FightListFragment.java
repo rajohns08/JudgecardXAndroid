@@ -18,6 +18,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.rajohns.judgecardx.Activities.FightListsContainerActivity;
 import com.rajohns.judgecardx.Activities.ScorecardActivity;
+import com.rajohns.judgecardx.Adapters.CreateRequestAdapter;
 import com.rajohns.judgecardx.Adapters.FightListAdapter;
 import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
 import com.rajohns.judgecardx.CustomApplication;
@@ -64,6 +65,7 @@ public class FightListFragment extends Fragment {
     final ArrayList<Fight> fights = new ArrayList<>();
     ArrayList<Fight> filteredFights;
     FightListAdapter adapter;
+    CreateRequestAdapter noResultsAdapter;
     ListView listView;
 
     @Override
@@ -94,22 +96,33 @@ public class FightListFragment extends Fragment {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Fight fightTapped;
-                    if (filteredFights != null) {
-                        fightTapped = filteredFights.get(position);
+                    if (listView.getAdapter() instanceof CreateRequestAdapter) {
+                        if (position == 1) {
+                            // start create private activity
+                            int x = 2;
+                        }
+                        else if (position == 2) {
+                            // start request community card activity
+                            int x = 2;
+                        }
                     }
                     else {
-                        fightTapped = fights.get(position);
-                    }
+                        Fight fightTapped;
+                        if (filteredFights != null) {
+                            fightTapped = filteredFights.get(position);
+                        } else {
+                            fightTapped = fights.get(position);
+                        }
 
-                    Intent intent = new Intent(getActivity(), ScorecardActivity.class);
-                    intent.putExtra(TabsPagerAdapter.REST_CALL_KEY, fragmentPosition);
-                    intent.putExtra(SUBTEXT, fightTapped.getSubtext());
-                    intent.putExtra(LEFT_FIGHTER, fightTapped.getFighter1());
-                    intent.putExtra(RIGHT_FIGHTER, fightTapped.getFighter2());
-                    intent.putExtra(ROUNDS, fightTapped.getRounds());
-                    intent.putExtra(FIGHT_DATE, fightTapped.getSubtext());
-                    startActivity(intent);
+                        Intent intent = new Intent(getActivity(), ScorecardActivity.class);
+                        intent.putExtra(TabsPagerAdapter.REST_CALL_KEY, fragmentPosition);
+                        intent.putExtra(SUBTEXT, fightTapped.getSubtext());
+                        intent.putExtra(LEFT_FIGHTER, fightTapped.getFighter1());
+                        intent.putExtra(RIGHT_FIGHTER, fightTapped.getFighter2());
+                        intent.putExtra(ROUNDS, fightTapped.getRounds());
+                        intent.putExtra(FIGHT_DATE, fightTapped.getSubtext());
+                        startActivity(intent);
+                    }
                 }
             });
         }
@@ -207,14 +220,28 @@ public class FightListFragment extends Fragment {
                         }
                     }
 
-                    adapter = new FightListAdapter(getActivity(), R.layout.row_fight, filteredFights);
+                    if (filteredFights.size() > 0) {
+                        // make adapter with filtered fights
+                        // set create/request to null so can keep up with index for clicking
+                        adapter = new FightListAdapter(getActivity(), R.layout.row_fight, filteredFights);
+                        listView.setAdapter(adapter);
+                    }
+                    else {
+                        if (fragmentPosition == MASTER_FIGHT_LIST_INDEX) {
+                            noResultsAdapter = new CreateRequestAdapter(getActivity(), true);
+                        }
+                        else {
+                            noResultsAdapter = new CreateRequestAdapter(getActivity(), false);
+                        }
+
+                        listView.setAdapter(noResultsAdapter);
+                    }
                 }
                 else {
                     filteredFights = null;
                     adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
+                    listView.setAdapter(adapter);
                 }
-
-                listView.setAdapter(adapter);
 
                 return false;
             }
