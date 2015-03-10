@@ -16,6 +16,7 @@ import android.widget.SearchView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.rajohns.judgecardx.Activities.CreatePrivateScorecardActivity;
 import com.rajohns.judgecardx.Activities.FightListsContainerActivity;
 import com.rajohns.judgecardx.Activities.ScorecardActivity;
 import com.rajohns.judgecardx.Adapters.CreateRequestAdapter;
@@ -98,8 +99,7 @@ public class FightListFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (listView.getAdapter() instanceof CreateRequestAdapter) {
                         if (position == 1) {
-                            // start create private activity
-                            int x = 2;
+                            startActivity(new Intent(getActivity(), CreatePrivateScorecardActivity.class));
                         }
                         else if (position == 2) {
                             // start request community card activity
