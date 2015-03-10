@@ -49,21 +49,24 @@ public class CreateRequestAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(android.R.layout.simple_list_item_2, parent, false);
+            convertView = inflater.inflate(R.layout.row_no_results, parent, false);
         }
 
-        TextView mainText = (TextView)convertView.findViewById(android.R.id.text1);
-        TextView subText = (TextView)convertView.findViewById(android.R.id.text2);
+        TextView mainText = (TextView)convertView.findViewById(R.id.mainText);
+        TextView subText = (TextView)convertView.findViewById(R.id.subText);
 
         switch (position) {
             case NO_RESULTS_POSITION:
                 mainText.setText("No Results");
+                subText.setText("");
                 break;
             case CREATE_PRIVATE_POSITION:
                 mainText.setText("Create Private Scorecard");
+                subText.setText("Immediately available, no avg scorecard.");
                 break;
             case REQUEST_SCORECARD_POSITION:
                 mainText.setText("Request Community Scorecard");
+                subText.setText("Once approved, appears in master fight list.");
                 break;
             default:
                 break;
