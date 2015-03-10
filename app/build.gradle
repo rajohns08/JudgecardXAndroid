@@ -26,4 +26,5 @@ dependencies {
     provided 'com.squareup.dagger:dagger-compiler:1.2.2'
     compile 'com.jakewharton:butterknife:5.1.2'
     provided 'com.android.support:support-v4:21.0.2'
+    compile 'info.hoang8f:android-segmented:1.0.4'
 }

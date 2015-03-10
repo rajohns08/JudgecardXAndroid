@@ -4,4 +4,5 @@
     <color name="red">#FFEF1919</color>
     <color name="green">#FF18b500</color>
     <color name="black">#FF000000</color>
+    <color name="gray">#FF9F9F9F</color>
 </resources>
