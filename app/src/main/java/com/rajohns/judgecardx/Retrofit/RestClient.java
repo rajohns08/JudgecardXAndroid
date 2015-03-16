@@ -2,6 +2,8 @@ package com.rajohns.judgecardx.Retrofit;
 
 import com.google.gson.JsonElement;
 
+import java.sql.Date;
+
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -21,6 +23,7 @@ public interface RestClient {
     public static final String SIGNUP_SUCCESS = "com.judgecard.userAvailable";
     public static final String SIGNUP_FAILURE = "com.judgecard.userAlreadyExists";
     public static final String SCORECARD_CREATED = "com.judgecard.scorecardCreated";
+    public static final String SCORECARD_ALREADY_EXISTS = "com.judgecard.scorecardAlreadyExists";
     public static final String DELETE_SUCCESS = "com.judgecard.scorecardDeleted";
     public static final String DELETE_FAILED = "com.judgecard.deleteFailed";
 
@@ -123,4 +126,13 @@ public interface RestClient {
     void getAvgScorecard(@Field(FIGHTER1_KEY) String fighter1,
                          @Field(FIGHTER2_KEY) String fighter2,
                          Callback<JsonElement> callback);
+
+    @FormUrlEncoded
+    @POST("/createPrivateScorecard.php")
+    void createPrivateScorecard(@Field(FIGHTER1_KEY) String fighter1,
+                                @Field(FIGHTER2_KEY) String fighter2,
+                                @Field(ROUNDS_KEY) String rounds,
+                                @Field(FIGHT_DATE_KEY) Date date,
+                                @Field(USERNAME_KEY) String username,
+                                Callback<String> callback);
 }

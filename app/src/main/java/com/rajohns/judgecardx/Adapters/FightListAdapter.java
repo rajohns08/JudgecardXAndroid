@@ -47,7 +47,12 @@ public class FightListAdapter extends ArrayAdapter<Fight> {
 
         Fight fight = fights.get(position);
         fightersTV.setText(fight.getFighter1() + " - " + fight.getFighter2());
-        subtextTV.setText(fight.getSubtext());
+
+        if (fight.privateCard.equals("YES")) {
+            subtextTV.setText("Private");
+        } else {
+            subtextTV.setText(fight.getSubtext());
+        }
 
         String todayString = String.format("%02d", today.month+1) + "-" + String.format("%02d", today.monthDay) + "-" + today.year;
 

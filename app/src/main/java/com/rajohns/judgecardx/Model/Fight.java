@@ -11,14 +11,16 @@ public class Fight {
     public String fighter2;
     public String fighter2NoNum;
     public String subtext;
+    public String privateCard;
     public int rounds;
 
-    public Fight(String fighter1, String fighter2, String subtext, int rounds) {
+    public Fight(String fighter1, String fighter2, String subtext, int rounds, String privateCard) {
         this.fighter1 = fighter1.toUpperCase();
         this.fighter2 = fighter2.toUpperCase();
         this.fighter2NoNum = StringUtils.removeNumbers(fighter2);
         this.subtext = subtext;
         this.rounds = rounds;
+        this.privateCard = privateCard;
     }
 
     public String getFighter1() {

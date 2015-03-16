@@ -2,11 +2,15 @@ package com.rajohns.judgecardx.Activities;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.R;
@@ -24,8 +28,11 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
+    private SearchView searchView;
     // Tab titles
     private String[] tabs = { "Fights", "Upcoming", "My Fights", "Recent" };
+    public static final int PRIVATE_SCORECARD_CREATED = 111;
+    public static final String PRIVATE_CARD_JUST_CREATED = "com.rajohns.judgecardx.privatecardcreated";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +83,8 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
     protected void onRestart() {
         super.onRestart();
 
+        clearActionBarSearch();
+
         switch (actionBar.getSelectedNavigationIndex()) {
             case FightListFragment.MY_CARDS_INDEX:
                 if (!FightListFragment.serviceCallsMade.get(FightListFragment.MY_CARDS_INDEX)) {
@@ -93,8 +102,21 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PRIVATE_SCORECARD_CREATED) {
+            if (resultCode == RESULT_OK) {
+                boolean privateCardJustCreated = data.getBooleanExtra(PRIVATE_CARD_JUST_CREATED, false);
+                if (privateCardJustCreated) {
+                    actionBar.setSelectedNavigationItem(FightListFragment.MY_CARDS_INDEX);
+                }
+            }
+        }
+    }
+
+    @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
         viewPager.setCurrentItem(tab.getPosition());
+        clearActionBarSearch();
     }
 
     @Override
@@ -105,5 +127,16 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
+    }
+
+    public void setSearchView(SearchView searchView) {
+        this.searchView = searchView;
+    }
+
+    private void clearActionBarSearch() {
+        if (this.searchView != null) {
+            this.searchView.setQuery("", false);
+            this.searchView.clearFocus();
+        }
     }
 }

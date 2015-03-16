@@ -99,14 +99,13 @@ public class FightListFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (listView.getAdapter() instanceof CreateRequestAdapter) {
                         if (position == 1) {
-                            startActivity(new Intent(getActivity(), CreatePrivateScorecardActivity.class));
-                        }
-                        else if (position == 2) {
+                            Intent intent = new Intent(getActivity(), CreatePrivateScorecardActivity.class);
+                            getActivity().startActivityForResult(intent, FightListsContainerActivity.PRIVATE_SCORECARD_CREATED);
+                        } else if (position == 2) {
                             // start request community card activity
                             int x = 2;
                         }
-                    }
-                    else {
+                    } else {
                         Fight fightTapped;
                         if (filteredFights != null) {
                             fightTapped = filteredFights.get(position);
@@ -137,6 +136,11 @@ public class FightListFragment extends Fragment {
                     String fighter1 = object.get("fighter1").getAsString();
                     String fighter2 = object.get("fighter2").getAsString();
                     String rounds = object.get("rounds").getAsString();
+                    String privateCard = "NO";
+                    if (fragmentPosition == MY_CARDS_INDEX) {
+                        privateCard = object.get("private").getAsString();
+                    }
+
                     int roundsNum = Integer.parseInt(rounds);
 
                     String subtext;
@@ -148,7 +152,7 @@ public class FightListFragment extends Fragment {
                         subtext = object.get("date").getAsString();
                     }
 
-                    Fight fight = new Fight(fighter1, fighter2, subtext, roundsNum);
+                    Fight fight = new Fight(fighter1, fighter2, subtext, roundsNum, privateCard);
                     fights.add(fight);
                 }
 
@@ -201,9 +205,12 @@ public class FightListFragment extends Fragment {
         inflater.inflate(R.menu.fight_list, menu);
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = new SearchView(getActivity().getActionBar().getThemedContext());
+
+        // Pass the searchview back to the activity so it can handle clearing it when coming back
+        ((FightListsContainerActivity) getActivity()).setSearchView(searchView);
+
         MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
         MenuItemCompat.setActionView(item, searchView);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -221,23 +228,18 @@ public class FightListFragment extends Fragment {
                     }
 
                     if (filteredFights.size() > 0) {
-                        // make adapter with filtered fights
-                        // set create/request to null so can keep up with index for clicking
                         adapter = new FightListAdapter(getActivity(), R.layout.row_fight, filteredFights);
                         listView.setAdapter(adapter);
-                    }
-                    else {
+                    } else {
                         if (fragmentPosition == MASTER_FIGHT_LIST_INDEX) {
                             noResultsAdapter = new CreateRequestAdapter(getActivity(), true);
-                        }
-                        else {
+                        } else {
                             noResultsAdapter = new CreateRequestAdapter(getActivity(), false);
                         }
 
                         listView.setAdapter(noResultsAdapter);
                     }
-                }
-                else {
+                } else {
                     filteredFights = null;
                     adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
                     listView.setAdapter(adapter);
