@@ -53,8 +53,8 @@
         </activity>
 
         <activity
-            android:name=".Activities.CreatePrivateScorecardActivity"
-            android:label="Create Private Scorecard"
+            android:name=".Activities.CreateOrRequestActivity"
+            android:label="Request Scorecard"
             android:screenOrientation="portrait">
         </activity>
 

@@ -26,6 +26,7 @@ public interface RestClient {
     public static final String SCORECARD_ALREADY_EXISTS = "com.judgecard.scorecardAlreadyExists";
     public static final String DELETE_SUCCESS = "com.judgecard.scorecardDeleted";
     public static final String DELETE_FAILED = "com.judgecard.deleteFailed";
+    public static final String REQUEST_SUCCESS = "com.judgecard.emailsent";
 
     public static final String USERNAME_KEY = "username";
     public static final String PASSWORD_KEY = "password";
@@ -33,6 +34,7 @@ public interface RestClient {
     public static final String FIGHTER1_KEY = "fighter1";
     public static final String FIGHTER2_KEY = "fighter2";
     public static final String FIGHT_DATE_KEY = "date";
+    public static final String FIGHT_FIGHT_DATE_KEY = "fightdate";
     public static final String ROUNDS_KEY = "rounds";
     public static final String SCORECARD_ID_KEY = "id";
 
@@ -133,6 +135,15 @@ public interface RestClient {
                                 @Field(FIGHTER2_KEY) String fighter2,
                                 @Field(ROUNDS_KEY) String rounds,
                                 @Field(FIGHT_DATE_KEY) Date date,
+                                @Field(USERNAME_KEY) String username,
+                                Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST("/requestScorecardNew.php")
+    void requestPublicScorecard(@Field(FIGHTER1_KEY) String fighter1,
+                                @Field(FIGHTER2_KEY) String fighter2,
+                                @Field(ROUNDS_KEY) String rounds,
+                                @Field(FIGHT_FIGHT_DATE_KEY) String date,
                                 @Field(USERNAME_KEY) String username,
                                 Callback<String> callback);
 }

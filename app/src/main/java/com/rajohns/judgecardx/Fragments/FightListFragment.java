@@ -16,7 +16,7 @@ import android.widget.SearchView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.rajohns.judgecardx.Activities.CreatePrivateScorecardActivity;
+import com.rajohns.judgecardx.Activities.CreateOrRequestActivity;
 import com.rajohns.judgecardx.Activities.FightListsContainerActivity;
 import com.rajohns.judgecardx.Activities.ScorecardActivity;
 import com.rajohns.judgecardx.Adapters.CreateRequestAdapter;
@@ -52,12 +52,14 @@ public class FightListFragment extends Fragment {
     public static final int UPCOMING_FIGHTS_INDEX = 1;
     public static final int MY_CARDS_INDEX = 2;
     public static final int RECENT_CARDS_INDEX = 3;
+    public static final int REQUEST_TYPE = 456;
 
     public static final String SUBTEXT = "subtext";
     public static final String LEFT_FIGHTER = "leftFighter";
     public static final String RIGHT_FIGHTER = "rightFighter";
     public static final String ROUNDS = "rounds";
     public static final String FIGHT_DATE = "fightDate";
+    public static final String CREATE_OR_REQUEST = "createOrRequest";
 
     private int fragmentPosition;
     public Callback<JsonElement> callback;
@@ -99,11 +101,12 @@ public class FightListFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (listView.getAdapter() instanceof CreateRequestAdapter) {
                         if (position == 1) {
-                            Intent intent = new Intent(getActivity(), CreatePrivateScorecardActivity.class);
+                            Intent intent = new Intent(getActivity(), CreateOrRequestActivity.class);
                             getActivity().startActivityForResult(intent, FightListsContainerActivity.PRIVATE_SCORECARD_CREATED);
                         } else if (position == 2) {
-                            // start request community card activity
-                            int x = 2;
+                            Intent intent = new Intent(getActivity(), CreateOrRequestActivity.class);
+                            intent.putExtra(CREATE_OR_REQUEST, REQUEST_TYPE);
+                            getActivity().startActivityForResult(intent, 000);
                         }
                     } else {
                         Fight fightTapped;

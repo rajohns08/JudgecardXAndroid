@@ -21,13 +21,22 @@
         android:layout_centerHorizontal="true"
         />
 
+    <EditText
+        android:id="@+id/dateET"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fighter2ET"
+        android:layout_centerHorizontal="true"
+        android:hint="mm/dd/yyyy"
+        />
+
     <TextView
         android:id="@+id/numRoundsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/fighter2ET"
+        android:layout_below="@id/dateET"
         android:textColor="@color/gray"
         android:text="Rounds"
         />
@@ -98,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/numRoundsPicker"
         android:layout_marginTop="50dp"
-        android:text="Create Scorecard"
+        android:text="Submit Request"
         android:layout_centerHorizontal="true"
         />
 

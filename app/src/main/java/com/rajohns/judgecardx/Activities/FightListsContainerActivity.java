@@ -16,6 +16,7 @@ import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
+import com.rajohns.judgecardx.Utils.NotifyHelper;
 
 import javax.inject.Inject;
 
@@ -110,6 +111,9 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
                     actionBar.setSelectedNavigationItem(FightListFragment.MY_CARDS_INDEX);
                 }
             }
+        } else {
+            // coming from just requesting a card
+            NotifyHelper.showSingleButtonAlert(this, "Success", "Your request has been successfully submitted.");
         }
     }
 
