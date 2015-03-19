@@ -34,6 +34,9 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -62,6 +65,7 @@ public class FightListFragment extends Fragment {
     public static final String CREATE_OR_REQUEST = "createOrRequest";
 
     private int fragmentPosition;
+    private PtrClassicFrameLayout refreshControl;
     public Callback<JsonElement> callback;
     public static HashMap<Integer, Boolean> serviceCallsMade = new HashMap<>();
 
@@ -88,6 +92,15 @@ public class FightListFragment extends Fragment {
         }
 
         View rootView = inflater.inflate(R.layout.fragment_fight_list, container, false);
+
+        // Set up pull to refresh actions
+        refreshControl = (PtrClassicFrameLayout)rootView.findViewById(R.id.rotate_header_list_view_frame);
+        refreshControl.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout ptrFrameLayout) {
+                callAppropriateRestMethodFromIndex(fragmentPosition);
+            }
+        });
 
         listView = (ListView) rootView.findViewById(R.id.listview);
         adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
@@ -133,6 +146,7 @@ public class FightListFragment extends Fragment {
             @Override
             public void success(JsonElement jsonElement, Response response) {
                 NotifyHelper.hideLoading();
+                refreshControl.refreshComplete();
                 fights.clear();
                 for (JsonElement je : jsonElement.getAsJsonArray()) {
                     JsonObject object = je.getAsJsonObject();
@@ -166,6 +180,7 @@ public class FightListFragment extends Fragment {
             public void failure(RetrofitError error) {
                 NotifyHelper.hideLoading();
                 NotifyHelper.showGeneralErrorMsg(getActivity());
+                refreshControl.refreshComplete();
             }
         };
 
