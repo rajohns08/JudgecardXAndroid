@@ -33,7 +33,9 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
     // Tab titles
     private String[] tabs = { "Fights", "Upcoming", "My Fights", "Recent" };
     public static final int PRIVATE_SCORECARD_CREATED = 111;
+    public static final int SCORECARD_JUST_REQUESTED = 222;
     public static final String PRIVATE_CARD_JUST_CREATED = "com.rajohns.judgecardx.privatecardcreated";
+    public static final String SCORECARD_JUST_REQUESTED_SUCCESS = "com.rajohns.judgecardx.scorecardrequested";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,9 +113,13 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
                     actionBar.setSelectedNavigationItem(FightListFragment.MY_CARDS_INDEX);
                 }
             }
-        } else {
-            // coming from just requesting a card
-            NotifyHelper.showSingleButtonAlert(this, "Success", "Your request has been successfully submitted.");
+        } else if (requestCode == SCORECARD_JUST_REQUESTED) {
+            if (resultCode == RESULT_OK) {
+                boolean scorecardRequestedSuccess = data.getBooleanExtra(SCORECARD_JUST_REQUESTED_SUCCESS, false);
+                if (scorecardRequestedSuccess) {
+                    NotifyHelper.showSingleButtonAlert(this, "Success", "Your request has been successfully submitted.");
+                }
+            }
         }
     }
 

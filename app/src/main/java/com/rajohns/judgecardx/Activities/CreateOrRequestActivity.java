@@ -150,7 +150,9 @@ public class CreateOrRequestActivity extends BaseActivity {
             public void success(String s, Response response) {
                 NotifyHelper.hideLoading();
                 if (s.equals(RestClient.REQUEST_SUCCESS)) {
-                    setResult(RESULT_OK);
+                    Intent intent = getIntent();
+                    intent.putExtra(FightListsContainerActivity.SCORECARD_JUST_REQUESTED_SUCCESS, true);
+                    setResult(RESULT_OK, intent);
                     finish();
                 } else {
                     NotifyHelper.showGeneralErrorMsg(CreateOrRequestActivity.this);

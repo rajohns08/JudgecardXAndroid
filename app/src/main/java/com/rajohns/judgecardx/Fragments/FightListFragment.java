@@ -119,7 +119,7 @@ public class FightListFragment extends Fragment {
                         } else if (position == 2) {
                             Intent intent = new Intent(getActivity(), CreateOrRequestActivity.class);
                             intent.putExtra(CREATE_OR_REQUEST, REQUEST_TYPE);
-                            getActivity().startActivityForResult(intent, 000);
+                            getActivity().startActivityForResult(intent, FightListsContainerActivity.SCORECARD_JUST_REQUESTED);
                         }
                     } else {
                         Fight fightTapped;
