@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- SECTION: Android Studio -->
-	<string name="app_name">JudgecardXAndroid</string>
+	<string name="app_name">JudgecardX</string>
 	<string name="action_settings">Settings</string>
 
 	<!-- SECTION: General -->
