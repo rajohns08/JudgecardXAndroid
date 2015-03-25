@@ -86,8 +86,8 @@ public class AvgScorecardAdapter extends BaseAdapter {
             rightScore.setTextColor(convertView.getResources().getColor(R.color.green));
         }
         else {
-            leftScore.setTextColor(convertView.getResources().getColor(R.color.black));
-            rightScore.setTextColor(convertView.getResources().getColor(R.color.black));
+            leftScore.setTextColor(convertView.getResources().getColor(R.color.white));
+            rightScore.setTextColor(convertView.getResources().getColor(R.color.white));
         }
 
         double leftMultiplier = avgRound.getLeftConfidence();
