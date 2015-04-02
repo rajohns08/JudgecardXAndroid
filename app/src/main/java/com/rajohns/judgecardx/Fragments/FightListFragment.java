@@ -1,6 +1,7 @@
 package com.rajohns.judgecardx.Fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -30,6 +32,7 @@ import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -218,11 +221,40 @@ public class FightListFragment extends Fragment {
         }
     }
 
+    // Magic from StackOverflow to set SearchView text color to white
+    public static <V extends View> Collection<V> findChildrenByClass(ViewGroup viewGroup, Class<V> clazz) {
+
+        return gatherChildrenByClass(viewGroup, clazz, new ArrayList<V>());
+    }
+
+    private static <V extends View> Collection<V> gatherChildrenByClass(ViewGroup viewGroup, Class<V> clazz, Collection<V> childrenFound) {
+
+        for (int i = 0; i < viewGroup.getChildCount(); i++)
+        {
+            final View child = viewGroup.getChildAt(i);
+            if (clazz.isAssignableFrom(child.getClass())) {
+                childrenFound.add((V)child);
+            }
+            if (child instanceof ViewGroup) {
+                gatherChildrenByClass((ViewGroup) child, clazz, childrenFound);
+            }
+        }
+
+        return childrenFound;
+    }
+    // End magic from stackoverflow
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fight_list, menu);
         MenuItem item = menu.findItem(R.id.action_search);
+
         SearchView searchView = new SearchView(getActivity().getActionBar().getThemedContext());
+
+        // Set searchview text color to white
+        for (TextView textView : findChildrenByClass(searchView, TextView.class)) {
+            textView.setTextColor(Color.WHITE);
+        }
 
         // Pass the searchview back to the activity so it can handle clearing it when coming back
         ((FightListsContainerActivity) getActivity()).setSearchView(searchView);

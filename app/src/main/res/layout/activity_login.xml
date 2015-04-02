@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_title_judge"
             android:textSize="30sp"
-            android:textColor="@android:color/holo_blue_bright"/>
+            android:textColor="@color/base_blue"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_title_x"
             android:textSize="30sp"
-            android:textColor="@android:color/holo_blue_bright"/>
+            android:textColor="@color/base_blue"/>
     </LinearLayout>
 
     <LinearLayout

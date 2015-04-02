@@ -1,6 +1,7 @@
 package com.rajohns.judgecardx.Activities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -66,11 +67,9 @@ public class LoginActivity extends BaseActivity {
                 NotifyHelper.hideLoading();
                 if (responseString.equals(LOGIN_SUCCESS)) {
                     startActivity(new Intent(LoginActivity.this, FightListsContainerActivity.class));
-                }
-                else if (responseString.equals(LOGIN_FAILURE)) {
+                } else if (responseString.equals(LOGIN_FAILURE)) {
                     NotifyHelper.showSingleButtonAlert(LoginActivity.this, getResources().getString(R.string.bad_credentials_title), getResources().getString(R.string.bad_credentials_msg));
-                }
-                else {
+                } else {
                     NotifyHelper.showSingleButtonAlert(LoginActivity.this, getResources().getString(R.string.generic_error_title), getResources().getString(R.string.generic_error_msg));
                 }
             }
