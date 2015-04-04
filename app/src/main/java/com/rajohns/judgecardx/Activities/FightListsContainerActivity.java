@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,14 +25,14 @@ import javax.inject.Inject;
  * Created by rajohns on 11/19/14.
  *
  */
-public class FightListsContainerActivity extends FragmentActivity implements ActionBar.TabListener {
+public class FightListsContainerActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener {
     @Inject RestClient restClient;
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
-    private ActionBar actionBar;
+    private android.support.v7.app.ActionBar actionBar;
     private SearchView searchView;
     // Tab titles
-    private String[] tabs = { "Fights", "Upcoming", "My Fights", "Recent" };
+    private String[] tabs = { "All Fights", "Upcoming", "My Cards", "Recent" };
     public static final int PRIVATE_SCORECARD_CREATED = 111;
     public static final int SCORECARD_JUST_REQUESTED = 222;
     public static final String PRIVATE_CARD_JUST_CREATED = "com.rajohns.judgecardx.privatecardcreated";
@@ -44,12 +45,13 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setOffscreenPageLimit(3);
-        actionBar = getActionBar();
+        actionBar = getSupportActionBar();
+        actionBar.setTitle(tabs[0]);
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setNavigationMode(android.support.v7.app.ActionBar.NAVIGATION_MODE_TABS);
 
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
@@ -65,6 +67,7 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
             @Override
             public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
+                actionBar.setTitle(tabs[position]);
 
                 // Only make the service call for the list if it hasn't already been made
                 if (!FightListFragment.serviceCallsMade.get(position)) {
@@ -124,18 +127,18 @@ public class FightListsContainerActivity extends FragmentActivity implements Act
     }
 
     @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+    public void onTabSelected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
         viewPager.setCurrentItem(tab.getPosition());
         clearActionBarSearch();
     }
 
     @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    public void onTabReselected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
 
     }
 
     @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    public void onTabUnselected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
 
     }
 

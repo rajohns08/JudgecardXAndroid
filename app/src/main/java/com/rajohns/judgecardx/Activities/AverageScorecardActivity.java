@@ -46,6 +46,8 @@ public class AverageScorecardActivity extends BaseActivity {
     AvgScorecardAdapter adapter;
     List<String> leftConfidenceList;
     List<String> rightConfidenceList;
+    List<String> leftScoresList;
+    List<String> rightScoresList;
     int numOfCards;
     MenuItem numPeopleMenuItem;
 
@@ -80,74 +82,78 @@ public class AverageScorecardActivity extends BaseActivity {
                 numOfCards = object.get("numOfCards").getAsInt();
                 numPeopleMenuItem.setTitle("" + numOfCards);
 
-                List<String> leftScoresList = Arrays.asList(
-                        object.get("f1r1").getAsString(),
-                        object.get("f1r2").getAsString(),
-                        object.get("f1r3").getAsString(),
-                        object.get("f1r4").getAsString(),
-                        object.get("f1r5").getAsString(),
-                        object.get("f1r6").getAsString(),
-                        object.get("f1r7").getAsString(),
-                        object.get("f1r8").getAsString(),
-                        object.get("f1r9").getAsString(),
-                        object.get("f1r10").getAsString(),
-                        object.get("f1r11").getAsString(),
-                        object.get("f1r12").getAsString(),
-                        object.get("f1r13").getAsString(),
-                        object.get("f1r14").getAsString(),
-                        object.get("f1r15").getAsString()
-                );
-                leftConfidenceList = Arrays.asList(
-                        object.get("f1r1conf").getAsString(),
-                        object.get("f1r2conf").getAsString(),
-                        object.get("f1r3conf").getAsString(),
-                        object.get("f1r4conf").getAsString(),
-                        object.get("f1r5conf").getAsString(),
-                        object.get("f1r6conf").getAsString(),
-                        object.get("f1r7conf").getAsString(),
-                        object.get("f1r8conf").getAsString(),
-                        object.get("f1r9conf").getAsString(),
-                        object.get("f1r10conf").getAsString(),
-                        object.get("f1r11conf").getAsString(),
-                        object.get("f1r12conf").getAsString(),
-                        object.get("f1r13conf").getAsString(),
-                        object.get("f1r14conf").getAsString(),
-                        object.get("f1r15conf").getAsString()
-                );
-                List<String> rightScoresList = Arrays.asList(
-                        object.get("f2r1").getAsString(),
-                        object.get("f2r2").getAsString(),
-                        object.get("f2r3").getAsString(),
-                        object.get("f2r4").getAsString(),
-                        object.get("f2r5").getAsString(),
-                        object.get("f2r6").getAsString(),
-                        object.get("f2r7").getAsString(),
-                        object.get("f2r8").getAsString(),
-                        object.get("f2r9").getAsString(),
-                        object.get("f2r10").getAsString(),
-                        object.get("f2r11").getAsString(),
-                        object.get("f2r12").getAsString(),
-                        object.get("f2r13").getAsString(),
-                        object.get("f2r14").getAsString(),
-                        object.get("f2r15").getAsString()
-                );
-                rightConfidenceList = Arrays.asList(
-                        object.get("f2r1conf").getAsString(),
-                        object.get("f2r2conf").getAsString(),
-                        object.get("f2r3conf").getAsString(),
-                        object.get("f2r4conf").getAsString(),
-                        object.get("f2r5conf").getAsString(),
-                        object.get("f2r6conf").getAsString(),
-                        object.get("f2r7conf").getAsString(),
-                        object.get("f2r8conf").getAsString(),
-                        object.get("f2r9conf").getAsString(),
-                        object.get("f2r10conf").getAsString(),
-                        object.get("f2r11conf").getAsString(),
-                        object.get("f2r12conf").getAsString(),
-                        object.get("f2r13conf").getAsString(),
-                        object.get("f2r14conf").getAsString(),
-                        object.get("f2r15conf").getAsString()
-                );
+                initializeScoreArrays();
+
+                if (numOfCards > 0) {
+                    leftScoresList = Arrays.asList(
+                            object.get("f1r1").getAsString(),
+                            object.get("f1r2").getAsString(),
+                            object.get("f1r3").getAsString(),
+                            object.get("f1r4").getAsString(),
+                            object.get("f1r5").getAsString(),
+                            object.get("f1r6").getAsString(),
+                            object.get("f1r7").getAsString(),
+                            object.get("f1r8").getAsString(),
+                            object.get("f1r9").getAsString(),
+                            object.get("f1r10").getAsString(),
+                            object.get("f1r11").getAsString(),
+                            object.get("f1r12").getAsString(),
+                            object.get("f1r13").getAsString(),
+                            object.get("f1r14").getAsString(),
+                            object.get("f1r15").getAsString()
+                    );
+                    leftConfidenceList = Arrays.asList(
+                            object.get("f1r1conf").getAsString(),
+                            object.get("f1r2conf").getAsString(),
+                            object.get("f1r3conf").getAsString(),
+                            object.get("f1r4conf").getAsString(),
+                            object.get("f1r5conf").getAsString(),
+                            object.get("f1r6conf").getAsString(),
+                            object.get("f1r7conf").getAsString(),
+                            object.get("f1r8conf").getAsString(),
+                            object.get("f1r9conf").getAsString(),
+                            object.get("f1r10conf").getAsString(),
+                            object.get("f1r11conf").getAsString(),
+                            object.get("f1r12conf").getAsString(),
+                            object.get("f1r13conf").getAsString(),
+                            object.get("f1r14conf").getAsString(),
+                            object.get("f1r15conf").getAsString()
+                    );
+                    rightScoresList = Arrays.asList(
+                            object.get("f2r1").getAsString(),
+                            object.get("f2r2").getAsString(),
+                            object.get("f2r3").getAsString(),
+                            object.get("f2r4").getAsString(),
+                            object.get("f2r5").getAsString(),
+                            object.get("f2r6").getAsString(),
+                            object.get("f2r7").getAsString(),
+                            object.get("f2r8").getAsString(),
+                            object.get("f2r9").getAsString(),
+                            object.get("f2r10").getAsString(),
+                            object.get("f2r11").getAsString(),
+                            object.get("f2r12").getAsString(),
+                            object.get("f2r13").getAsString(),
+                            object.get("f2r14").getAsString(),
+                            object.get("f2r15").getAsString()
+                    );
+                    rightConfidenceList = Arrays.asList(
+                            object.get("f2r1conf").getAsString(),
+                            object.get("f2r2conf").getAsString(),
+                            object.get("f2r3conf").getAsString(),
+                            object.get("f2r4conf").getAsString(),
+                            object.get("f2r5conf").getAsString(),
+                            object.get("f2r6conf").getAsString(),
+                            object.get("f2r7conf").getAsString(),
+                            object.get("f2r8conf").getAsString(),
+                            object.get("f2r9conf").getAsString(),
+                            object.get("f2r10conf").getAsString(),
+                            object.get("f2r11conf").getAsString(),
+                            object.get("f2r12conf").getAsString(),
+                            object.get("f2r13conf").getAsString(),
+                            object.get("f2r14conf").getAsString(),
+                            object.get("f2r15conf").getAsString()
+                    );
+                }
 
                 int leftTotal = 0;
                 int rightTotal = 0;
@@ -181,9 +187,23 @@ public class AverageScorecardActivity extends BaseActivity {
                 String rightConfString = rightConfidenceList.get(position);
                 double leftConf = Double.parseDouble(leftConfString) * 100;
                 double rightConf = Double.parseDouble(rightConfString) * 100;
-                NotifyHelper.showSingleButtonAlert(AverageScorecardActivity.this, "Round " + (position+1), String.format("%.0f", leftConf) + "% gave " + leftFighter + " a 10\n" + String.format("%.0f", rightConf) + "% gave " + StringUtils.removeNumbers(rightFighter) + " a 10");
+
+                if (leftConf < 0 || rightConf < 0) {
+                    NotifyHelper.showSingleButtonAlert(AverageScorecardActivity.this, "Insufficient Data", "More people need to score this round before round percentages will be shown");
+                } else if (leftConf == 0 && rightConf == 0) {
+                    NotifyHelper.showSingleButtonAlert(AverageScorecardActivity.this, "Insufficient Data", "More people need to score this round before round percentages will be shown");
+                } else {
+                    NotifyHelper.showSingleButtonAlert(AverageScorecardActivity.this, "Round " + (position + 1), String.format("%.0f", leftConf) + "% gave " + leftFighter + " a 10\n" + String.format("%.0f", rightConf) + "% gave " + StringUtils.removeNumbers(rightFighter) + " a 10");
+                }
             }
         });
+    }
+
+    private void initializeScoreArrays() {
+        leftScoresList = Arrays.asList( "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" );
+        rightScoresList = Arrays.asList( "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" );
+        leftConfidenceList = Arrays.asList( "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" );
+        rightConfidenceList = Arrays.asList( "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" );
     }
 
     @Override

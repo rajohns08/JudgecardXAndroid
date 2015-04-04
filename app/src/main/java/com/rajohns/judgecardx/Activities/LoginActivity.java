@@ -3,6 +3,7 @@ package com.rajohns.judgecardx.Activities;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -38,7 +39,7 @@ public class LoginActivity extends BaseActivity {
     ObscuredSharedPreferences prefs;
     @InjectView(R.id.usernameET) EditText usernameET;
     @InjectView(R.id.passwordET) EditText passwordET;
-    @InjectView(R.id.rememberMeSwitch) Switch rememberMeSwitch;
+    @InjectView(R.id.rememberMeSwitch) SwitchCompat rememberMeSwitch;
 
     @InjectViews({R.id.usernameET, R.id.passwordET})
     List<EditText> requiredEditTexts;
@@ -49,6 +50,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
         restoreLoginFieldsIfUserWantsThemRemembered();
+        getSupportActionBar().setTitle("Sign In");
     }
 
     @OnClick(R.id.signInButton) void signIn() {

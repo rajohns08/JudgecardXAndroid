@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -249,7 +250,8 @@ public class FightListFragment extends Fragment {
         inflater.inflate(R.menu.fight_list, menu);
         MenuItem item = menu.findItem(R.id.action_search);
 
-        SearchView searchView = new SearchView(getActivity().getActionBar().getThemedContext());
+        ActionBarActivity parentActivity = ((ActionBarActivity)getActivity());
+        SearchView searchView = new SearchView(parentActivity.getSupportActionBar().getThemedContext());
 
         // Set searchview text color to white
         for (TextView textView : findChildrenByClass(searchView, TextView.class)) {
