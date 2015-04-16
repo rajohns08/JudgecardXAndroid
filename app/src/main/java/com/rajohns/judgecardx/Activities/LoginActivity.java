@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
 import com.rajohns.judgecardx.R;
@@ -44,10 +45,15 @@ public class LoginActivity extends BaseActivity {
     @InjectViews({R.id.usernameET, R.id.passwordET})
     List<EditText> requiredEditTexts;
 
+    ProgressWheel progressWheel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        progressWheel = (ProgressWheel)findViewById(R.id.progress_wheel);
+
         ButterKnife.inject(this);
         restoreLoginFieldsIfUserWantsThemRemembered();
         getSupportActionBar().setTitle("Sign In");
@@ -62,11 +68,11 @@ public class LoginActivity extends BaseActivity {
         prefs.edit().putString(USERNAME_PREF, usernameET.getText().toString()).commit();
         savePasswordInfoIfUserWantsItRemembered();
 
-        NotifyHelper.showLoading(LoginActivity.this);
+        NotifyHelper.showLoading(progressWheel);
         restClient.login(usernameET.getText().toString(), passwordET.getText().toString(), new Callback<String>() {
             @Override
             public void success(String responseString, Response response) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 if (responseString.equals(LOGIN_SUCCESS)) {
                     startActivity(new Intent(LoginActivity.this, FightListsContainerActivity.class));
                 } else if (responseString.equals(LOGIN_FAILURE)) {
@@ -78,7 +84,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError retrofitError) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 NotifyHelper.showSingleButtonAlert(LoginActivity.this, getResources().getString(R.string.generic_error_title), getResources().getString(R.string.generic_error_msg));
             }
         });

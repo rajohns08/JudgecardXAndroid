@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rajohns.judgecardx.Adapters.AvgScorecardAdapter;
 import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.Model.AvgRound;
@@ -50,6 +51,7 @@ public class AverageScorecardActivity extends BaseActivity {
     List<String> rightScoresList;
     int numOfCards;
     MenuItem numPeopleMenuItem;
+    private ProgressWheel progressWheel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,8 @@ public class AverageScorecardActivity extends BaseActivity {
         TextView leftFighterTV = (TextView)findViewById(R.id.leftFighter);
         TextView rightFighterTV = (TextView)findViewById(R.id.rightFighter);
 
+        progressWheel = (ProgressWheel)findViewById(R.id.progress_wheel);
+
         Intent intent = getIntent();
         if (intent != null) {
             leftFighter = intent.getStringExtra(FightListFragment.LEFT_FIGHTER);
@@ -71,11 +75,11 @@ public class AverageScorecardActivity extends BaseActivity {
             rounds = intent.getIntExtra(FightListFragment.ROUNDS, 0);
         }
 
-        NotifyHelper.showLoading(this);
+        NotifyHelper.showLoading(progressWheel);
         restClient.getAvgScorecard(leftFighter, rightFighter, new Callback<JsonElement>() {
             @Override
             public void success(JsonElement jsonElement, Response response) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
 
                 JsonObject object = jsonElement.getAsJsonObject();
 
@@ -175,7 +179,7 @@ public class AverageScorecardActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 NotifyHelper.showGeneralErrorMsg(AverageScorecardActivity.this);
             }
         });

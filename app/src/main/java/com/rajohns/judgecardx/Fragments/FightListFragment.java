@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rajohns.judgecardx.Activities.CreateOrRequestActivity;
 import com.rajohns.judgecardx.Activities.FightListsContainerActivity;
 import com.rajohns.judgecardx.Activities.ScorecardActivity;
@@ -78,6 +79,7 @@ public class FightListFragment extends Fragment {
     FightListAdapter adapter;
     CreateRequestAdapter noResultsAdapter;
     ListView listView;
+    private ProgressWheel progressWheel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,6 +109,7 @@ public class FightListFragment extends Fragment {
         });
 
         listView = (ListView) rootView.findViewById(R.id.listview);
+        progressWheel = (ProgressWheel)rootView.findViewById(R.id.progress_wheel);
         adapter = new FightListAdapter(getActivity(), R.layout.row_fight, fights);
 
         listView.setAdapter(adapter);
@@ -149,7 +152,7 @@ public class FightListFragment extends Fragment {
         callback = new Callback<JsonElement>() {
             @Override
             public void success(JsonElement jsonElement, Response response) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 refreshControl.refreshComplete();
                 fights.clear();
                 for (JsonElement je : jsonElement.getAsJsonArray()) {
@@ -182,7 +185,7 @@ public class FightListFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 NotifyHelper.showGeneralErrorMsg(getActivity());
                 refreshControl.refreshComplete();
             }
@@ -199,7 +202,7 @@ public class FightListFragment extends Fragment {
     }
 
     public void callAppropriateRestMethodFromIndex(int index) {
-        NotifyHelper.showLoading(getActivity());
+        NotifyHelper.showLoading(progressWheel);
         serviceCallsMade.put(index, true);
 
         switch (index) {
@@ -217,7 +220,7 @@ public class FightListFragment extends Fragment {
                 restClient.getRecentScorecards(callback);
                 break;
             default:
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 break;
         }
     }

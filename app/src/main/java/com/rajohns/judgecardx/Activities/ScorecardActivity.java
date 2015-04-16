@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rajohns.judgecardx.Adapters.ScorecardAdapter;
 import com.rajohns.judgecardx.Adapters.TabsPagerAdapter;
 import com.rajohns.judgecardx.Fragments.FightListFragment;
@@ -52,6 +53,7 @@ public class ScorecardActivity extends BaseActivity {
     TextView leftTotalTV;
     TextView rightTotalTV;
     ScorecardAdapter adapter;
+    private ProgressWheel progressWheel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +81,9 @@ public class ScorecardActivity extends BaseActivity {
         final ListView listView = (ListView)findViewById(R.id.scorecardList);
         leftTotalTV = (TextView)findViewById(R.id.leftFighterTotalScore);
         rightTotalTV = (TextView)findViewById(R.id.rightFighterTotalScore);
+        progressWheel = (ProgressWheel)findViewById(R.id.progress_wheel);
 
-        NotifyHelper.showLoading(this);
+        NotifyHelper.showLoading(progressWheel);
 
         String username;
         if (fragmentSource == FightListFragment.RECENT_CARDS_INDEX) {
@@ -94,7 +97,7 @@ public class ScorecardActivity extends BaseActivity {
         restClient.getScorecardDetail(username, leftFighter, rightFighter, new Callback<JsonElement>() {
             @Override
             public void success(JsonElement jsonElement, Response response) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
 
                 JsonObject object = jsonElement.getAsJsonObject();
 
@@ -157,7 +160,7 @@ public class ScorecardActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
 
                 AlertDialog alertDialog;
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ScorecardActivity.this);
@@ -263,12 +266,12 @@ public class ScorecardActivity extends BaseActivity {
     }
 
     public void deleteScorecard(final Scorecard scorecard) {
-        NotifyHelper.showLoading(this);
+        NotifyHelper.showLoading(progressWheel);
         String username = prefs.getString(USERNAME_PREF, "");
         restClient.deleteScorecard(scorecard.getId(), username, new Callback<String>() {
             @Override
             public void success(String s, Response response) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
 
                 switch (s) {
                     case RestClient.DELETE_SUCCESS:
@@ -287,7 +290,7 @@ public class ScorecardActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 NotifyHelper.showGeneralErrorMsg(ScorecardActivity.this);
             }
         });

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rajohns.judgecardx.Utils.EditTextUtil;
 import com.rajohns.judgecardx.Utils.KeyboardUtil;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
@@ -37,11 +38,14 @@ public class ForgotLoginActivity extends BaseActivity {
     @InjectViews({R.id.emailET})
     List<EditText> requiredEditTexts;
 
+    private ProgressWheel progressWheel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgotlogin);
         ButterKnife.inject(this);
+        progressWheel = (ProgressWheel)findViewById(R.id.progress_wheel);
     }
 
     @OnClick(R.id.emailMeButton) void emailMe() {
@@ -51,11 +55,11 @@ public class ForgotLoginActivity extends BaseActivity {
         }
 
         // service call
-        NotifyHelper.showLoading(this);
+        NotifyHelper.showLoading(progressWheel);
         restClient.sendEmail(emailET.getText().toString(), new Callback<String>() {
             @Override
             public void success(String responseString, Response response) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 if (responseString.equals(FORGOT_LOGIN_SUCCESS)) {
                     NotifyHelper.showSingleButtonAlert(ForgotLoginActivity.this, getResources().getString(R.string.email_sent_title), getResources().getString(R.string.email_sent_msg));
                 }
@@ -69,7 +73,7 @@ public class ForgotLoginActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
             }
         });
 

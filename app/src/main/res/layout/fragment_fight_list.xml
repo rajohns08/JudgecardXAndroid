@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress_wheel"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/rounded_corner_loading"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        wheel:matProg_barColor="@color/base_blue"
+        wheel:matProg_progressIndeterminate="true" />
 
     <in.srain.cube.views.ptr.PtrClassicFrameLayout
         android:id="@+id/rotate_header_list_view_frame"
         xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cube_mints_f1f1f1"
         cube_ptr:ptr_duration_to_close="200"
         cube_ptr:ptr_duration_to_close_header="1000"
         cube_ptr:ptr_keep_header_when_refresh="true"
@@ -18,7 +29,6 @@
 
         <ListView
             android:id="@+id/listview"
-            android:background="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -14,6 +14,12 @@
         <!--<item name="colorControlHighlight">@color/base_blue</item>-->
     </style>
 
+    <!--<style name="LoadingDialog" parent="android:style/Theme.Dialog">-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--<item name="android:textColor">@color/base_blue</item>-->
+    <!--</style>-->
+
 
 
     <!--<style name="AppTheme.ActionBar" parent="android:Widget.ActionBar">-->

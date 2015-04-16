@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
     android:focusableInTouchMode="true"
     android:layout_margin="20dp">
 
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress_wheel"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/rounded_corner_loading"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        wheel:matProg_barColor="@color/base_blue"
+        wheel:matProg_progressIndeterminate="true" />
+
     <EditText
         android:id="@+id/usernameET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:singleLine="true"
         android:imeOptions="actionDone"
         android:hint="@string/username"/>
@@ -20,7 +32,9 @@
         android:id="@+id/emailET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:inputType="textEmailAddress"
+        android:layout_below="@id/usernameET"
         android:singleLine="true"
         android:imeOptions="actionDone"
         android:hint="@string/email"/>
@@ -29,6 +43,8 @@
         android:id="@+id/passwordET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/emailET"
         android:inputType="textPassword"
         android:singleLine="true"
         android:imeOptions="actionDone"
@@ -38,6 +54,8 @@
         android:id="@+id/confirmPasswordET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/passwordET"
         android:inputType="textPassword"
         android:singleLine="true"
         android:imeOptions="actionDone"
@@ -47,7 +65,9 @@
         android:id="@+id/signUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/confirmPasswordET"
         android:layout_marginTop="40dp"
         android:text="@string/sign_up"/>
 
-</LinearLayout>
+</RelativeLayout>

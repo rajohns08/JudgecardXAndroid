@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rajohns.judgecardx.Fragments.FightListFragment;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
@@ -35,11 +36,14 @@ public class CreateOrRequestActivity extends BaseActivity {
     @Inject ObscuredSharedPreferences prefs;
     private String numRounds;
     private int type;
+    private ProgressWheel progressWheel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_private);
+
+        progressWheel = (ProgressWheel)findViewById(R.id.progress_wheel);
 
         SegmentedGroup roundSegment = (SegmentedGroup)findViewById(R.id.numRoundsPicker);
         final EditText fighter1ET = (EditText)findViewById(R.id.fighter1ET);
@@ -104,7 +108,7 @@ public class CreateOrRequestActivity extends BaseActivity {
                     String fighter2 = fighter2ET.getText().toString();
                     String username = prefs.getString(USERNAME_PREF, "");
 
-                    NotifyHelper.showLoading(CreateOrRequestActivity.this);
+                    NotifyHelper.showLoading(progressWheel);
                     if (dateET.getVisibility()==View.VISIBLE) {
                         String date = dateET.getText().toString();
                         requestPublicCard(fighter1, fighter2, date, username);
@@ -121,7 +125,7 @@ public class CreateOrRequestActivity extends BaseActivity {
         restClient.createPrivateScorecard(fighter1, fighter2, numRounds, date, username, new Callback<String>() {
             @Override
             public void success(String s, Response response) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
 
                 if (s.equals(RestClient.SCORECARD_CREATED)) {
                     FightListFragment.serviceCallsMade.put(FightListFragment.MY_CARDS_INDEX, false);
@@ -138,7 +142,7 @@ public class CreateOrRequestActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 NotifyHelper.showGeneralErrorMsg(CreateOrRequestActivity.this);
             }
         });
@@ -148,7 +152,7 @@ public class CreateOrRequestActivity extends BaseActivity {
         restClient.requestPublicScorecard(fighter1, fighter2, numRounds, date, username, new Callback<String>() {
             @Override
             public void success(String s, Response response) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 if (s.equals(RestClient.REQUEST_SUCCESS)) {
                     Intent intent = getIntent();
                     intent.putExtra(FightListsContainerActivity.SCORECARD_JUST_REQUESTED_SUCCESS, true);
@@ -161,7 +165,7 @@ public class CreateOrRequestActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 NotifyHelper.showGeneralErrorMsg(CreateOrRequestActivity.this);
             }
         });

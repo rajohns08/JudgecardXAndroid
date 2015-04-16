@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rajohns.judgecardx.Utils.EditTextUtil;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.R;
@@ -39,11 +40,15 @@ public class SignUpActivity extends BaseActivity {
     @InjectViews({R.id.usernameET, R.id.emailET, R.id.passwordET, R.id.confirmPasswordET})
     List<EditText> requiredEditTexts;
 
+    private ProgressWheel progressWheel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.inject(this);
+
+        progressWheel = (ProgressWheel)findViewById(R.id.progress_wheel);
     }
 
     @OnClick(R.id.signUpButton) void signupTapped() {
@@ -57,11 +62,11 @@ public class SignUpActivity extends BaseActivity {
             return;
         }
 
-        NotifyHelper.showLoading(this);
+        NotifyHelper.showLoading(progressWheel);
         restClient.signup(usernameET.getText().toString(), emailET.getText().toString(), passwordET.getText().toString(), new Callback<String>() {
             @Override
             public void success(String responseString, Response response) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
                 if (responseString.equals(SIGNUP_SUCCESS)) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignUpActivity.this);
                     alertDialogBuilder.setTitle(getResources().getString(R.string.success));
@@ -87,7 +92,7 @@ public class SignUpActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                NotifyHelper.hideLoading();
+                NotifyHelper.hideLoading(progressWheel);
             }
         });
     }
