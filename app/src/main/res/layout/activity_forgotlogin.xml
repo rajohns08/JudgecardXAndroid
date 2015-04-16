@@ -8,17 +8,6 @@
     android:focusableInTouchMode="true"
     android:layout_margin="20dp">
 
-    <com.pnikosis.materialishprogress.ProgressWheel
-        android:id="@+id/progress_wheel"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/rounded_corner_loading"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        wheel:matProg_barColor="@color/base_blue"
-        wheel:matProg_progressIndeterminate="true" />
-
     <EditText
         android:id="@+id/emailET"
         android:layout_width="match_parent"
@@ -29,7 +18,7 @@
         android:imeOptions="actionDone"
         android:inputType="textEmailAddress"
         android:hint="@string/email"/>
-    
+
     <Button
         android:id="@+id/emailMeButton"
         android:layout_width="match_parent"
@@ -38,5 +27,16 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/emailET"
         android:text="@string/emailMe"/>
+
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress_wheel"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/rounded_corner_loading"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        wheel:matProg_barColor="@color/base_blue"
+        wheel:matProg_progressIndeterminate="true" />
 
 </RelativeLayout>

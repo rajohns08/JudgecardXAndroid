@@ -42,17 +42,6 @@
         android:text="Rounds"
         />
 
-    <com.pnikosis.materialishprogress.ProgressWheel
-        android:id="@+id/progress_wheel"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/rounded_corner_loading"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        wheel:matProg_barColor="@color/base_blue"
-        wheel:matProg_progressIndeterminate="true" />
-
     <info.hoang8f.android.segmented.SegmentedGroup
         android:id="@+id/numRoundsPicker"
         android:layout_width="wrap_content"
@@ -122,5 +111,16 @@
         android:text="Submit Request"
         android:layout_centerHorizontal="true"
         />
+
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress_wheel"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/rounded_corner_loading"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        wheel:matProg_barColor="@color/base_blue"
+        wheel:matProg_progressIndeterminate="true" />
 
 </RelativeLayout>
