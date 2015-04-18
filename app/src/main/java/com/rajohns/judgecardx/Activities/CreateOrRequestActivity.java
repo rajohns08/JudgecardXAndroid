@@ -58,6 +58,7 @@ public class CreateOrRequestActivity extends BaseActivity {
             setTitle("Create Private Scorecard");
         }
 
+        roundSegment.setTintColor(getResources().getColor(R.color.base_blue));
         roundSegment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
