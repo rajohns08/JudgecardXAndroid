@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.view.View;
 
+import com.afollestad.materialdialogs.AlertDialogWrapper;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rajohns.judgecardx.R;
 
@@ -47,40 +49,31 @@ public class NotifyHelper {
     }
 
     public static void showSingleButtonAlert(Context context, String title, String message) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder.setTitle(title);
-        alertDialogBuilder.setMessage(message);
-        alertDialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        new MaterialDialog.Builder(context)
+                .title(title)
+                .content(message)
+                .positiveText(R.string.ok)
+                .show();
     }
 
     public static void showConfirmAlert(Context context, String title, String message, String actionButtonTitle, final Handler.Callback callback) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder.setTitle(title);
-        alertDialogBuilder.setMessage(message);
-        alertDialogBuilder.setPositiveButton(actionButtonTitle, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                callback.handleMessage(null);
-            }
-        });
-        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        new AlertDialogWrapper.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(actionButtonTitle, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        callback.handleMessage(null);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
     }
 
     public static void showGeneralErrorMsg(Context context) {

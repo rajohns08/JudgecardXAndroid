@@ -30,4 +30,5 @@ dependencies {
     compile 'in.srain.cube:ultra-ptr:1.0.8@aar'
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.pnikosis:materialish-progress:1.5'
+    compile 'com.afollestad:material-dialogs:0.7.2.4'
 }
