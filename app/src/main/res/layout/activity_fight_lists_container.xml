@@ -1,11 +1,16 @@
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<ListView xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:id="@+id/listview"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+<?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</android.support.v4.view.ViewPager>
+<!--<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/pager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+<!--</android.support.v4.view.ViewPager>-->
+
+    <uk.co.androidalliance.edgeeffectoverride.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:edgeeffect_color="@color/base_blue" >
+    </uk.co.androidalliance.edgeeffectoverride.ViewPager>
