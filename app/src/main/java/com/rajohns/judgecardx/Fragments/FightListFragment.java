@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import uk.co.androidalliance.edgeeffectoverride.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 

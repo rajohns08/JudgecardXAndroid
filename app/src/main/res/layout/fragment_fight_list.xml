@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,10 +16,12 @@
         cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
         cube_ptr:ptr_resistance="1.7">
 
-        <ListView
+        <uk.co.androidalliance.edgeeffectoverride.ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:edgeeffect_color = "@color/base_blue"
+        />
 
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
@@ -31,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="gone"
-        wheel:matProg_barColor="@color/base_blue"
-        wheel:matProg_progressIndeterminate="true" />
+        app:matProg_barColor="@color/base_blue"
+        app:matProg_progressIndeterminate="true" />
 
 </RelativeLayout>
