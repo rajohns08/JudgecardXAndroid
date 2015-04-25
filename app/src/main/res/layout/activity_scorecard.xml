@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
@@ -51,11 +51,13 @@
 
     </RelativeLayout>
 
-    <ListView
+    <uk.co.androidalliance.edgeeffectoverride.ListView
         android:id="@+id/scorecardList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/headerView"/>
+        android:layout_below="@id/headerView"
+        app:edgeeffect_color = "@color/base_blue"
+    />
 
     <com.pnikosis.materialishprogress.ProgressWheel
         android:id="@+id/progress_wheel"
@@ -65,7 +67,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="gone"
-        wheel:matProg_barColor="@color/base_blue"
-        wheel:matProg_progressIndeterminate="true" />
+        app:matProg_barColor="@color/base_blue"
+        app:matProg_progressIndeterminate="true" />
 
 </RelativeLayout>

@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
+import uk.co.androidalliance.edgeeffectoverride.ListView;
 import android.widget.TextView;
 
 import com.google.gson.JsonElement;
