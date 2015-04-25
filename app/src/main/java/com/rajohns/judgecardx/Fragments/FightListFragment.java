@@ -261,6 +261,13 @@ public class FightListFragment extends Fragment {
             textView.setTextColor(Color.WHITE);
         }
 
+        // Change background of search view so the holo light blue underline becomes base blue
+        int searchPlateId = searchView.getContext().getResources().getIdentifier("android:id/search_plate", null, null);
+        View searchPlateView = searchView.findViewById(searchPlateId);
+        if (searchPlateView != null) {
+            searchPlateView.setBackgroundResource(R.drawable.textfield_searchview_holo_dark);
+        }
+
         // Pass the searchview back to the activity so it can handle clearing it when coming back
         ((FightListsContainerActivity) getActivity()).setSearchView(searchView);
 
