@@ -1,17 +1,20 @@
 package com.rajohns.judgecardx.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import uk.co.androidalliance.edgeeffectoverride.ListView;
 import android.widget.SearchView;
@@ -80,6 +83,7 @@ public class FightListFragment extends Fragment {
     CreateRequestAdapter noResultsAdapter;
     ListView listView;
     private ProgressWheel progressWheel;
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -254,7 +258,10 @@ public class FightListFragment extends Fragment {
         MenuItem item = menu.findItem(R.id.action_search);
 
         ActionBarActivity parentActivity = ((ActionBarActivity)getActivity());
-        SearchView searchView = new SearchView(parentActivity.getSupportActionBar().getThemedContext());
+        searchView = new SearchView(parentActivity.getSupportActionBar().getThemedContext());
+
+        // Make the search field have an underline after search button is tapped
+        searchView.setIconifiedByDefault(false);
 
         // Set searchview text color to white
         for (TextView textView : findChildrenByClass(searchView, TextView.class)) {
@@ -276,7 +283,8 @@ public class FightListFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                searchView.clearFocus();
+                return true;
             }
 
             @Override
@@ -311,4 +319,5 @@ public class FightListFragment extends Fragment {
             }
         });
     }
+
 }
