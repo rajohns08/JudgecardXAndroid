@@ -251,7 +251,7 @@ public class ScorecardActivity extends BaseActivity {
                                                         if (created.equals(RestClient.SCORECARD_CREATED)) {
                                                             scorecard.setId(object.get("id").getAsString());
                                                             adapter.notifyDataSetChanged();
-                                                            NotifyHelper.showSingleButtonAlert(ScorecardActivity.this, "Scorecard Created", "This scorecard has been saved to 'My Scorecards'");
+                                                            NotifyHelper.showSingleButtonAlert(ScorecardActivity.this, "Scorecard Created", "This scorecard has been saved to 'My Cards'");
                                                             FightListFragment.serviceCallsMade.put(FightListFragment.MY_CARDS_INDEX, false);
                                                             FightListFragment.serviceCallsMade.put(FightListFragment.RECENT_CARDS_INDEX, false);
                                                         }
