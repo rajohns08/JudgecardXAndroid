@@ -35,6 +35,7 @@ import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
+import com.rajohns.judgecardx.Utils.OldServerCheck;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -159,6 +160,10 @@ public class FightListFragment extends Fragment {
                 NotifyHelper.hideLoading(progressWheel);
                 refreshControl.refreshComplete();
                 fights.clear();
+
+                // Check if jsonElement is actually a string that equals "com.judgecard.oldServer"
+                if (OldServerCheck.isOldServer(getActivity(), jsonElement)) return;
+
                 for (JsonElement je : jsonElement.getAsJsonArray()) {
                     JsonObject object = je.getAsJsonObject();
                     String fighter1 = object.get("fighter1").getAsString();

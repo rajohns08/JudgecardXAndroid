@@ -20,6 +20,7 @@ import com.rajohns.judgecardx.Model.Round;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
+import com.rajohns.judgecardx.Utils.OldServerCheck;
 import com.rajohns.judgecardx.Utils.StringUtils;
 
 import java.util.ArrayList;
@@ -80,6 +81,8 @@ public class AverageScorecardActivity extends BaseActivity {
             @Override
             public void success(JsonElement jsonElement, Response response) {
                 NotifyHelper.hideLoading(progressWheel);
+
+                if (OldServerCheck.isOldServer(AverageScorecardActivity.this, jsonElement)) return;
 
                 JsonObject object = jsonElement.getAsJsonObject();
 

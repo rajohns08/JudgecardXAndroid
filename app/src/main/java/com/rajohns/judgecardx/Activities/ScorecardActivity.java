@@ -22,6 +22,7 @@ import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Utils.DateUtil;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
+import com.rajohns.judgecardx.Utils.OldServerCheck;
 import com.rajohns.judgecardx.Utils.StringUtils;
 
 import java.util.ArrayList;
@@ -98,6 +99,8 @@ public class ScorecardActivity extends BaseActivity {
             @Override
             public void success(JsonElement jsonElement, Response response) {
                 NotifyHelper.hideLoading(progressWheel);
+
+                if (OldServerCheck.isOldServer(ScorecardActivity.this, jsonElement)) return;
 
                 JsonObject object = jsonElement.getAsJsonObject();
 
@@ -244,6 +247,8 @@ public class ScorecardActivity extends BaseActivity {
                                                 @Override
                                                 public void success(JsonElement jsonElement, Response response) {
 
+                                                    if (OldServerCheck.isOldServer(ScorecardActivity.this, jsonElement)) return;
+
                                                     if (jsonElement != null) {
                                                         JsonObject object = jsonElement.getAsJsonObject();
                                                         String created = object.get("msg").getAsString();
@@ -272,6 +277,8 @@ public class ScorecardActivity extends BaseActivity {
             @Override
             public void success(String s, Response response) {
                 NotifyHelper.hideLoading(progressWheel);
+
+                if (OldServerCheck.isOldServer(ScorecardActivity.this, s)) return;
 
                 switch (s) {
                     case RestClient.DELETE_SUCCESS:
