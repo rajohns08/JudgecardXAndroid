@@ -15,6 +15,7 @@ import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Utils.DateUtil;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
+import com.rajohns.judgecardx.Utils.OldServerCheck;
 
 import java.sql.Date;
 
@@ -128,6 +129,8 @@ public class CreateOrRequestActivity extends BaseActivity {
             public void success(String s, Response response) {
                 NotifyHelper.hideLoading(progressWheel);
 
+                if (OldServerCheck.isOldServer(CreateOrRequestActivity.this, s)) return;
+
                 if (s.equals(RestClient.SCORECARD_CREATED)) {
                     FightListFragment.serviceCallsMade.put(FightListFragment.MY_CARDS_INDEX, false);
                     Intent intent = getIntent();
@@ -154,6 +157,9 @@ public class CreateOrRequestActivity extends BaseActivity {
             @Override
             public void success(String s, Response response) {
                 NotifyHelper.hideLoading(progressWheel);
+
+                if (OldServerCheck.isOldServer(CreateOrRequestActivity.this, s)) return;
+
                 if (s.equals(RestClient.REQUEST_SUCCESS)) {
                     Intent intent = getIntent();
                     intent.putExtra(FightListsContainerActivity.SCORECARD_JUST_REQUESTED_SUCCESS, true);

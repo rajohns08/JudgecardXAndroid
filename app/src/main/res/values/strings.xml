@@ -10,6 +10,8 @@
 	<string name="ok">OK</string>
 	<string name="success">Success</string>
 	<string name="judgecardx">JudgecardX</string>
+	<string name="updateTitle">Update JudgecardX</string>
+	<string name="updateMessage">Please update JudgecardX to the newest version, so you can access our new server.</string>
     <plurals name="person">
         <item quantity="one">person</item>
         <item quantity="other">people</item>

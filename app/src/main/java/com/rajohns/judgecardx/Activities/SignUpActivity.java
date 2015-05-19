@@ -10,6 +10,7 @@ import com.rajohns.judgecardx.Utils.EditTextUtil;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
+import com.rajohns.judgecardx.Utils.OldServerCheck;
 
 import java.util.List;
 
@@ -67,6 +68,9 @@ public class SignUpActivity extends BaseActivity {
             @Override
             public void success(String responseString, Response response) {
                 NotifyHelper.hideLoading(progressWheel);
+
+                if (OldServerCheck.isOldServer(SignUpActivity.this, responseString)) return;
+
                 if (responseString.equals(SIGNUP_SUCCESS)) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignUpActivity.this);
                     alertDialogBuilder.setTitle(getResources().getString(R.string.success));

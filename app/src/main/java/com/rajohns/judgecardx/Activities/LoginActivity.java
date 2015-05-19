@@ -1,16 +1,12 @@
 package com.rajohns.judgecardx.Activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Switch;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.Utils.ObscuredSharedPreferences;
@@ -18,6 +14,7 @@ import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
 import com.rajohns.judgecardx.Utils.EditTextUtil;
 import com.rajohns.judgecardx.Utils.KeyboardUtil;
+import com.rajohns.judgecardx.Utils.OldServerCheck;
 
 import java.util.List;
 
@@ -76,6 +73,9 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void success(String responseString, Response response) {
                 NotifyHelper.hideLoading(progressWheel);
+
+                if (OldServerCheck.isOldServer(LoginActivity.this, responseString)) return;
+
                 if (responseString.equals(LOGIN_SUCCESS)) {
                     startActivity(new Intent(LoginActivity.this, FightListsContainerActivity.class));
                 } else if (responseString.equals(LOGIN_FAILURE)) {

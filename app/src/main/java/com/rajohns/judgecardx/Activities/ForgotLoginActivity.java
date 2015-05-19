@@ -10,6 +10,7 @@ import com.rajohns.judgecardx.Utils.KeyboardUtil;
 import com.rajohns.judgecardx.Utils.NotifyHelper;
 import com.rajohns.judgecardx.R;
 import com.rajohns.judgecardx.Retrofit.RestClient;
+import com.rajohns.judgecardx.Utils.OldServerCheck;
 
 import java.util.List;
 
@@ -60,6 +61,9 @@ public class ForgotLoginActivity extends BaseActivity {
             @Override
             public void success(String responseString, Response response) {
                 NotifyHelper.hideLoading(progressWheel);
+
+                if (OldServerCheck.isOldServer(ForgotLoginActivity.this, responseString)) return;
+
                 if (responseString.equals(FORGOT_LOGIN_SUCCESS)) {
                     NotifyHelper.showSingleButtonAlert(ForgotLoginActivity.this, getResources().getString(R.string.email_sent_title), getResources().getString(R.string.email_sent_msg));
                 }

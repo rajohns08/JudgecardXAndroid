@@ -1,6 +1,7 @@
 package com.rajohns.judgecardx.Retrofit;
 
 import com.google.gson.JsonElement;
+import com.rajohns.judgecardx.BuildConfig;
 
 import java.sql.Date;
 
@@ -15,7 +16,7 @@ import retrofit.http.POST;
  *
  */
 public interface RestClient {
-    public static final String BASE_URL = "https://secure3017.hostgator.com/~rajohns/";
+    public static final String BASE_URL = BuildConfig.DEBUG ? "http://192.168.1.126/" : "https://secure3017.hostgator.com/~rajohns/";
     public static final String LOGIN_SUCCESS = "com.judgecard.successfulLogin";
     public static final String LOGIN_FAILURE = "com.judgecard.badCredentials";
     public static final String FORGOT_LOGIN_SUCCESS = "com.judgecard.sendingEmail";
@@ -27,6 +28,7 @@ public interface RestClient {
     public static final String DELETE_SUCCESS = "com.judgecard.scorecardDeleted";
     public static final String DELETE_FAILED = "com.judgecard.deleteFailed";
     public static final String REQUEST_SUCCESS = "com.judgecard.emailsent";
+    public static final String OLD_SERVER = "com.judgecard.oldServer";
 
     public static final String USERNAME_KEY = "username";
     public static final String PASSWORD_KEY = "password";
