@@ -16,7 +16,11 @@ import retrofit.http.POST;
  *
  */
 public interface RestClient {
-    public static final String BASE_URL = BuildConfig.DEBUG ? "http://192.168.1.126/" : "https://judgecardx.com/";
+    public static final String BASE_URL = BuildConfig.DEBUG ?
+            "http://192.168.1.126/"
+//            "https://judgecardx.com/"
+//    "https://secure3017.hostgator.com/~rajohns/"
+            : "https://judgecardx.com/";
     public static final String LOGIN_SUCCESS = "com.judgecard.successfulLogin";
     public static final String LOGIN_FAILURE = "com.judgecard.badCredentials";
     public static final String FORGOT_LOGIN_SUCCESS = "com.judgecard.sendingEmail";
